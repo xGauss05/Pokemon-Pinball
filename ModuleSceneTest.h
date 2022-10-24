@@ -6,13 +6,13 @@
 
 class PhysBody;
 
-class ModuleSceneIntro : public Module
+class ModuleSceneTest : public Module
 {
 public:
 
 	// Constructors & Destructors
-	ModuleSceneIntro(Application* app, bool start_enabled = true);
-	~ModuleSceneIntro();
+	ModuleSceneTest(Application* app, bool start_enabled = true);
+	~ModuleSceneTest();
 
 	// Main module steps
 	bool Start();

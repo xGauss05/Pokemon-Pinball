@@ -11,7 +11,10 @@ class ModuleInput;
 class ModuleAudio;
 class ModulePlayer;
 class ModuleSceneIntro;
+class ModuleSceneTest;
 class ModulePhysics;
+class ModuleFonts;
+class ModuleFadeToBlack;
 
 class Application
 {
@@ -23,7 +26,10 @@ public:
 	ModuleAudio* audio;
 	ModulePlayer* player;
 	ModuleSceneIntro* scene_intro;
+	ModuleSceneTest* scene_test;
 	ModulePhysics* physics;
+	ModuleFonts* fonts;
+	ModuleFadeToBlack* ftb;
 
 private:
 

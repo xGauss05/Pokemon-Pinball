@@ -92,6 +92,15 @@
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>Header Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Header Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneTest.h">
+      <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -126,6 +135,15 @@
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneTest.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
