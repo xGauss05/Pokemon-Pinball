@@ -3,25 +3,23 @@
 
 #include "Module.h"
 
-#define DEBUG_BOX 225
-
-class Debug : public Module {
+class ModuleDebug : public Module {
 public:
 	// Constructor
-	Debug();
+	ModuleDebug(Application* app, bool start_enabled = true);
 
 	// Destructor
-	~Debug();
+	~ModuleDebug();
 
 	bool Start() override;
 
 	// Called at the middle of the application loop
 	// Switches the debug mode on/off
-	bool Update(float dt);
+	update_status Update();
 
 	// Called at the end of the application loop
 	// Draw all functionality (if debug mode is enabled)
-	bool PostUpdate();
+	update_status PostUpdate();
 
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
@@ -30,8 +28,6 @@ private:
 
 	// Simple debugging flag
 	bool debug;
-
-	int varBox = 50;
 
 	bool variables = false;
 };

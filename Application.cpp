@@ -11,6 +11,7 @@
 #include "ModuleSceneTest.h"
 #include "ModuleFonts.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleDebug.h"
 
 #include "Application.h"
 
@@ -27,6 +28,7 @@ Application::Application()
 	physics = new ModulePhysics(this);
 	fonts = new ModuleFonts(this);
 	ftb = new ModuleFadeToBlack(this);
+	debug = new ModuleDebug(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -38,6 +40,7 @@ Application::Application()
 	AddModule(renderer);
 	AddModule(textures);
 	AddModule(fonts);
+	AddModule(debug);
 	AddModule(input);
 	AddModule(ftb);
 	AddModule(audio);
