@@ -191,6 +191,11 @@ bool ModuleRender::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 
 
 	float factor = (float) M_PI / 180.0f;
 
+	x *= SCREEN_SIZE;
+	y *= SCREEN_SIZE;
+
+	radius *= SCREEN_SIZE;
+
 	for(uint i = 0; i < 360; ++i)
 	{
 		points[i].x = (int) (x + radius * cos( i * factor));
