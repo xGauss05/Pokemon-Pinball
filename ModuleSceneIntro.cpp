@@ -32,6 +32,13 @@ bool ModuleSceneIntro::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	// Load map textures
+	mapLayer0 = App->textures->Load("pinball/Textures/Map/Layer0.png");
+	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
+	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
+	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
+
+
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -58,6 +65,27 @@ bool ModuleSceneIntro::CleanUp()
 
 update_status ModuleSceneIntro::Update()
 {
+
+	// Blit Layer0
+	App->renderer->Blit(mapLayer0, 0, 0);
+
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer1
+	App->renderer->Blit(mapLayer1, 0, 0);
+
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer2
+	App->renderer->Blit(mapLayer2, 0, 0);
+
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer3
+	App->renderer->Blit(mapLayer3, 0, 0);
+
+
+
 	App->fonts->BlitText(20, 20, 0, "HOLA");
 
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)

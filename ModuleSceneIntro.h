@@ -31,6 +31,12 @@ public:
 	PhysBody* lower_ground_sensor;
 	bool sensed;
 
+	// Map Textures
+	SDL_Texture* mapLayer0;
+	SDL_Texture* mapLayer1;
+	SDL_Texture* mapLayer2;
+	SDL_Texture* mapLayer3;
+
 	// Textures
 	SDL_Texture* circle;
 	SDL_Texture* box;
