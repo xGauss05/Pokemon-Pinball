@@ -37,7 +37,57 @@ bool ModuleSceneIntro::Start()
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
 	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
+	/*
 
+	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
+	// Load Assets for the Map
+	// Arrows
+	greenArrow1 = {33, 257,};
+	greenArrow2 = {43, 273};
+	greenArrow3 = {53, 289};
+	blueArrow1 = {47, 232};
+	blueArrow2 = {54, 247};
+	blueArrow3 = {61, 262};
+	redArrow1;
+	redArrow2;
+	redArrow3;
+	yellowArrow1;
+	yellowArrow2;
+	yellowArrow3;
+	yellowArrow4;
+
+	// Bumpers
+	bumperLeft;
+	bumperRight;
+
+	// TODO Water Animation
+
+	// TODO Screen Animation
+
+	// TODO Hole Animation
+
+	// TODO P Animation
+
+	// H-O-L-E Letters
+	holeLight1;
+	holeLight2;
+	holeLight3;
+	holeLight4;
+
+	// Saver
+	saverLatios;
+
+	// Dots
+	dotsLight1;
+	dotsLight2;
+	dotsLight3;
+
+	// Lives 
+	livesLight1;
+	livesLight2;
+	livesLight3;
+
+	*/
 
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
@@ -68,7 +118,13 @@ update_status ModuleSceneIntro::Update()
 
 	// Blit Layer0
 	App->renderer->Blit(mapLayer0, 0, 0);
-
+	/*
+	for (p2List_item<GroundAsset*>* i = groundAssets.getFirst(); i; i = i->next) {
+		if (i->data->isActive) {
+			App->renderer->Blit(assetsTexture, i->data->x, i->data->y, &(i->data->rect));
+		}
+	}
+	*/
 	// TODO Blit Pokeball here if this layer
 
 	// Blit Layer1
