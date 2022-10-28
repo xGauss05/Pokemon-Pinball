@@ -37,20 +37,22 @@ bool ModuleSceneIntro::Start()
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
 	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
-	/*
+	
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 	// Load Assets for the Map
 	// Arrows
-	greenArrow1 = {33, 257,};
-	greenArrow2 = {43, 273};
-	greenArrow3 = {53, 289};
-	blueArrow1 = {47, 232};
-	blueArrow2 = {54, 247};
-	blueArrow3 = {61, 262};
-	redArrow1;
-	redArrow2;
-	redArrow3;
+	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, true };
+	greenArrow2 = { 43, 273, {16, 0, 16, 24}, true };
+	greenArrow3 = { 53, 289, {32, 0,  16, 24}, true };
+	blueArrow1 = { 47, 232, {48, 0, 16, 24}, true };
+	blueArrow2 = { 54, 247, {64, 0, 16, 24}, true };
+	blueArrow3 = { 61, 262, {80, 0, 16, 24}, true };
+	redArrow1 = { 193, 257, {96, 0, 16, 24}, true };
+	redArrow2 = { 183, 273, {112, 0, 16, 24}, true };
+	redArrow3 = { 173, 289, {128, 0, 16, 24}, true };
+
+	/*
 	yellowArrow1;
 	yellowArrow2;
 	yellowArrow3;
@@ -89,6 +91,16 @@ bool ModuleSceneIntro::Start()
 
 	*/
 
+	groundAssets.add(&greenArrow1);
+	groundAssets.add(&greenArrow2);
+	groundAssets.add(&greenArrow3);
+	groundAssets.add(&blueArrow1);
+	groundAssets.add(&blueArrow2);
+	groundAssets.add(&blueArrow3);	
+	groundAssets.add(&redArrow1);
+	groundAssets.add(&redArrow2);
+	groundAssets.add(&redArrow3);
+
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -118,13 +130,13 @@ update_status ModuleSceneIntro::Update()
 
 	// Blit Layer0
 	App->renderer->Blit(mapLayer0, 0, 0);
-	/*
+	
 	for (p2List_item<GroundAsset*>* i = groundAssets.getFirst(); i; i = i->next) {
 		if (i->data->isActive) {
 			App->renderer->Blit(assetsTexture, i->data->x, i->data->y, &(i->data->rect));
 		}
 	}
-	*/
+	
 	// TODO Blit Pokeball here if this layer
 
 	// Blit Layer1

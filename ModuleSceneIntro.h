@@ -43,7 +43,7 @@ public:
 	SDL_Texture* mapLayer1;
 	SDL_Texture* mapLayer2;
 	SDL_Texture* mapLayer3;
-/*
+
 	SDL_Texture* assetsTexture;
 
 	// Assets for the Map
@@ -57,6 +57,7 @@ public:
 	GroundAsset redArrow1;
 	GroundAsset redArrow2;
 	GroundAsset redArrow3;
+	/*
 	GroundAsset yellowArrow1;
 	GroundAsset yellowArrow2;
 	GroundAsset yellowArrow3;
@@ -92,10 +93,10 @@ public:
 	GroundAsset livesLight1;
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
-
+	*/
 	p2List<GroundAsset*> groundAssets;
 
-	*/
+	
 
 
 	// Textures
