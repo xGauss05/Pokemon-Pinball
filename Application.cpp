@@ -31,20 +31,18 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
-	AddModule(physics);
-	AddModule(textures);
-	AddModule(fonts);
-	AddModule(debug);
 	AddModule(input);
+	AddModule(textures);
 	AddModule(audio);
+	AddModule(debug);
+	AddModule(fonts);
+	AddModule(physics);
 	
-	// Scenes
+	// Scenes	
 	AddModule(scene);
 	
 	// Player
 	AddModule(player);
-
-	//Renderer
 	AddModule(renderer);
 }
 

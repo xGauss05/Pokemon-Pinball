@@ -29,8 +29,6 @@ void ModuleScene::initTextures()
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
 
-
-
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 	// Load Assets for the Map
 	// Arrows
@@ -133,6 +131,13 @@ void ModuleScene::doRayCast()
 		// Origin point of the raycast is be the mouse current position now (will not change)
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
+	}
+
+	// Example of how to create a PhysBody
+
+	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+	circles.getLast()->data->ctype = ColliderType::BALL;
+	circles.getLast()->data->listener = this;*/
 
 		// Prepare for raycast -----------------------------------------------------
 
