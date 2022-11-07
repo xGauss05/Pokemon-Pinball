@@ -28,6 +28,7 @@ void ModuleScene::initTextures()
 	mapLayer0 = App->textures->Load("pinball/Textures/Map/Layer0.png");
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
+	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 	// Load Assets for the Map
@@ -133,40 +134,33 @@ void ModuleScene::doRayCast()
 		ray.y = App->input->GetMouseY();
 	}
 
-	// Example of how to create a PhysBody
+	// Prepare for raycast -----------------------------------------------------
 
-	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-	circles.getLast()->data->ctype = ColliderType::BALL;
-	circles.getLast()->data->listener = this;*/
+	// The target point of the raycast is the mouse current position (will change over game time)
+	iPoint mouse;
+	mouse.x = App->input->GetMouseX();
+	mouse.y = App->input->GetMouseY();
 
-		// Prepare for raycast -----------------------------------------------------
+	// Total distance of the raycast reference segment
+	int ray_hit = ray.DistanceTo(mouse);
 
-		// The target point of the raycast is the mouse current position (will change over game time)
-		iPoint mouse;
-		mouse.x = App->input->GetMouseX();
-		mouse.y = App->input->GetMouseY();
+	// Declare a vector. We will draw the normal to the hit surface (if we hit something)
+	fVector normal(0.0f, 0.0f);
 
-		// Total distance of the raycast reference segment
-		int ray_hit = ray.DistanceTo(mouse);
+	// Raycasts -----------------
+	if (ray_on == true)
+	{
+		// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
+		destination.Normalize();
+		destination *= ray_hit;
 
-		// Declare a vector. We will draw the normal to the hit surface (if we hit something)
-		fVector normal(0.0f, 0.0f);
+		// Draw a line from origin to the hit point (or reference length if we are not hitting anything)
+		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
-		// Raycasts -----------------
-		if (ray_on == true)
-		{
-			// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
-			fVector destination(mouse.x - ray.x, mouse.y - ray.y);
-			destination.Normalize();
-			destination *= ray_hit;
-
-			// Draw a line from origin to the hit point (or reference length if we are not hitting anything)
-			App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-			// If we are hitting something with the raycast, draw the normal vector to the contact point
-			if (normal.x != 0.0f)
-				App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-		}
+		// If we are hitting something with the raycast, draw the normal vector to the contact point
+		if (normal.x != 0.0f)
+			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 }
 
@@ -178,6 +172,12 @@ bool ModuleScene::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	initTextures();
+
+	// Example of how to create a PhysBody
+
+	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+	circles.getLast()->data->ctype = ColliderType::BALL;
+	circles.getLast()->data->listener = this;*/
 
 	// Add this module (ModuleSceneIntro) as a listener for collisions with the sensor.
 	// TODO
@@ -194,6 +194,8 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	drawScene();
+
+	return UPDATE_CONTINUE;
 }
 
 bool ModuleScene::CleanUp(){
