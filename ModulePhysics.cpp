@@ -199,8 +199,6 @@ update_status ModulePhysics::PostUpdate()
 		}
 	}
 
-
-
 	// TODO 3: If the player keeps pressing the mouse button, update
 	// target position and draw a red line between both anchor points
 	if (mouse_body != nullptr && mouse_joint != nullptr)

@@ -1,4 +1,3 @@
-
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
@@ -10,7 +9,6 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneTest.h"
 #include "ModuleFonts.h"
-#include "ModuleFadeToBlack.h"
 #include "ModuleDebug.h"
 
 #include "Application.h"
@@ -27,7 +25,6 @@ Application::Application()
 	scene_test = new ModuleSceneTest(this, false);
 	physics = new ModulePhysics(this);
 	fonts = new ModuleFonts(this);
-	ftb = new ModuleFadeToBlack(this);
 	debug = new ModuleDebug(this);
 
 	// The order of calls is very important!
@@ -42,7 +39,6 @@ Application::Application()
 	AddModule(fonts);
 	AddModule(debug);
 	AddModule(input);
-	AddModule(ftb);
 	AddModule(audio);
 	
 	// Scenes

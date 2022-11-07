@@ -8,7 +8,6 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
-#include "ModuleFadeToBlack.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -155,11 +154,6 @@ update_status ModuleSceneIntro::Update()
 
 
 	App->fonts->BlitText(20, 20, 0, "HOLA");
-
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		App->ftb->FadeToBlack(this, App->scene_test, 0.0f);
-	}
 
 	// If user presses SPACE, enable RayCast
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)

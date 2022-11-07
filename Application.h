@@ -14,7 +14,6 @@ class ModuleSceneIntro;
 class ModuleSceneTest;
 class ModulePhysics;
 class ModuleFonts;
-class ModuleFadeToBlack;
 class ModuleDebug;
 
 class Application
@@ -30,7 +29,6 @@ public:
 	ModuleSceneTest* scene_test;
 	ModulePhysics* physics;
 	ModuleFonts* fonts;
-	ModuleFadeToBlack* ftb;
 	ModuleDebug* debug;
 
 private:

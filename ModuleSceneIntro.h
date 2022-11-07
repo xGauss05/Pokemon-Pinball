@@ -96,9 +96,6 @@ public:
 	*/
 	p2List<GroundAsset*> groundAssets;
 
-	
-
-
 	// Textures
 	SDL_Texture* circle;
 	SDL_Texture* box;

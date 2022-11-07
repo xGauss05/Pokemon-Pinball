@@ -95,9 +95,6 @@
     <ClInclude Include="ModuleFonts.h">
       <Filter>Header Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Header Files\Modules\Core</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneTest.h">
       <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
@@ -140,9 +137,6 @@
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneTest.cpp">
