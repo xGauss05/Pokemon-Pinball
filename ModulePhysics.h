@@ -13,13 +13,19 @@
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
 // Small class to return to other modules to track position and rotation of physics bodies
+enum class ColliderType {
+	BALL,
+	ITEM,
+	UNKNOWN
+};
+
 class PhysBody
 {
 public:
 	PhysBody();
 	~PhysBody();
 
-	void GetPosition(int& x, int &y) const;
+	void GetPosition(int& x, int& y) const;
 	float GetRotation() const;
 	bool Contains(int x, int y) const;
 	int RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const;
@@ -28,13 +34,14 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+	ColliderType ctype;
 };
 
 // Module --------------------------------------
 class ModulePhysics : public Module, public b2ContactListener // TODO
 {
 public:
-	
+
 	// Constructors & Destructors
 	ModulePhysics(Application* app, bool start_enabled = true);
 	~ModulePhysics();

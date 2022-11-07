@@ -6,8 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
-#include "ModuleSceneIntro.h"
-#include "ModuleSceneTest.h"
+#include "ModuleScene.h";
 #include "ModuleFonts.h"
 #include "ModuleDebug.h"
 
@@ -21,8 +20,7 @@ Application::Application()
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
 	player = new ModulePlayer(this);
-	scene_intro = new ModuleSceneIntro(this);
-	scene_test = new ModuleSceneTest(this, false);
+	scene = new ModuleScene(this);
 	physics = new ModulePhysics(this);
 	fonts = new ModuleFonts(this);
 	debug = new ModuleDebug(this);
@@ -41,8 +39,7 @@ Application::Application()
 	AddModule(audio);
 	
 	// Scenes
-	AddModule(scene_intro);
-	AddModule(scene_test);
+	AddModule(scene);
 	
 	// Player
 	AddModule(player);
