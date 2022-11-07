@@ -18,6 +18,7 @@ class ModuleDebug;
 class Application
 {
 public:
+
 	ModuleRender* renderer;
 	ModuleWindow* window;
 	ModuleTextures* textures;

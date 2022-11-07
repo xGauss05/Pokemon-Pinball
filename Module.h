@@ -8,9 +8,11 @@ class PhysBody;
 class Module
 {
 private :
+
 	bool enabled;
 
 public:
+
 	Application* App;
 
 	Module(Application* parent, bool start_enabled = true) : App(parent), enabled(start_enabled)

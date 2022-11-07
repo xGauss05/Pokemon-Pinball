@@ -35,7 +35,7 @@ bool ModuleScene::Start()
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
 	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
-	
+
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 	// Load Assets for the Map
@@ -82,7 +82,7 @@ bool ModuleScene::Start()
 	dotsLight2;
 	dotsLight3;
 
-	// Lives 
+	// Lives
 	livesLight1;
 	livesLight2;
 	livesLight3;
@@ -94,13 +94,13 @@ bool ModuleScene::Start()
 	groundAssets.add(&greenArrow3);
 	groundAssets.add(&blueArrow1);
 	groundAssets.add(&blueArrow2);
-	groundAssets.add(&blueArrow3);	
+	groundAssets.add(&blueArrow3);
 	groundAssets.add(&redArrow1);
 	groundAssets.add(&redArrow2);
 	groundAssets.add(&redArrow3);
 
 	// Load textures
-	circle = App->textures->Load("pinball/wheel.png"); 
+	circle = App->textures->Load("pinball/wheel.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
@@ -128,13 +128,13 @@ update_status ModuleScene::Update()
 
 	// Blit Layer0
 	App->renderer->Blit(mapLayer0, 0, 0);
-	
+
 	for (p2List_item<GroundAsset*>* i = groundAssets.getFirst(); i; i = i->next) {
 		if (i->data->isActive) {
 			App->renderer->Blit(assetsTexture, i->data->x, i->data->y, &(i->data->rect));
 		}
 	}
-	
+
 	// TODO Blit Pokeball here if this layer
 
 	// Blit Layer1
@@ -155,7 +155,7 @@ update_status ModuleScene::Update()
 	App->fonts->BlitText(20, 20, 0, "HOLA");
 
 	// If user presses SPACE, enable RayCast
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		// Enable raycast mode
 		ray_on = !ray_on;
@@ -166,7 +166,7 @@ update_status ModuleScene::Update()
 	}
 
 	// If user presses 1, create a new circle object
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
 
@@ -176,13 +176,13 @@ update_status ModuleScene::Update()
 	}
 
 	// If user presses 2, create a new box object
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
 	}
 
 	// If user presses 3, create a new RickHead object
-	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
 		// Pivot 0, 0
 		int rick_head[64] = {
@@ -224,7 +224,7 @@ update_status ModuleScene::Update()
 	}
 
 	// Prepare for raycast ------------------------------------------------------
-	
+
 	// The target point of the raycast is the mouse current position (will change over game time)
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
@@ -240,7 +240,7 @@ update_status ModuleScene::Update()
 
 	// Circles
 	p2List_item<PhysBody*>* c = circles.getFirst();
-	while(c != NULL)
+	while (c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -252,7 +252,7 @@ update_status ModuleScene::Update()
 
 	// Boxes
 	c = boxes.getFirst();
-	while(c != NULL)
+	while (c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -261,11 +261,11 @@ update_status ModuleScene::Update()
 		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
 
 		// Are we hitting this box with the raycast?
-		if(ray_on)
+		if (ray_on)
 		{
 			// Test raycast over the box, return fraction and normal vector
 			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if(hit >= 0)
+			if (hit >= 0)
 				ray_hit = hit;
 		}
 		c = c->next;
@@ -273,7 +273,7 @@ update_status ModuleScene::Update()
 
 	// Rick Heads
 	c = ricks.getFirst();
-	while(c != NULL)
+	while (c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -282,10 +282,10 @@ update_status ModuleScene::Update()
 	}
 
 	// Raycasts -----------------
-	if(ray_on == true)
+	if (ray_on == true)
 	{
 		// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
 		destination.Normalize();
 		destination *= ray_hit;
 
@@ -293,7 +293,7 @@ update_status ModuleScene::Update()
 		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
 		// If we are hitting something with the raycast, draw the normal vector to the contact point
-		if(normal.x != 0.0f)
+		if (normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
@@ -304,7 +304,21 @@ update_status ModuleScene::Update()
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	// Play Audio FX on every collision, regardless of who is colliding
-	App->audio->PlayFx(bonus_fx);
+	switch (bodyB->ctype) 
+	{
+	case ColliderType::BALL:
+		LOG("Colliding with BALL");
+		break;
+	case ColliderType::ITEM:
+		LOG("Colliding with ITEM");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Colliding with UNKNOWN");
+		break;
+	/*case ColliderType::NEW_TYPE:
+		LOG("Colliding with NEW_TYPE");
+		break;*/
+	}
 
 	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
 }
