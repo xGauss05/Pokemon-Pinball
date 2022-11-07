@@ -92,6 +92,9 @@
     <ClInclude Include="ModuleDebug.h">
       <Filter>Header Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

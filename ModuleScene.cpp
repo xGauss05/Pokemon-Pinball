@@ -29,12 +29,20 @@ bool ModuleScene::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	ball = App->physics->CreateCircle(25, 25, 5);
+	ball->ctype = ColliderType::BALL;
+	ball->listener = (Module*)App->player;
+	circles.add(ball);
+
+	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+	circles.getLast()->data->ctype = ColliderType::BALL;
+	circles.getLast()->data->listener = this;*/
+
 	// Load map textures
 	mapLayer0 = App->textures->Load("pinball/Textures/Map/Layer0.png");
 	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
 	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
 	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
-
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 	// Load Assets for the Map
@@ -164,7 +172,7 @@ update_status ModuleScene::Update()
 
 	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
 	circles.getLast()->data->ctype = ColliderType::BALL;
-	circles.getLast()->data->listener = this;*/ 
+	circles.getLast()->data->listener = this;*/
 
 	// Prepare for raycast -----------------------------------------------------
 
