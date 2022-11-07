@@ -1,14 +1,14 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRender.h"
-#include "ModuleSceneTest.h"
+#include "ModuleScene.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
 
-ModuleSceneTest::ModuleSceneTest(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
@@ -17,12 +17,12 @@ ModuleSceneTest::ModuleSceneTest(Application* app, bool start_enabled) : Module(
 	sensed = false;
 }
 
-ModuleSceneTest::~ModuleSceneTest()
+ModuleScene::~ModuleScene()
 {
 	// You should do some memory cleaning here, if required
 }
 
-bool ModuleSceneTest::Start()
+bool ModuleScene::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
@@ -30,11 +30,81 @@ bool ModuleSceneTest::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	// Load map textures
+	mapLayer0 = App->textures->Load("pinball/Textures/Map/Layer0.png");
+	mapLayer1 = App->textures->Load("pinball/Textures/Map/Layer1.png");
+	mapLayer2 = App->textures->Load("pinball/Textures/Map/Layer2.png");
+	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
+	
+
+	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
+	// Load Assets for the Map
+	// Arrows
+	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, true };
+	greenArrow2 = { 43, 273, {16, 0, 16, 24}, true };
+	greenArrow3 = { 53, 289, {32, 0,  16, 24}, true };
+	blueArrow1 = { 47, 232, {48, 0, 16, 24}, true };
+	blueArrow2 = { 54, 247, {64, 0, 16, 24}, true };
+	blueArrow3 = { 61, 262, {80, 0, 16, 24}, true };
+	redArrow1 = { 193, 257, {96, 0, 16, 24}, true };
+	redArrow2 = { 183, 273, {112, 0, 16, 24}, true };
+	redArrow3 = { 173, 289, {128, 0, 16, 24}, true };
+
+	/*
+	yellowArrow1;
+	yellowArrow2;
+	yellowArrow3;
+	yellowArrow4;
+
+	// Bumpers
+	bumperLeft;
+	bumperRight;
+
+	// TODO Water Animation
+
+	// TODO Screen Animation
+
+	// TODO Hole Animation
+
+	// TODO P Animation
+
+	// H-O-L-E Letters
+	holeLight1;
+	holeLight2;
+	holeLight3;
+	holeLight4;
+
+	// Saver
+	saverLatios;
+
+	// Dots
+	dotsLight1;
+	dotsLight2;
+	dotsLight3;
+
+	// Lives 
+	livesLight1;
+	livesLight2;
+	livesLight3;
+
+	*/
+
+	groundAssets.add(&greenArrow1);
+	groundAssets.add(&greenArrow2);
+	groundAssets.add(&greenArrow3);
+	groundAssets.add(&blueArrow1);
+	groundAssets.add(&blueArrow2);
+	groundAssets.add(&blueArrow3);	
+	groundAssets.add(&redArrow1);
+	groundAssets.add(&redArrow2);
+	groundAssets.add(&redArrow3);
+
 	// Load textures
-	circle = App->textures->Load("pinball/wheel.png");
+	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	font = App->fonts->Load("pinball/font.png", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'&-                       ", 8);
 	// Create a big red sensor on the bottom of the screen.
 	// This sensor will not make other objects collide with it, but it can tell if it is "colliding" with something else
 	lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -46,17 +116,46 @@ bool ModuleSceneTest::Start()
 	return ret;
 }
 
-bool ModuleSceneTest::CleanUp()
+bool ModuleScene::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
 	return true;
 }
 
-update_status ModuleSceneTest::Update()
+update_status ModuleScene::Update()
 {
+
+	// Blit Layer0
+	App->renderer->Blit(mapLayer0, 0, 0);
+	
+	for (p2List_item<GroundAsset*>* i = groundAssets.getFirst(); i; i = i->next) {
+		if (i->data->isActive) {
+			App->renderer->Blit(assetsTexture, i->data->x, i->data->y, &(i->data->rect));
+		}
+	}
+	
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer1
+	App->renderer->Blit(mapLayer1, 0, 0);
+
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer2
+	App->renderer->Blit(mapLayer2, 0, 0);
+
+	// TODO Blit Pokeball here if this layer
+
+	// Blit Layer3
+	App->renderer->Blit(mapLayer3, 0, 0);
+
+
+
+	App->fonts->BlitText(20, 20, 0, "HOLA");
+
 	// If user presses SPACE, enable RayCast
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		// Enable raycast mode
 		ray_on = !ray_on;
@@ -67,7 +166,7 @@ update_status ModuleSceneTest::Update()
 	}
 
 	// If user presses 1, create a new circle object
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
 
@@ -77,13 +176,13 @@ update_status ModuleSceneTest::Update()
 	}
 
 	// If user presses 2, create a new box object
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
 	}
 
 	// If user presses 3, create a new RickHead object
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
 		// Pivot 0, 0
 		int rick_head[64] = {
@@ -125,7 +224,7 @@ update_status ModuleSceneTest::Update()
 	}
 
 	// Prepare for raycast ------------------------------------------------------
-
+	
 	// The target point of the raycast is the mouse current position (will change over game time)
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
@@ -141,21 +240,19 @@ update_status ModuleSceneTest::Update()
 
 	// Circles
 	p2List_item<PhysBody*>* c = circles.getFirst();
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
 
-		// If mouse is over this circle, paint the circle's texture
-		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-			App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
+		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 
 		c = c->next;
 	}
 
 	// Boxes
 	c = boxes.getFirst();
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -164,11 +261,11 @@ update_status ModuleSceneTest::Update()
 		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
 
 		// Are we hitting this box with the raycast?
-		if (ray_on)
+		if(ray_on)
 		{
 			// Test raycast over the box, return fraction and normal vector
 			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if (hit >= 0)
+			if(hit >= 0)
 				ray_hit = hit;
 		}
 		c = c->next;
@@ -176,7 +273,7 @@ update_status ModuleSceneTest::Update()
 
 	// Rick Heads
 	c = ricks.getFirst();
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -185,10 +282,10 @@ update_status ModuleSceneTest::Update()
 	}
 
 	// Raycasts -----------------
-	if (ray_on == true)
+	if(ray_on == true)
 	{
 		// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
-		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
+		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
 		destination.Normalize();
 		destination *= ray_hit;
 
@@ -196,7 +293,7 @@ update_status ModuleSceneTest::Update()
 		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
 		// If we are hitting something with the raycast, draw the normal vector to the contact point
-		if (normal.x != 0.0f)
+		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
@@ -204,7 +301,7 @@ update_status ModuleSceneTest::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneTest::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	// Play Audio FX on every collision, regardless of who is colliding
 	App->audio->PlayFx(bonus_fx);

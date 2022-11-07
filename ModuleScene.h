@@ -13,13 +13,13 @@ struct GroundAsset {
 	bool isActive;
 };
 
-class ModuleSceneIntro : public Module
+class ModuleScene : public Module
 {
 public:
 
 	// Constructors & Destructors
-	ModuleSceneIntro(Application* app, bool start_enabled = true);
-	~ModuleSceneIntro();
+	ModuleScene(Application* app, bool start_enabled = true);
+	~ModuleScene();
 
 	// Main module steps
 	bool Start();

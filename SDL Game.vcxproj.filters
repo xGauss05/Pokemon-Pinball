@@ -89,14 +89,11 @@
     <ClInclude Include="ModulePlayer.h">
       <Filter>Header Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
+    <ClInclude Include="ModuleScene.h">
       <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFonts.h">
       <Filter>Header Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneTest.h">
-      <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleDebug.h">
       <Filter>Header Files\Modules\Gameplay</Filter>
@@ -112,7 +109,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
+    <ClCompile Include="ModuleScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
@@ -138,9 +135,6 @@
     </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
       <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneTest.cpp">
-      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
