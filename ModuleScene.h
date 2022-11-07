@@ -95,7 +95,6 @@ public:
 	p2List<GroundAsset*> groundAssets;
 
 	// FX
-	//uint bonus_fx;
 	int font;
 
 	// Raycast
