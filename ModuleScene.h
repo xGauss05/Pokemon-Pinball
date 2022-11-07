@@ -32,7 +32,6 @@ public:
 	// Lists of physics objects
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
 
 	// Lower ground sensor (will kill all objects passig through it)
 	PhysBody* lower_ground_sensor;
@@ -99,7 +98,6 @@ public:
 	// Textures
 	SDL_Texture* circle;
 	SDL_Texture* box;
-	SDL_Texture* rick;
 
 	// FX
 	uint bonus_fx;
