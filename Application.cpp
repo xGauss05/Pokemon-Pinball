@@ -34,7 +34,6 @@ Application::Application()
 	// Main Modules
 	AddModule(window);
 	AddModule(physics);
-	AddModule(renderer);
 	AddModule(textures);
 	AddModule(fonts);
 	AddModule(debug);
@@ -47,6 +46,9 @@ Application::Application()
 	
 	// Player
 	AddModule(player);
+
+	//Renderer
+	AddModule(renderer);
 }
 
 Application::~Application()
