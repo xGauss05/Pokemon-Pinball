@@ -14,7 +14,7 @@ ModuleSceneTest::ModuleSceneTest(Application* app, bool start_enabled) : Module(
 	// Initialise all the internal class variables, at least to NULL pointer
 	circle = box = rick = NULL;
 	ray_on = false;
-	sensed = false;
+	//sensed = false;
 }
 
 ModuleSceneTest::~ModuleSceneTest()

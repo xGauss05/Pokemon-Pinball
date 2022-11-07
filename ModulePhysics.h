@@ -46,7 +46,7 @@ public:
 	bool CleanUp();
 
 	// Create main ground
-	void CreateScenarioGround();
+	//void CreateScenarioGround();
 
 	// Create basic physics objects
 	PhysBody* CreateCircle(int x, int y, int radius);
@@ -66,7 +66,7 @@ private:
 	b2World* world;
 
 	// Main ground
-	b2Body* ground;
+	b2Body* worldBody;
 
 	// Mouse joint
 	b2MouseJoint* mouse_joint;

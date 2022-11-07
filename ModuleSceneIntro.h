@@ -21,22 +21,20 @@ public:
 	ModuleSceneIntro(Application* app, bool start_enabled = true);
 	~ModuleSceneIntro();
 
+	void initTextures();
+	void drawScene();
+	void doRayCast();
+
 	// Main module steps
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
 
 	// Lists of physics objects
-	p2List<PhysBody*> circles;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
-
-	// Lower ground sensor (will kill all objects passig through it)
-	PhysBody* lower_ground_sensor;
-	bool sensed;
 
 	// Map Textures
 	SDL_Texture* mapLayer0;
@@ -96,13 +94,8 @@ public:
 	*/
 	p2List<GroundAsset*> groundAssets;
 
-	// Textures
-	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
-
 	// FX
-	uint bonus_fx;
+	//uint bonus_fx;
 	int font;
 
 	// Raycast
