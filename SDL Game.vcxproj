@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Flipper.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleDebug.h" />
     <ClInclude Include="ModuleFonts.h" />
