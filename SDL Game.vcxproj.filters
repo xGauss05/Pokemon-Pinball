@@ -86,9 +86,6 @@
     <ClInclude Include="ModuleWindow.h">
       <Filter>Header Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Header Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleScene.h">
       <Filter>Header Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
@@ -117,9 +114,6 @@
     </ClCompile>
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Source Files\Modules\Core</Filter>

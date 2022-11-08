@@ -4,7 +4,6 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 
-#include "ModulePlayer.h"
 #include "ModuleFonts.h"
 #include <string>
 using namespace std;

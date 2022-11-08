@@ -9,7 +9,6 @@ class ModuleWindow;
 class ModuleTextures;
 class ModuleInput;
 class ModuleAudio;
-class ModulePlayer;
 class ModuleScene;
 class ModulePhysics;
 class ModuleFonts;
@@ -24,7 +23,6 @@ public:
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleAudio* audio;
-	ModulePlayer* player;
 	ModuleScene* scene;
 	
 	ModulePhysics* physics;
@@ -47,4 +45,5 @@ public:
 private:
 
 	void AddModule(Module* mod);
+
 };

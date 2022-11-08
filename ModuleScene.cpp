@@ -170,7 +170,7 @@ bool ModuleScene::Start()
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
-
+	App->audio->PlayMusic("pinball/Music/bgm.ogg");
 	initTextures();
 
 	// Example of how to create a PhysBody
