@@ -8,6 +8,7 @@
 #include "ModuleScene.h";
 #include "ModuleFonts.h"
 #include "ModuleDebug.h"
+#include "ModuleProps.h"
 
 #include "Application.h"
 
@@ -22,6 +23,7 @@ Application::Application()
 	physics = new ModulePhysics(this);
 	fonts = new ModuleFonts(this);
 	debug = new ModuleDebug(this);
+	propManager = new PropsManager(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -35,6 +37,7 @@ Application::Application()
 	AddModule(debug);
 	AddModule(fonts);
 	AddModule(physics);
+	AddModule(propManager);
 	
 	// Scenes	
 	AddModule(scene);

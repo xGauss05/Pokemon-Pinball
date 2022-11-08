@@ -5,8 +5,8 @@
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
 
-PropsManager::PropsManager(Application* app, bool start_enabled = true) : Module(app, start_enabled)
-{
+
+PropsManager::PropsManager(Application* app, bool start_enabled) : Module(app, start_enabled) {
 
 }
 

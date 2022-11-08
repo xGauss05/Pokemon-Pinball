@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "Globals.h"
 #include "Prop.h"
 #include "p2List.h"
 
@@ -24,9 +25,9 @@ public:
 	// Additional methods
 	Prop* CreateProp(PropType type);
 
-	void DestroyProp(Prop* entity);
+	void DestroyProp(Prop* prop);
 
-	void AddProp(Prop* entity);
+	void AddProp(Prop* prop);
 
 	void OnCollision(PhysBody* pBody1, PhysBody* pBody2);
 

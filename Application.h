@@ -13,6 +13,7 @@ class ModuleScene;
 class ModulePhysics;
 class ModuleFonts;
 class ModuleDebug;
+class PropsManager;
 
 class Application
 {
@@ -27,6 +28,7 @@ public:
 	ModulePhysics* physics;
 	ModuleFonts* fonts;
 	ModuleDebug* debug;
+	PropsManager* propManager;
 
 private:
 
