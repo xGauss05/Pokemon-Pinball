@@ -101,6 +101,12 @@
     <ClInclude Include="Flipper.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleProps.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="Prop.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -138,6 +144,9 @@
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleProps.cpp">
+      <Filter>Source Files\Modules\Gameplay\Props</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

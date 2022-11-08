@@ -1,4 +1,9 @@
 #pragma once
+#include "Application.h"
+#include "Module.h"
+#include "ModulePhysics.h"
+
+class ModulePhysics;
 
 enum FLIPPERSIDE {
 	LEFT,
@@ -7,11 +12,14 @@ enum FLIPPERSIDE {
 
 class Flipper {
 public:
+
+	
+
 	Flipper(FLIPPERSIDE side) {
 		switch (side)
 		{
 		case LEFT:
-
+			
 			break;
 		case RIGHT:
 
@@ -21,5 +29,11 @@ public:
 		}
 	}
 
+private:
+	int x;
+	int y;
 
+	PhysBody* pBody;
+	PhysBody* pin;
+	b2RevoluteJoint* joint;
 };
