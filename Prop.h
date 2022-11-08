@@ -8,6 +8,8 @@ enum class PropType
 	PLAYER,
 	ITEM,
 	GOAL,
+	FLIPPER_LEFT,
+	FLIPPER_RIGHT,
 	UNKNOWN
 };
 

@@ -65,6 +65,12 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::GOAL:
 		break;
+	case PropType::FLIPPER_LEFT:
+		prop = (Prop*)new Flipper(type, FLIPPERSIDE::LEFT);
+		break;
+	case PropType::FLIPPER_RIGHT:
+		prop = (Prop*)new Flipper(type, FLIPPERSIDE::RIGHT);
+		break;
 	case PropType::UNKNOWN:
 		break;
 	default:

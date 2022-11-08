@@ -4,6 +4,9 @@
 #include "p2Point.h"
 #include "Globals.h"
 
+#include "Flipper.h"
+
+
 class PhysBody;
 
 struct GroundAsset {
@@ -35,6 +38,9 @@ public:
 public:
 
 	// Lists of physics objects
+	Flipper* leftFlipper;
+	Flipper* rightFlipper;
+
 
 	// Map Textures
 	SDL_Texture* mapLayer0;
