@@ -120,6 +120,10 @@ void ModuleScene::drawScene()
 
 	// Blit Layer3
 	App->renderer->Blit(mapLayer3, 0, 0);
+
+
+	leftFlipper->Blit();
+
 }
 
 void ModuleScene::doRayCast()
@@ -172,6 +176,8 @@ bool ModuleScene::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	initTextures();
+
+	leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
 
 	// Example of how to create a PhysBody
 

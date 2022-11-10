@@ -41,7 +41,9 @@ public:
 		pin = App->physics->CreateRectangle(xPin, yPin, 1, 1);
 	}
 
-
+	void Blit() {
+		App->renderer->Blit(texture, x, y);
+	}
 
 private:
 	int x;
