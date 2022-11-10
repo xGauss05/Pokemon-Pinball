@@ -45,9 +45,6 @@
     <Filter Include="Header Files\Modules\Gameplay\Props">
       <UniqueIdentifier>{1c923008-2bb4-4751-9e7b-e98d2c4060a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Modules\Gameplay\Props">
-      <UniqueIdentifier>{ccb0431e-ae40-47e9-a92f-aff098813841}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Point.h">
@@ -104,9 +101,6 @@
     <ClInclude Include="Prop.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleProps.h">
-      <Filter>Header Files\Modules\Gameplay\Props</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -144,9 +138,6 @@
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleProps.cpp">
-      <Filter>Source Files\Modules\Gameplay\Props</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
