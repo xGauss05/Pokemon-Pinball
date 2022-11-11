@@ -10,6 +10,7 @@ enum class PropType
 	GOAL,
 	FLIPPER_LEFT,
 	FLIPPER_RIGHT,
+	BALL,
 	UNKNOWN
 };
 

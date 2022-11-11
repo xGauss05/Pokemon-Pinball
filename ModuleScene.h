@@ -5,6 +5,7 @@
 #include "Globals.h"
 
 #include "Flipper.h"
+#include "Ball.h"
 
 
 class PhysBody;
@@ -40,7 +41,7 @@ public:
 	// Lists of physics objects
 	Flipper* leftFlipper;
 	Flipper* rightFlipper;
-
+	Ball* ball;
 
 	// Map Textures
 	SDL_Texture* mapLayer0;

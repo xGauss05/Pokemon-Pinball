@@ -123,6 +123,7 @@ void ModuleScene::drawScene()
 
 
 	leftFlipper->Blit();
+	ball->Blit();
 
 }
 
@@ -177,7 +178,9 @@ bool ModuleScene::Start()
 
 	initTextures();
 
-	leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
+	//leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
+	
+	ball = new Ball(PropType::BALL);
 
 	// Example of how to create a PhysBody
 
@@ -199,8 +202,9 @@ update_status ModuleScene::Update()
 
 update_status ModuleScene::PostUpdate()
 {
-	drawScene();
-
+	//drawScene();
+	//leftFlipper->Blit();
+	ball->Blit();
 	return UPDATE_CONTINUE;
 }
 
