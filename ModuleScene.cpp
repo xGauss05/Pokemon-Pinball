@@ -178,7 +178,7 @@ bool ModuleScene::Start()
 
 	initTextures();
 
-	//leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
+	leftFlipper = new Flipper(PropType::FLIPPER_RIGHT, RIGHT);
 	
 	ball = new Ball(PropType::BALL);
 
@@ -203,7 +203,7 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	//drawScene();
-	//leftFlipper->Blit();
+	leftFlipper->Blit();
 	ball->Blit();
 	return UPDATE_CONTINUE;
 }

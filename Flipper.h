@@ -39,10 +39,14 @@ public:
 
 		pBody = App->physics->CreateRectangle(x, y, 20, 10);
 		pin = App->physics->CreateRectangle(xPin, yPin, 1, 1);
+		pBody->body->SetType(b2BodyType::b2_dynamicBody);
+		pin->body->SetType(b2BodyType::b2_staticBody);
+
+		joint = (b2RevoluteJoint*)App->physics->CreateRevoluteJoint(pBody, pin, xPin, yPin);
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture, x, y);
+		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), NULL, 1.0f, pBody->GetRotation());
 	}
 
 private:

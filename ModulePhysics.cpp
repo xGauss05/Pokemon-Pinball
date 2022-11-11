@@ -398,6 +398,17 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 	return pbody;
 }
 
+b2RevoluteJoint* ModulePhysics::CreateRevoluteJoint(PhysBody* pBody1, PhysBody* pBody2, float anchorX, float anchorY)
+{
+	b2RevoluteJointDef def;
+	def.Initialize(pBody1->body, pBody2->body, { PIXEL_TO_METERS(anchorX), PIXEL_TO_METERS(anchorY) });
+	def.collideConnected = false;
+
+
+
+	return (b2RevoluteJoint*)world->CreateJoint(&def);
+}
+
 // Callback function to collisions with Box2D
 void ModulePhysics::BeginContact(b2Contact* contact)
 {
