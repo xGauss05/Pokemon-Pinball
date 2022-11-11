@@ -178,7 +178,9 @@ bool ModuleScene::Start()
 
 	initTextures();
 
-	leftFlipper = new Flipper(PropType::FLIPPER_RIGHT, RIGHT);
+	leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
+
+	rightFlipper = new Flipper(PropType::FLIPPER_RIGHT, RIGHT);
 	
 	ball = new Ball(PropType::BALL);
 
@@ -197,6 +199,21 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	// Keep playing
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		rightFlipper->Kick();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		leftFlipper->Kick();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
+		rightFlipper->StopKick();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
+		leftFlipper->StopKick();
+	}
+
+
 	return UPDATE_CONTINUE;
 }
 
@@ -204,6 +221,7 @@ update_status ModuleScene::PostUpdate()
 {
 	//drawScene();
 	leftFlipper->Blit();
+	rightFlipper->Blit();
 	ball->Blit();
 	return UPDATE_CONTINUE;
 }
