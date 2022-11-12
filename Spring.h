@@ -28,36 +28,77 @@ public:
 		joint->EnableMotor(true);
 		joint->SetMotorSpeed(-releaseSpeed);
 		joint->SetMaxMotorForce(20);
+
+		initAnim();
+		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
+	}
+
+	void initAnim()
+	{
+		texture = App->textures->Load("pinball/Textures/spoink_sprite.png");
+
+		idleAnim.PushBack({ 0, 0, 20, 40 });
+		idleAnim.PushBack({ 20, 0, 20, 40 });
+		idleAnim.speed = 0.05;
+
+		for (int i = 2; i < 7; i++)
+		{
+			compressionAnim.PushBack({ i * 20, 0, 20, 40 });
+		}
+		compressionAnim.speed = 0.1f;
+		compressionAnim.loop = false;
+
+		currentAnim = &idleAnim;
 	}
 
 	void StartLoading()
 	{
 		joint->SetMotorSpeed(contractionSpeed);
+		compressionAnim.Reset();
+		currentAnim = &compressionAnim;
 	}
 	void Release()
 	{
 		joint->SetMotorSpeed(-releaseSpeed);
+		currentAnim = &idleAnim;
+
+		App->audio->PlayFx(releaseSFX);
 	}
 
 	void Blit() {
-		//App->renderer->Blit(NULL);
-	}
+		idleAnim.Update();
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { compressionAnim.Update(); }
 
-	void PlaySFX() {
-		//App->audio->PlayFx(NULL);
+		if (currentAnim == &idleAnim)
+		{
+			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11, &currentAnim->GetCurrentFrame());
+		}
+		if (currentAnim == &compressionAnim)
+		{
+			App->renderer->Blit(texture, 
+								METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, 
+								METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11 - 4, 
+								&currentAnim->GetCurrentFrame());
+		}
 	}
 
 private:
 	int x = 243;
-	int y = 390;
+	int y = 395;
 
 	PhysBody* pBody;
 	PhysBody* path;
-	int pathLength = 15;
+	int pathLength = 7;
 	float contractionSpeed = 0.3f;
 	float releaseSpeed = 20.0f;
 
 	b2PrismaticJoint* joint;
 
 	SDL_Texture* texture;
+	
+	Animation* currentAnim;
+	Animation idleAnim;
+	Animation compressionAnim;
+
+	int releaseSFX;
 };
