@@ -317,13 +317,13 @@ bool ModuleScene::Start()
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
-
+	App->audio->PlayMusic("pinball/Music/bgm.ogg");
 	initTextures();
 
 	leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
 
 	rightFlipper = new Flipper(PropType::FLIPPER_RIGHT, RIGHT);
-	
+
 	ball = new Ball(PropType::BALL);
 
 	// Example of how to create a PhysBody
@@ -343,11 +343,15 @@ update_status ModuleScene::Update()
 	// Keep playing
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		rightFlipper->PlaySFX();
 		rightFlipper->Kick();
 	}
+
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		leftFlipper->PlaySFX();
 		leftFlipper->Kick();
 	}
+
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
 		rightFlipper->StopKick();
 	}
@@ -356,10 +360,6 @@ update_status ModuleScene::Update()
 	}
 
 	drawScene();
-	//leftFlipper->Blit();
-	//rightFlipper->Blit();
-	//ball->Blit();
-
 
 	return UPDATE_CONTINUE;
 }
@@ -370,7 +370,7 @@ update_status ModuleScene::PostUpdate()
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleScene::CleanUp(){
+bool ModuleScene::CleanUp() {
 
 	LOG("Unloading Intro scene");
 
@@ -379,5 +379,13 @@ bool ModuleScene::CleanUp(){
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
+	if (bodyA->prop != NULL) {
+		switch (bodyA->prop->type) {
+		case PropType::BALL:
+			ball->OnCollision(bodyB);
+			break;
+		}
+	}
+	
+	
 }

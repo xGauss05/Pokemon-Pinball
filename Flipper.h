@@ -4,6 +4,7 @@
 #include "Prop.h"
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 
 class ModulePhysics;
 class SDL_Texture;
@@ -63,6 +64,8 @@ public:
 			break;
 		}
 
+		flipperSfx = App->audio->LoadFx("pinball/Sounds/flipper.wav");
+
 		joint->EnableLimit(true);
 	}
 
@@ -78,12 +81,18 @@ public:
 		joint->EnableMotor(false);
 	}
 
+	void PlaySFX() {
+		App->audio->PlayFx(flipperSfx);
+	}
+
 private:
 	int x;
 	int y;
 
 	int xPin;
 	int yPin;
+
+	int flipperSfx;
 
 	PhysBody* pBody;
 	PhysBody* pin;
