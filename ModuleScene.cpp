@@ -33,50 +33,131 @@ void ModuleScene::initTextures()
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 
 	// map collisions
+	{
+		int points[62] = {
+		141, 461,
+		96, 461,
+		96, 429,
+		23, 386,
+		23, 330,
+		32, 321,
+		44, 321,
+		44, 295,
+		21, 263,
+		11, 233,
+		7, 204,
+		7, 168,
+		14, 141,
+		27, 113,
+		61, 84,
+		92, 73,
+		121, 70,
+		157, 74,
+		186, 90,
+		208, 113,
+		223, 137,
+		230, 165,
+		233, 199,
+		231, 226,
+		217, 264,
+		194, 294,
+		194, 319,
+		208, 319,
+		217, 328,
+		217, 387,
+		143, 429 };
 
-	int points[62] = {
-	141, 461,
-	96, 461,
-	96, 429,
-	23, 386,
-	23, 330,
-	32, 321,
-	44, 321,
-	44, 295,
-	21, 263,
-	11, 233,
-	7, 204,
-	7, 168,
-	14, 141,
-	27, 113,
-	61, 84,
-	92, 73,
-	121, 70,
-	157, 74,
-	186, 90,
-	208, 113,
-	223, 137,
-	230, 165,
-	233, 199,
-	231, 226,
-	217, 264,
-	194, 294,
-	194, 319,
-	208, 319,
-	217, 328,
-	217, 387,
-	143, 429 };
+		mapCollisionGeneral1 = App->physics->CreateChain(0, 0, points, 62);
+	}
 
-	mapCollisionLake1;
+	{
+		int points[52] = {
+		141, 100,
+		137, 110,
+		139, 118,
+		150, 120,
+		164, 125,
+		164, 143,
+		142, 181,
+		148, 177,
+		165, 186,
+		156, 217,
+		161, 216,
+		175, 188,
+		193, 197,
+		178, 226,
+		177, 231,
+		189, 210,
+		203, 220,
+		190, 244,
+		197, 239,
+		207, 219,
+		212, 211,
+		211, 180,
+		204, 152,
+		192, 130,
+		175, 112,
+		156, 102
+		};
+
+		mapCollisionLake1 = App->physics->CreateChain(0, 0, points, 52);
+	}
+
+	{
+		int points[12] = {
+		191, 342,
+		191, 375,
+		149, 402,
+		154, 406,
+		196, 378,
+		196, 342
+		};
+
+		mapCollisionRight1 = App->physics->CreateChain(0, 0, points, 12);
+
+	}
+
+	{
+		int points[12] = {
+		43, 342,
+		48, 342,
+		48, 372,
+		91, 402,
+		86, 406,
+		43, 377
+		};
+
+		mapCollisionLeft1 = App->physics->CreateChain(0, 0, points, 12);
+
+	}
+
+	{
+		int points[26] = {
+		50, 192,
+		63, 215,
+		54, 220,
+		54, 227,
+		33, 182,
+		35, 150,
+		57, 123,
+		79, 107,
+		79, 129,
+		67, 145,
+		94, 196,
+		87, 200,
+		65, 182
+		};
+
+		mapCollisionMarket1 = App->physics->CreateChain(0, 0, points, 26);
+
+	}
+
 	mapCollisionMarket1;
-	mapCollisionLeft1;
-	mapCollisionRight1;
-	mapCollisionGeneral1 = App->physics->CreateChain(0, 0, points, 62);;
 
-	//mapCollisionLake1->body->SetType(b2BodyType::b2_staticBody);
-	//mapCollisionMarket1->body->SetType(b2BodyType::b2_staticBody);
-	//mapCollisionLeft1->body->SetType(b2BodyType::b2_staticBody);
-	//mapCollisionRight1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionLake1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionMarket1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionLeft1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionRight1->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionGeneral1->body->SetType(b2BodyType::b2_staticBody);
 
 
