@@ -104,6 +104,9 @@
     <ClInclude Include="Ball.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
+    <ClInclude Include="Spring.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

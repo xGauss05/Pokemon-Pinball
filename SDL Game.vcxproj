@@ -91,6 +91,7 @@
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="Spring.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
