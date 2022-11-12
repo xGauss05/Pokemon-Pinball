@@ -14,7 +14,7 @@ class SDL_Texture;
 class Ball : public Prop {
 public:
 	Ball(PropType type) : Prop(type) {
-		texture = App->textures->Load("pinball/Textures/test.png");
+		texture = App->textures->Load("pinball/Textures/ball.png");
 		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
 		x = 100;
 		y = 100;
