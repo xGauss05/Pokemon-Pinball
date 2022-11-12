@@ -77,4 +77,6 @@ private:
 	// Mouse joint
 	b2MouseJoint* mouse_joint;
 	b2Body* mouse_body;
+
+	friend class ModuleDebug;
 };
