@@ -150,3 +150,17 @@ update_status PropsManager::PostUpdate()
 
 	return UPDATE_CONTINUE;
 }
+
+void PropsManager::BlitPropsByLayer(int layer)
+{
+	p2List_item<Prop*>* item;
+	Prop* prop = NULL;
+
+	for (item = props.getFirst(); item != NULL; item = item->next)
+	{
+		prop = item->data;
+
+		if (prop->active == false) continue;
+		item->data->BlitByLayer(layer);
+	}
+}

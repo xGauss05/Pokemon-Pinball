@@ -245,16 +245,25 @@ void ModuleScene::drawScene()
 	}
 
 	// TODO Blit Pokeball here if this layer
+	if (currentLayer == 0) {
+		App->pManager->BlitPropsByLayer(0);
+	}
 
 	// Blit Layer1
 	App->renderer->Blit(mapLayer1, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
+	if (currentLayer == 1) {
+		App->pManager->BlitPropsByLayer(1);
+	}
 
 	// Blit Layer2
 	App->renderer->Blit(mapLayer2, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
+	if (currentLayer == 2) {
+		App->pManager->BlitPropsByLayer(2);
+	}
 
 	// Blit Layer3
 	App->renderer->Blit(mapLayer3, 0, 0);

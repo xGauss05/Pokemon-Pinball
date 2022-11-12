@@ -21,6 +21,8 @@ public:
 
 	update_status PostUpdate();
 
+	void BlitPropsByLayer(int layer);
+
 	// Called before quitting
 	bool CleanUp();
 

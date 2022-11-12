@@ -53,9 +53,11 @@ public:
 		}
 	}
 
-	bool PostUpdate() {
-		Blit();
-		return true;
+	void BlitByLayer(int layer) {
+		int l = App->scene->currentLayer;
+		if (l == layer) {
+			Blit();
+		}
 	}
 
 private:

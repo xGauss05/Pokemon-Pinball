@@ -40,6 +40,10 @@ public:
 		return true;
 	}
 
+	virtual void BlitByLayer(int layer) {
+
+	}
+
 	virtual bool CleanUp()
 	{
 		return true;
