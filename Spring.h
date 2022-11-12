@@ -31,6 +31,7 @@ public:
 
 		initAnim();
 		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
+		chargeSFX = App->audio->LoadFx("pinball/Sounds/spoink_charge.wav");
 	}
 
 	void initAnim()
@@ -56,6 +57,8 @@ public:
 		joint->SetMotorSpeed(contractionSpeed);
 		compressionAnim.Reset();
 		currentAnim = &compressionAnim;
+
+		App->audio->PlayFx(chargeSFX);
 	}
 
 	void Release()
@@ -117,4 +120,5 @@ private:
 	Animation compressionAnim;
 
 	int releaseSFX;
+	int chargeSFX;
 };
