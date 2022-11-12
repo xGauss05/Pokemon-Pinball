@@ -31,6 +31,66 @@ void ModuleScene::initTextures()
 	mapLayer3 = App->textures->Load("pinball/Textures/Map/Layer3.png");
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
+
+	// map collisions
+
+	int points[62] = {
+	141, 461,
+	96, 461,
+	96, 429,
+	23, 386,
+	23, 330,
+	32, 321,
+	44, 321,
+	44, 295,
+	21, 263,
+	11, 233,
+	7, 204,
+	7, 168,
+	14, 141,
+	27, 113,
+	61, 84,
+	92, 73,
+	121, 70,
+	157, 74,
+	186, 90,
+	208, 113,
+	223, 137,
+	230, 165,
+	233, 199,
+	231, 226,
+	217, 264,
+	194, 294,
+	194, 319,
+	208, 319,
+	217, 328,
+	217, 387,
+	143, 429 };
+
+	mapCollisionLake1;
+	mapCollisionMarket1;
+	mapCollisionLeft1;
+	mapCollisionRight1;
+	mapCollisionGeneral1 = App->physics->CreateChain(0, 0, points, 62);;
+
+	//mapCollisionLake1->body->SetType(b2BodyType::b2_staticBody);
+	//mapCollisionMarket1->body->SetType(b2BodyType::b2_staticBody);
+	//mapCollisionLeft1->body->SetType(b2BodyType::b2_staticBody);
+	//mapCollisionRight1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionGeneral1->body->SetType(b2BodyType::b2_staticBody);
+
+
+	mapCollisionsLayer1.add(mapCollisionLake1);
+	mapCollisionsLayer1.add(mapCollisionMarket1);
+	mapCollisionsLayer1.add(mapCollisionLeft1);
+	mapCollisionsLayer1.add(mapCollisionRight1);
+	mapCollisionsLayer1.add(mapCollisionGeneral1);
+
+
+
+
+
+
 	// Load Assets for the Map
 	// Arrows
 	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, true };
@@ -92,7 +152,7 @@ void ModuleScene::initTextures()
 	groundAssets.add(&redArrow2);
 	groundAssets.add(&redArrow3);
 
-	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!-", 8);
+	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
 void ModuleScene::drawScene()
