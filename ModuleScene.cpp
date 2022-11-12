@@ -270,7 +270,6 @@ void ModuleScene::drawScene()
 
 	leftFlipper->Blit();
 	rightFlipper->Blit();
-	ball->Blit();
 	spring->Blit();
 
 }
