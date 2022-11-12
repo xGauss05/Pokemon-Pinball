@@ -123,6 +123,7 @@ void ModuleScene::drawScene()
 
 
 	leftFlipper->Blit();
+	rightFlipper->Blit();
 	ball->Blit();
 
 }
@@ -213,16 +214,18 @@ update_status ModuleScene::Update()
 		leftFlipper->StopKick();
 	}
 
+	drawScene();
+	//leftFlipper->Blit();
+	//rightFlipper->Blit();
+	//ball->Blit();
+
 
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleScene::PostUpdate()
 {
-	//drawScene();
-	leftFlipper->Blit();
-	rightFlipper->Blit();
-	ball->Blit();
+
 	return UPDATE_CONTINUE;
 }
 

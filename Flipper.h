@@ -16,29 +16,32 @@ enum FLIPPERSIDE {
 class Flipper : Prop {
 public:
 	Flipper(PropType type, FLIPPERSIDE side) : Prop(type) {
-		texture = App->textures->Load("pinball/Textures/temp_flipper.png");
 
 		switch (side)
 		{
 		case LEFT:
+			texture = App->textures->Load("pinball/Textures/flipper_left.png");
+
 			x = 100;
 			y = 100;
-			xPin = x - 10;
-			yPin = y;
+			xPin = x - 11;
+			yPin = y - 1;
 			break;
 		case RIGHT:
+			texture = App->textures->Load("pinball/Textures/flipper_right.png");
+
 			x = 200;
 			y = 100;
-			xPin = x + 10;
-			yPin = y;
+			xPin = x + 11;
+			yPin = y - 1;
 			break;
 		default:
 			break;
 		}
 
 
-		pBody = App->physics->CreateRectangle(x, y, 30, 10);
-		pin = App->physics->CreateRectangle(xPin, yPin, 1, 1);
+		pBody = App->physics->CreateRectangle(x, y, 32, 12);
+		pin = App->physics->CreateRectangle(xPin, yPin, 2, 2);
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pin->body->SetType(b2BodyType::b2_staticBody);
 
@@ -64,7 +67,7 @@ public:
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 15), METERS_TO_PIXELS(pBody->body->GetPosition().y - 5), NULL, 1.0f, pBody->GetRotation());
+		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 16), METERS_TO_PIXELS(pBody->body->GetPosition().y - 6), NULL, 1.0f, pBody->GetRotation());
 	}
 
 	void Kick() {
