@@ -59,6 +59,7 @@ public:
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 
 	b2RevoluteJoint* CreateRevoluteJoint(PhysBody* pBody1, PhysBody* pBody2, float anchorX, float anchorY);
+	b2PrismaticJoint* CreatePrismaticJoint(PhysBody* pBody1, PhysBody* pBody2, float anchorX, float anchorY, b2Vec2 axis);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

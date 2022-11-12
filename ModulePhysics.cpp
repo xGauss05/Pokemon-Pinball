@@ -268,6 +268,17 @@ b2RevoluteJoint* ModulePhysics::CreateRevoluteJoint(PhysBody* pBody1, PhysBody* 
 	return (b2RevoluteJoint*)world->CreateJoint(&def);
 }
 
+b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(PhysBody* pBody1, PhysBody* pBody2, float anchorX, float anchorY, b2Vec2 axis)
+{
+	b2PrismaticJointDef def;
+	def.Initialize(pBody1->body, pBody2->body, b2Vec2(PIXEL_TO_METERS(anchorX), PIXEL_TO_METERS(anchorY)), axis);
+	def.collideConnected = false;
+
+
+
+	return (b2PrismaticJoint*)world->CreateJoint(&def);
+}
+
 // Callback function to collisions with Box2D
 void ModulePhysics::BeginContact(b2Contact* contact)
 {

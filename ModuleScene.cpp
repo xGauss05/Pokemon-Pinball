@@ -266,6 +266,7 @@ void ModuleScene::drawScene()
 	leftFlipper->Blit();
 	rightFlipper->Blit();
 	ball->Blit();
+	spring->Blit();
 
 }
 
@@ -326,6 +327,8 @@ bool ModuleScene::Start()
 
 	ball = new Ball(PropType::BALL);
 
+	spring = new Spring(PropType::SPRING);
+
 	// Example of how to create a PhysBody
 
 	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
@@ -357,6 +360,13 @@ update_status ModuleScene::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
 		leftFlipper->StopKick();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		spring->StartLoading();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
+		spring->Release();
 	}
 
 	drawScene();

@@ -6,6 +6,7 @@
 
 #include "Flipper.h"
 #include "Ball.h"
+#include "Spring.h"
 
 
 class PhysBody;
@@ -42,6 +43,7 @@ public:
 	Flipper* leftFlipper;
 	Flipper* rightFlipper;
 	Ball* ball;
+	Spring* spring;
 
 	// Map Textures
 	SDL_Texture* mapLayer0;
