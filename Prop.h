@@ -1,17 +1,16 @@
 #pragma once
-
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 
+class ModuleScene;
+
 enum class PropType
 {
-	PLAYER,
-	ITEM,
-	GOAL,
 	FLIPPER_LEFT,
 	FLIPPER_RIGHT,
 	SPRING,
 	BALL,
+	BUMPER,
 	UNKNOWN
 };
 
@@ -32,6 +31,11 @@ public:
 	}
 
 	virtual bool Update()
+	{
+		return true;
+	}
+
+	virtual bool PostUpdate()
 	{
 		return true;
 	}

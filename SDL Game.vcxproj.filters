@@ -107,6 +107,9 @@
     <ClInclude Include="Spring.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
+    <ClInclude Include="PropsManager.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -143,6 +146,9 @@
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="PropsManager.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>

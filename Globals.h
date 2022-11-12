@@ -30,3 +30,7 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "Pokemon Pinball"
+
+// Scores
+#define BUMPER_SCORE 500;
+#define SLINGSHOT_SCORE 500;

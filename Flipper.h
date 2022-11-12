@@ -9,15 +9,15 @@
 class ModulePhysics;
 class SDL_Texture;
 
-enum FLIPPERSIDE {
+enum FlipperSide {
 	LEFT,
 	RIGHT
 };
 
 class Flipper : Prop {
 public:
-	Flipper(PropType type, FLIPPERSIDE side) : Prop(type) {
-
+	Flipper(PropType type, FlipperSide fSide) : Prop(type) {
+		side = fSide;
 		switch (side)
 		{
 		case LEFT:
@@ -73,6 +73,37 @@ public:
 		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 16), METERS_TO_PIXELS(pBody->body->GetPosition().y - 6), NULL, 1.0f, pBody->GetRotation());
 	}
 
+	bool Update() {
+		switch (side) {
+		case FlipperSide::LEFT:
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+				PlaySFX();
+				Kick();
+			}
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
+				StopKick();
+			}
+			break;
+		case FlipperSide::RIGHT:
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+				PlaySFX();
+				Kick();
+			}
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
+				StopKick();
+			}
+			break;
+		default:
+			break;
+		}
+		return true;
+	}
+
+	bool PostUpdate() { 
+		Blit();
+		return true;
+	}
+
 	void Kick() {
 		joint->EnableMotor(true);
 	}
@@ -93,7 +124,7 @@ private:
 	int yPin;
 
 	int flipperSfx;
-
+	FlipperSide side;
 	PhysBody* pBody;
 	PhysBody* pin;
 	b2RevoluteJoint* joint;

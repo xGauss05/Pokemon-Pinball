@@ -4,11 +4,6 @@
 #include "p2Point.h"
 #include "Globals.h"
 
-#include "Flipper.h"
-#include "Ball.h"
-#include "Spring.h"
-
-
 class PhysBody;
 
 struct GroundAsset {
@@ -32,23 +27,18 @@ public:
 	void doRayCast();
 
 	void switchLayer(int newLayer);
-
+	void AddScore(int amount);
 	// Main module steps
 	bool Start();
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
-	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
 
 	int currentLayer;
 
 	// Lists of physics objects
-	Flipper* leftFlipper;
-	Flipper* rightFlipper;
-	Ball* ball;
-	Spring* spring;
 
 	// Map Textures
 	SDL_Texture* mapLayer0;
@@ -128,7 +118,8 @@ public:
 
 	p2List<PhysBody*> mapCollisionsLayer2;
 
-
+	//
+	int score = 0;
 
 	// FX
 	int font;

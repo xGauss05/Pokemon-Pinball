@@ -1,10 +1,12 @@
 #pragma once
+#include "Globals.h"
 #include "Application.h"
 #include "Module.h"
 #include "Prop.h"
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleScene.h"
 
 class ModulePhysics;
 class SDL_Texture;
@@ -13,16 +15,16 @@ class Ball : public Prop {
 public:
 	Ball(PropType type) : Prop(type) {
 		texture = App->textures->Load("pinball/Textures/test.png");
+		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
 		x = 100;
 		y = 100;
 		radius = 7;
-		type = PropType::BALL;
 		pBody = App->physics->CreateCircle(x, y, radius);
+		pBody->listener = (Module*)App->pManager;
+
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
-		pBody->listener = (Module*)App->scene;
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0.0f);
 		pBody->prop = this;
-		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
 	}
 
 	void PlaySFX() {
@@ -35,6 +37,25 @@ public:
 
 	void OnCollision(PhysBody* bodyB) {
 		PlaySFX();
+		if (bodyB->prop != NULL) {
+			switch (bodyB->prop->type) {
+			case PropType::BUMPER:
+				
+				App->scene->score += BUMPER_SCORE;
+				LOG("YEET");
+				break;
+			default:
+				App->scene->score += BUMPER_SCORE;
+
+				break;
+			}
+			
+		}
+	}
+
+	bool PostUpdate() {
+		Blit();
+		return true;
 	}
 
 private:

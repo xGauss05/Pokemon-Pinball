@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
+#include "PropsManager.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -244,33 +245,19 @@ void ModuleScene::drawScene()
 	}
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 0) {
-		ball->Blit();
-	}
 
 	// Blit Layer1
 	App->renderer->Blit(mapLayer1, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 1) {
-		ball->Blit();
-	}
 
 	// Blit Layer2
 	App->renderer->Blit(mapLayer2, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 2) {
-		ball->Blit();
-	}
 
 	// Blit Layer3
 	App->renderer->Blit(mapLayer3, 0, 0);
-
-
-	leftFlipper->Blit();
-	rightFlipper->Blit();
-	spring->Blit();
 
 }
 
@@ -378,21 +365,14 @@ bool ModuleScene::Start()
 
 	currentLayer = 0;
 
-	leftFlipper = new Flipper(PropType::FLIPPER_LEFT, LEFT);
-
-	rightFlipper = new Flipper(PropType::FLIPPER_RIGHT, RIGHT);
-
-	ball = new Ball(PropType::BALL);
-
-	spring = new Spring(PropType::SPRING);
+	App->pManager->CreateProp(PropType::FLIPPER_LEFT);
+	App->pManager->CreateProp(PropType::FLIPPER_RIGHT);
+	App->pManager->CreateProp(PropType::BALL);
+	App->pManager->CreateProp(PropType::SPRING);
 
 	// Example of how to create a PhysBody
 
-	/*circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-	circles.getLast()->data->ctype = ColliderType::BALL;
-	circles.getLast()->data->listener = this;*/
-
-	// Add this module (ModuleSceneIntro) as a listener for collisions with the sensor.
+	// Add this module (ModuleScene) as a listener for collisions with the sensor.
 	// TODO
 
 	return ret;
@@ -401,30 +381,6 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	// Keep playing
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
-		rightFlipper->PlaySFX();
-		rightFlipper->Kick();
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
-		leftFlipper->PlaySFX();
-		leftFlipper->Kick();
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
-		rightFlipper->StopKick();
-	}
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
-		leftFlipper->StopKick();
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		spring->StartLoading();
-	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
-		spring->Release();
-	}
 
 	drawScene();
 
@@ -444,15 +400,4 @@ bool ModuleScene::CleanUp() {
 	return true;
 }
 
-void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
-{
-	if (bodyA->prop != NULL) {
-		switch (bodyA->prop->type) {
-		case PropType::BALL:
-			ball->OnCollision(bodyB);
-			break;
-		}
-	}
-	
-	
-}
+

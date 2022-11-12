@@ -34,6 +34,7 @@ public:
 	{
 		joint->SetMotorSpeed(contractionSpeed);
 	}
+
 	void Release()
 	{
 		joint->SetMotorSpeed(-releaseSpeed);
@@ -45,6 +46,21 @@ public:
 
 	void PlaySFX() {
 		//App->audio->PlayFx(NULL);
+	}
+
+	bool Update() {
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			StartLoading();
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
+			Release();
+		}
+		return true;
+	}
+
+	bool PostUpdate() {
+		Blit();
+		return true;
 	}
 
 private:
