@@ -92,7 +92,7 @@ void ModuleScene::initTextures()
 	groundAssets.add(&redArrow2);
 	groundAssets.add(&redArrow3);
 
-	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!-", 8);
+	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
 void ModuleScene::drawScene()
