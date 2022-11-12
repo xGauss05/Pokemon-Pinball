@@ -101,6 +101,15 @@ public:
 	*/
 	p2List<GroundAsset*> groundAssets;
 
+	// map collisions
+	PhysBody* mapCollisionLake1;
+	PhysBody* mapCollisionMarket1;
+	PhysBody* mapCollisionLeft1;
+	PhysBody* mapCollisionRight1;
+	PhysBody* mapCollisionGeneral1;
+
+	p2List<PhysBody*> mapCollisionsLayer1;
+
 	// FX
 	int font;
 
