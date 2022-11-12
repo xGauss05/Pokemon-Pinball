@@ -27,8 +27,11 @@ public:
 	~ModuleScene();
 
 	void initTextures();
+	void initMapCollisions();
 	void drawScene();
 	void doRayCast();
+
+	void switchLayer(int newLayer);
 
 	// Main module steps
 	bool Start();
@@ -38,6 +41,8 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
+
+	int currentLayer;
 
 	// Lists of physics objects
 	Flipper* leftFlipper;
@@ -104,13 +109,26 @@ public:
 	p2List<GroundAsset*> groundAssets;
 
 	// map collisions
-	PhysBody* mapCollisionLake1;
-	PhysBody* mapCollisionMarket1;
-	PhysBody* mapCollisionLeft1;
-	PhysBody* mapCollisionRight1;
-	PhysBody* mapCollisionGeneral1;
+	// 0
+	PhysBody* mapCollisionLake0;
+	PhysBody* mapCollisionMarket0;
+	PhysBody* mapCollisionLeft0;
+	PhysBody* mapCollisionRight0;
+	PhysBody* mapCollisionGeneral0;
+
+	p2List<PhysBody*> mapCollisionsLayer0;
+
+	// 1
+
 
 	p2List<PhysBody*> mapCollisionsLayer1;
+
+	// 2
+
+
+	p2List<PhysBody*> mapCollisionsLayer2;
+
+
 
 	// FX
 	int font;
