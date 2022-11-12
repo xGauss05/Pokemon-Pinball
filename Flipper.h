@@ -22,16 +22,16 @@ public:
 		case LEFT:
 			texture = App->textures->Load("pinball/Textures/flipper_left.png");
 
-			x = 100;
-			y = 100;
+			x = 92;
+			y = 300;
 			xPin = x - 11;
 			yPin = y - 1;
 			break;
 		case RIGHT:
 			texture = App->textures->Load("pinball/Textures/flipper_right.png");
 
-			x = 200;
-			y = 100;
+			x = 148;
+			y = 300;
 			xPin = x + 11;
 			yPin = y - 1;
 			break;

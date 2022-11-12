@@ -12,8 +12,8 @@ class Ball : Prop {
 public:
 	Ball(PropType type) : Prop(type) {
 		texture = App->textures->Load("pinball/Textures/test.png");
-		x = 50;
-		y = 50;
+		x = 100;
+		y = 100;
 		radius = 7;
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
