@@ -34,3 +34,7 @@ enum update_status
 // Scores
 #define BUMPER_SCORE 500;
 #define SLINGSHOT_SCORE 500;
+#define PLUSLE_SCORE 2000;
+#define MINUN_SCORE 2000;
+#define ZIGZAGOON_SCORE 3000;
+#define SEEDOT_SCORE 3000;

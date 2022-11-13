@@ -113,6 +113,9 @@
     <ClInclude Include="Bumper.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

@@ -76,6 +76,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Bumper.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Flipper.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleDebug.h" />

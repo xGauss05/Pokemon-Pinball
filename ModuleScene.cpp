@@ -489,11 +489,6 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::BALL);
 	App->pManager->CreateProp(PropType::SPRING);
 
-	// Example of how to create a PhysBody
-
-	// Add this module (ModuleScene) as a listener for collisions with the sensor.
-	// TODO
-
 	return ret;
 }
 
