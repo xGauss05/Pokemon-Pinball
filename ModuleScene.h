@@ -149,6 +149,18 @@ public:
 	Animation zigzagoonDance;
 	Animation* zigzagoonAnim = nullptr;
 
+	// Animations (Minun)
+	SDL_Texture* minunTexture;
+	Animation minunIdle;
+	Animation minunJump;
+	Animation* minunAnim = nullptr;
+
+	// Animations (Plusle)
+	SDL_Texture* plusleTexture;
+	Animation plusleIdle;
+	Animation plusleJump;
+	Animation* plusleAnim = nullptr;
+
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;

@@ -134,6 +134,22 @@ void ModuleScene::initTextures()
 	zigzagoonIdle.loop = true;
 	zigzagoonAnim = &zigzagoonIdle;
 
+	minunTexture = App->textures->Load("pinball/Textures/minun_sprite.png");
+	minunIdle.PushBack({ 0,0,30,36 });
+	minunIdle.PushBack({ 30,0,30,36 });
+	minunIdle.PushBack({ 60,0,30,36 });
+	minunIdle.speed = 0.05f;
+	minunIdle.loop = true;
+	minunAnim = &minunIdle;
+
+	plusleTexture = App->textures->Load("pinball/Textures/plusle_sprite.png");
+	plusleIdle.PushBack({ 0,0,30,36 });
+	plusleIdle.PushBack({ 30,0,30,36 });
+	plusleIdle.PushBack({ 60,0,30,36 });
+	plusleIdle.speed = 0.05f;
+	plusleIdle.loop = true;
+	plusleAnim = &plusleIdle;
+
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -462,6 +478,8 @@ void ModuleScene::drawAnimations() {
 	basketAnim->Update();
 	pelipperAnim->Update();
 	zigzagoonAnim->Update();
+	plusleAnim->Update();
+	minunAnim->Update();
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -478,6 +496,9 @@ void ModuleScene::drawAnimations() {
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
 	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));
 	App->renderer->Blit(zigzagoonTexture, 195, 270, &(zigzagoonAnim->GetCurrentFrame()));
+
+	App->renderer->Blit(minunTexture, 66, 145, &(minunAnim->GetCurrentFrame()));
+	App->renderer->Blit(plusleTexture, 35, 162, &(plusleAnim->GetCurrentFrame()));
 }
 
 void ModuleScene::doRayCast()

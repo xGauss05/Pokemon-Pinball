@@ -41,6 +41,7 @@ public:
 			}
 		}
 	}
+
 private:
 	int x;
 	int y;

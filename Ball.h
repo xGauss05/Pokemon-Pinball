@@ -95,7 +95,6 @@ public:
 				LOG("Ball collided ???");
 				break;
 			}
-
 		}
 	}
 
