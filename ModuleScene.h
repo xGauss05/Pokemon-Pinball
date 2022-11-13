@@ -142,6 +142,12 @@ public:
 	Animation pelipperIdle;
 	Animation* pelipperAnim = nullptr;
 
+	// Animations (Zigzagoon)
+	SDL_Texture* zigzagoonTexture;
+	Animation zigzagoonIdle;
+	Animation zigzagoonDance;
+	Animation* zigzagoonAnim = nullptr;
+
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;
