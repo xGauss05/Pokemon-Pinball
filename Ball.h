@@ -39,8 +39,18 @@ public:
 		PlaySFX();
 		if (bodyB->prop != NULL) {
 			switch (bodyB->prop->type) {
-			case PropType::BUMPER:
+			case PropType::BUMPERTOP:
 				
+				App->scene->score += BUMPER_SCORE;
+				LOG("YEET");
+				break;
+			case PropType::BUMPERRIGHT:
+
+				App->scene->score += BUMPER_SCORE;
+				LOG("YEET");
+				break;
+			case PropType::BUMPERLEFT:
+
 				App->scene->score += BUMPER_SCORE;
 				LOG("YEET");
 				break;

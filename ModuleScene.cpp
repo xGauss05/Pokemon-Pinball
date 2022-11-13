@@ -376,6 +376,9 @@ bool ModuleScene::Start()
 
 	App->pManager->CreateProp(PropType::FLIPPER_LEFT);
 	App->pManager->CreateProp(PropType::FLIPPER_RIGHT);
+	App->pManager->CreateProp(PropType::BUMPERTOP);
+	App->pManager->CreateProp(PropType::BUMPERRIGHT);
+	App->pManager->CreateProp(PropType::BUMPERLEFT);
 	App->pManager->CreateProp(PropType::BALL);
 	App->pManager->CreateProp(PropType::SPRING);
 

@@ -3,6 +3,7 @@
 #include "Flipper.h"
 #include "Ball.h"
 #include "Spring.h"
+#include "Bumper.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -64,8 +65,14 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::BALL:
 		prop = (Prop*)new Ball(type);
 		break;
-	case PropType::BUMPER:
-		//prop = (Prop*)new Bumper(type);
+	case PropType::BUMPERTOP:
+		prop = (Prop*)new Bumper(type, BumperPlace::BBOTTOM);
+		break;
+	case PropType::BUMPERRIGHT:
+		prop = (Prop*)new Bumper(type, BumperPlace::BRIGHT);
+		break;
+	case PropType::BUMPERLEFT:
+		prop = (Prop*)new Bumper(type, BumperPlace::BLEFT);
 		break;
 	case PropType::FLIPPER_LEFT:
 		prop = (Prop*)new Flipper(type, FlipperSide::LEFT);
