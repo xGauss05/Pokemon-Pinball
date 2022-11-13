@@ -51,7 +51,7 @@ public:
 	void OnCollision(PhysBody* bodyB) {
 		PlaySFX();
 		if (bodyB->prop != NULL) {
-			int pelipperScore;
+			int score;
 			switch (bodyB->prop->type) {
 			case PropType::BUMPERTOP:
 				App->scene->currentScore += BUMPER_SCORE;
@@ -78,12 +78,13 @@ public:
 				LOG("Ball collided ZIGZAGOON_BUTTON");
 				break;
 			case PropType::SEEDOT_BUTTON:
-				App->scene->currentScore += SEEDOT_SCORE;
+				score = SEEDOT_SCORE;
+				App->scene->currentScore += score * App->scene->seedotMultiplier;
 				LOG("Ball collided SEEDOT_BUTTON");
 				break;
 			case PropType::PELIPPER_BUTTON:
-				pelipperScore = PELIPPER_SCORE;
-				App->scene->currentScore += pelipperScore * App->scene->scoreMultiplier;
+				score = PELIPPER_SCORE;
+				App->scene->currentScore += score * App->scene->scoreMultiplier;
 				LOG("Ball collided PELIPPER_BUTTON");
 				break;
 			default:

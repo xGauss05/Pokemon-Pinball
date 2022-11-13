@@ -63,11 +63,18 @@ public:
 			switch (bodyB->prop->type) {
 			case PropType::BALL:
 				PlaySFX();
-				if (btnType == ButtonType::PELIPPER) {
+				switch (btnType) {
+				case ButtonType::PELIPPER:
 					App->scene->scoreMultiplier++;
 					if (App->scene->scoreMultiplier >= 4) {
 						App->scene->scoreMultiplier = 1;
 					}
+					break;
+				case ButtonType::SEEDOT:
+					if (App->scene->seedotMultiplier <= 3.0f) {
+						App->scene->seedotMultiplier += 0.5f;
+					}
+					break;
 				}
 			}
 		}

@@ -129,12 +129,18 @@ public:
 	Animation wailmerIdle;
 	Animation wailmerSpit;
 	Animation* wailmerAnim = nullptr;
+	// Animations (Seedot)
+	SDL_Texture* seedotTexture;
+	Animation basketIdle;
+	Animation seedotIdle;
+	Animation* seedotAnim = nullptr;
 
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;
 	int highestScore = 0;
 	int scoreMultiplier = 1;
+	float seedotMultiplier = 1.0f;
 
 	// Font
 	int font;
