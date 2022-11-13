@@ -69,20 +69,22 @@ public:
 		App->audio->PlayFx(releaseSFX);
 	}
 
-	void Blit() {
-		idleAnim.Update();
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { compressionAnim.Update(); }
+	void BlitByLayer(int layer) {
+		if (layer == 0) {
+			idleAnim.Update();
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { compressionAnim.Update(); }
 
-		if (currentAnim == &idleAnim)
-		{
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11, &currentAnim->GetCurrentFrame());
-		}
-		if (currentAnim == &compressionAnim)
-		{
-			App->renderer->Blit(texture, 
-								METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, 
-								METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11 - 4, 
-								&currentAnim->GetCurrentFrame());
+			if (currentAnim == &idleAnim)
+			{
+				App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11, &currentAnim->GetCurrentFrame());
+			}
+			if (currentAnim == &compressionAnim)
+			{
+				App->renderer->Blit(texture,
+					METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9,
+					METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11 - 4,
+					&currentAnim->GetCurrentFrame());
+			}
 		}
 	}
 
@@ -93,11 +95,6 @@ public:
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
 			Release();
 		}
-		return true;
-	}
-
-	bool PostUpdate() {
-		Blit();
 		return true;
 	}
 
