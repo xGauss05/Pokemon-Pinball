@@ -45,31 +45,31 @@ public:
 		if (bodyB->prop != NULL) {
 			switch (bodyB->prop->type) {
 			case PropType::BUMPERTOP:
-				App->scene->score += BUMPER_SCORE;
+				App->scene->currentScore += BUMPER_SCORE;
 				LOG("Ball collided BUMPERTOP");
 				break;
 			case PropType::BUMPERRIGHT:
-				App->scene->score += BUMPER_SCORE;
+				App->scene->currentScore += BUMPER_SCORE;
 				LOG("Ball collided BUMPERIGHT");
 				break;
 			case PropType::BUMPERLEFT:
-				App->scene->score += BUMPER_SCORE;
+				App->scene->currentScore += BUMPER_SCORE;
 				LOG("Ball collided BUMPERLEFT");
 				break;
 			case PropType::MINUN_BUTTON:
-				App->scene->score += MINUN_SCORE;
+				App->scene->currentScore += MINUN_SCORE;
 				LOG("Ball collided MINUN_BUTTON");
 				break;
 			case PropType::PLUSLE_BUTTON:
-				App->scene->score += PLUSLE_SCORE;
+				App->scene->currentScore += PLUSLE_SCORE;
 				LOG("Ball collided PLUSLE_BUTTON");
 				break;
 			case PropType::ZIGZAGOON_BUTTON:
-				App->scene->score += ZIGZAGOON_SCORE;
+				App->scene->currentScore += ZIGZAGOON_SCORE;
 				LOG("Ball collided ZIGZAGOON_BUTTON");
 				break;
 			case PropType::SEEDOT_BUTTON:
-				App->scene->score += SEEDOT_SCORE;
+				App->scene->currentScore += SEEDOT_SCORE;
 				LOG("Ball collided SEEDOT_BUTTON");
 				break;
 			default:

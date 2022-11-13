@@ -379,9 +379,24 @@ void ModuleScene::drawScene()
 }
 
 void ModuleScene::drawScore() {
-	std::string temp = std::to_string(score);
+
+	// Current score
+	std::string temp = std::to_string(currentScore);
 	char const* num_char = temp.c_str();
 	App->fonts->BlitText(App->renderer->camera.x + 5, SCREEN_HEIGHT - 10, font, num_char);
+
+	// Highest score
+	temp = std::to_string(highestScore);
+	num_char = temp.c_str();
+	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 5, font, "HIGH");
+	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 12, font, num_char);
+
+	// Previous score
+	temp = std::to_string(previousScore);
+	num_char = temp.c_str();
+	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 19, font, "PREV");
+	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 26, font, num_char);
+
 }
 
 void ModuleScene::doRayCast()
@@ -485,7 +500,7 @@ bool ModuleScene::Start()
 	App->audio->PlayMusic("pinball/Music/bgm.ogg");
 
 	currentLayer = 0;
-	score = 0;
+	currentScore = 0;
 	initTextures();
 	initMapCollisions();
 

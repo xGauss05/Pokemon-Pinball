@@ -122,10 +122,12 @@ public:
 
 	p2List<PhysBody*> mapCollisionsLayer2;
 
-	//
-	int score = 0;
+	// Score variables
+	int currentScore = 0;
+	int previousScore = 0;
+	int highestScore = 0;
 
-	// FX
+	// Font
 	int font;
 
 	// Raycast
