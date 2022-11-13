@@ -140,7 +140,7 @@ public:
 	int currentScore = 0;
 	int previousScore = 0;
 	int highestScore = 0;
-	int scoreMultiplier = 1;
+	int pelipperMultiplier = 1;
 	float seedotMultiplier = 1.0f;
 
 	// Font
