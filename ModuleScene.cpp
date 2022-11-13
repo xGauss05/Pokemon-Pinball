@@ -370,10 +370,28 @@ void ModuleScene::initMapCollisions()
 
 	}
 
+	{
+		int points[20] = {
+		194, 24,
+		154, 25,
+		115, 33,
+		92, 40,
+		79, 47,
+		86, 63,
+		103, 56,
+		123, 50,
+		155, 43,
+		194, 42
+		};
+
+		mapCollisionTopRail2 = App->physics->CreateChain(0, 0, points, 20);
+	}
+
 	mapCollisionRigthRail2->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionTopRail2->body->SetType(b2BodyType::b2_staticBody);
 
 	mapCollisionsLayer2.add(mapCollisionRigthRail2);
-
+	mapCollisionsLayer2.add(mapCollisionTopRail2);
 
 	switchLayer(2);
 	switchLayer(1);
