@@ -44,6 +44,7 @@ public:
 		initAnim();
 		bumperSfx = App->audio->LoadFx("pinball/Sounds/shroomish_hit.wav");
 
+
 	}
 
 	void initAnim()
@@ -56,16 +57,13 @@ public:
 
 		hitAnim.PushBack({ 54, 0, 27, 32 });
 		hitAnim.PushBack({ 81, 0, 27, 32 });
-		hitAnim.speed = 0.05f;
+		hitAnim.speed = 0.2f;
 		hitAnim.loop = false;
 
 		currentAnim = &idleAnim;
 	}
 
 	void Blit() {
-		if (currentAnim->HasFinished()) {
-			currentAnim = &idleAnim;
-		}
 
 
 		if (currentAnim == &idleAnim)
@@ -89,9 +87,13 @@ public:
 	void OnCollision(PhysBody* bodyB) {
 		PlaySFX();
 		currentAnim = &hitAnim;
+		currentAnim->Reset();
 	}
 
 	bool Update() {
+		if (currentAnim == &hitAnim && currentAnim->HasFinished()) {
+			currentAnim = &idleAnim;
+		}
 		return true;
 	}
 
