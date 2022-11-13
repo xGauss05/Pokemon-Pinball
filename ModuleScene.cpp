@@ -139,9 +139,8 @@ void ModuleScene::initMapCollisions()
 		mapCollisionGeneral0 = App->physics->CreateChain(0, 0, points, 62);
 	}
 	{
-		int points[52] = {
+		int points[50] = {
 		141, 100,
-		137, 110,
 		139, 118,
 		150, 120,
 		164, 125,
@@ -168,7 +167,7 @@ void ModuleScene::initMapCollisions()
 		156, 102
 		};
 
-		mapCollisionLake0 = App->physics->CreateChain(0, 0, points, 52);
+		mapCollisionLake0 = App->physics->CreateChain(0, 0, points, 50);
 	}
 	{
 		int points[12] = {
@@ -228,10 +227,10 @@ void ModuleScene::initMapCollisions()
 
 	{
 		int points[8] = {
-		96, 102,
-		101, 102,
-		101, 120,
-		96, 120
+		97, 102,
+		99, 102,
+		99, 120,
+		97, 120
 		};
 
 		mapCollisionTopRectA0 = App->physics->CreateChain(0, 0, points, 8);
@@ -240,10 +239,10 @@ void ModuleScene::initMapCollisions()
 
 	{
 		int points[8] = {
-		117, 100,
-		122, 100,
-		122, 118,
-		117, 118
+		119, 100,
+		121, 100,
+		121, 118,
+		119, 118
 		};
 
 		mapCollisionTopRectB0 = App->physics->CreateChain(0, 0, points, 8);
@@ -341,9 +340,6 @@ void ModuleScene::initMapCollisions()
 	switchLayer(2);
 	switchLayer(1);
 	switchLayer(0);
-
-	switchLayer(2);
-
 
 }
 
