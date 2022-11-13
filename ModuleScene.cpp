@@ -192,25 +192,26 @@ void ModuleScene::initMapCollisions()
 	}
 	{
 		int points[12] = {
-		191, 342,
-		191, 375,
-		149, 402,
-		154, 406,
-		196, 378,
-		196, 342
+		196, 344,
+		191, 344,
+		191, 373,
+		160, 392,
+		163, 398,
+		196, 378
 		};
+
 
 		mapCollisionRight0 = App->physics->CreateChain(0, 0, points, 12);
 
 	}
 	{
 		int points[12] = {
-		43, 342,
-		48, 342,
-		48, 372,
-		91, 402,
-		86, 406,
-		43, 377
+		44, 344,
+		49, 344,
+		49, 373,
+		80, 392,
+		77, 398,
+		44, 378
 		};
 
 		mapCollisionLeft0 = App->physics->CreateChain(0, 0, points, 12);
