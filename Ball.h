@@ -87,6 +87,10 @@ public:
 				App->scene->currentScore += score * App->scene->pelipperMultiplier;
 				LOG("Ball collided PELIPPER_BUTTON");
 				break;
+			case PropType::TROUGH:
+				//TeleportTo(spawn);
+				LOG("Ball collided TROUGH");
+				break;
 			default:
 				LOG("Ball collided ???");
 				break;

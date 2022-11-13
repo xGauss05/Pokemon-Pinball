@@ -30,7 +30,7 @@ public:
 	void doRayCast();
 
 	void switchLayer(int newLayer);
-	void AddScore(int amount);
+
 	// Main module steps
 	bool Start();
 	update_status Update();
@@ -154,6 +154,9 @@ public:
 	int highestScore = 0;
 	int pelipperMultiplier = 1;
 	float seedotMultiplier = 1.0f;
+
+	// Game variables
+	int lifes = 2;
 
 	// Font
 	int font;

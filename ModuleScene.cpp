@@ -579,6 +579,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SEEDOT_BUTTON);
 	App->pManager->CreateProp(PropType::ZIGZAGOON_BUTTON);
 	App->pManager->CreateProp(PropType::PELIPPER_BUTTON);
+	App->pManager->CreateProp(PropType::TROUGH);
 
 	return ret;
 }

@@ -18,6 +18,7 @@ enum class PropType
 	MINUN_BUTTON,
 	PLUSLE_BUTTON,
 	PELIPPER_BUTTON,
+	TROUGH,
 	UNKNOWN
 };
 

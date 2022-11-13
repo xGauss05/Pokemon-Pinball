@@ -5,6 +5,7 @@
 #include "Spring.h"
 #include "Bumper.h"
 #include "Button.h"
+#include "Trough.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -59,8 +60,6 @@ Prop* PropsManager::CreateProp(PropType type)
 {
 	Prop* prop = nullptr;
 
-	//L02: DONE 2: Instantiate entity according to the type and add the new entoty it to the list of Entities
-
 	switch (type)
 	{
 	case PropType::BALL:
@@ -98,6 +97,9 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::PELIPPER_BUTTON:
 		prop = (Prop*)new Button(type, ButtonType::PELIPPER);
+		break;
+	case PropType::TROUGH:
+		prop = (Prop*)new Trough(type);
 		break;
 	case PropType::UNKNOWN:
 		break;

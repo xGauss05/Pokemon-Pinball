@@ -95,6 +95,7 @@
     <ClInclude Include="Prop.h" />
     <ClInclude Include="PropsManager.h" />
     <ClInclude Include="Spring.h" />
+    <ClInclude Include="Trough.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
