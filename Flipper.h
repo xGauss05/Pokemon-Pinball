@@ -24,16 +24,16 @@ public:
 		case LEFT:
 			texture = App->textures->Load("pinball/Textures/flipper_left.png");
 
-			x = 92;
-			y = 300;
+			x = 97;
+			y = 398;
 			xPin = x - 11;
 			yPin = y - 1;
 			break;
 		case RIGHT:
 			texture = App->textures->Load("pinball/Textures/flipper_right.png");
 
-			x = 148;
-			y = 300;
+			x = 143;
+			y = 398;
 			xPin = x + 11;
 			yPin = y - 1;
 			break;
@@ -41,7 +41,7 @@ public:
 			break;
 		}
 
-		pBody = App->physics->CreateRectangle(x, y, 32, 12);
+		pBody = App->physics->CreateRectangle(x, y, 30, 8);
 		pin = App->physics->CreateRectangle(xPin, yPin, 2, 2);
 		pBody->prop = this;
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
@@ -52,12 +52,12 @@ public:
 		switch (side)
 		{
 		case LEFT:
-			joint->SetLimits(-30 * DEGTORAD, 30 * DEGTORAD);
+			joint->SetLimits(-21 * DEGTORAD, 30 * DEGTORAD);
 			joint->SetMotorSpeed(20);
 			joint->SetMaxMotorTorque(20);
 			break;
 		case RIGHT:
-			joint->SetLimits(-30 * DEGTORAD, 30 * DEGTORAD);
+			joint->SetLimits(-30 * DEGTORAD, 21 * DEGTORAD);
 			joint->SetMotorSpeed(-20);
 			joint->SetMaxMotorTorque(20);
 			break;
