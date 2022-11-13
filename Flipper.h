@@ -41,7 +41,6 @@ public:
 			break;
 		}
 
-
 		pBody = App->physics->CreateRectangle(x, y, 32, 12);
 		pin = App->physics->CreateRectangle(xPin, yPin, 2, 2);
 		pBody->prop = this;

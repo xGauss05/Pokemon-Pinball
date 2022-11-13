@@ -132,6 +132,7 @@ public:
 	// Animations (Seedot)
 	SDL_Texture* seedotTexture;
 	Animation basketIdle;
+	Animation* basketAnim = nullptr;
 	Animation seedotIdle;
 	Animation* seedotAnim = nullptr;
 

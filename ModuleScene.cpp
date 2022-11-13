@@ -117,6 +117,8 @@ void ModuleScene::initTextures()
 	seedotAnim = &seedotIdle;
 
 	basketIdle.PushBack({0,12,27,17});
+	basketIdle.loop = true;
+	basketAnim = &basketIdle;
 	
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
@@ -424,17 +426,21 @@ void ModuleScene::drawScore() {
 void ModuleScene::drawAnimations() {
 	wailmerAnim->Update();
 	seedotAnim->Update();
+	basketAnim->Update();
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
 	if (seedotMultiplier >= 2.5f) {
-		App->renderer->Blit(seedotTexture, 25, 285, &(seedotAnim->GetCurrentFrame()));
+		App->renderer->Blit(seedotTexture, 25, 280, &(seedotAnim->GetCurrentFrame()));
 	}
 	if (seedotMultiplier >= 2.0f) {
-		App->renderer->Blit(seedotTexture, 5, 285, &(seedotAnim->GetCurrentFrame()));
+		App->renderer->Blit(seedotTexture, 10, 280, &(seedotAnim->GetCurrentFrame()));
 	}
 	if (seedotMultiplier >= 1.5f) {
-		App->renderer->Blit(seedotTexture, 15, 290, &(seedotAnim->GetCurrentFrame()));
+		App->renderer->Blit(seedotTexture, 18, 283, &(seedotAnim->GetCurrentFrame()));
 	}
+
+	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
+
 }
 
 void ModuleScene::doRayCast()
