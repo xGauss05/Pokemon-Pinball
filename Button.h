@@ -80,9 +80,6 @@ public:
 		}
 	}
 
-public:
-	int scoreMultiplier = 1;
-
 private:
 	int x;
 	int y;
