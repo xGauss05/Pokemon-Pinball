@@ -543,7 +543,8 @@ update_status ModuleScene::Update()
 {
 	drawScene();
 	drawScore();
-	
+	drawAnimations();
+
 	return UPDATE_CONTINUE;
 }
 
