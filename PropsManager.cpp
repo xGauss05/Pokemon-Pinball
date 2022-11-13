@@ -96,6 +96,9 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::ZIGZAGOON_BUTTON:
 		prop = (Prop*)new Button(type, ButtonType::ZIGZAGOON);
 		break;
+	case PropType::PELIPPER_BUTTON:
+		prop = (Prop*)new Button(type, ButtonType::PELIPPER);
+		break;
 	case PropType::UNKNOWN:
 		break;
 	default:

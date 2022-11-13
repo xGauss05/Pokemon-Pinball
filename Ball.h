@@ -19,6 +19,8 @@ public:
 		x = 100;
 		y = 100;
 		radius = 8;
+		spawn.x = 243;
+		spawn.y = 350;
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
 
@@ -32,17 +34,24 @@ public:
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture, 
-							METERS_TO_PIXELS(pBody->body->GetPosition().x - 8), 
-							METERS_TO_PIXELS(pBody->body->GetPosition().y - 8), 
-							NULL, 
-							1.0f, 
-							pBody->GetRotation());
+		App->renderer->Blit(texture,
+			METERS_TO_PIXELS(pBody->body->GetPosition().x - 8),
+			METERS_TO_PIXELS(pBody->body->GetPosition().y - 8),
+			NULL,
+			1.0f,
+			pBody->GetRotation());
+	}
+
+	bool Update() {
+		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) TeleportTo(spawn);
+
+		return true;
 	}
 
 	void OnCollision(PhysBody* bodyB) {
 		PlaySFX();
 		if (bodyB->prop != NULL) {
+			int pelipperScore;
 			switch (bodyB->prop->type) {
 			case PropType::BUMPERTOP:
 				App->scene->currentScore += BUMPER_SCORE;
@@ -72,11 +81,16 @@ public:
 				App->scene->currentScore += SEEDOT_SCORE;
 				LOG("Ball collided SEEDOT_BUTTON");
 				break;
+			case PropType::PELIPPER_BUTTON:
+				pelipperScore = PELIPPER_SCORE;
+				App->scene->currentScore += pelipperScore * App->scene->scoreMultiplier;
+				LOG("Ball collided PELIPPER_BUTTON");
+				break;
 			default:
 				LOG("Ball collided ???");
 				break;
 			}
-			
+
 		}
 	}
 
@@ -87,12 +101,22 @@ public:
 		}
 	}
 
+	void TeleportTo(iPoint position) {
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0.0f);
+		pBody->body->ApplyForce(b2Vec2(0.1f, 0.0f), pBody->body->GetWorldCenter(), true);
+	}
+
 private:
 	int x;
 	int y;
 	int radius;
-	int ballSfx;
-	PhysBody* pBody;
 
+	// SFX
+	int ballSfx;
+
+	// Spawn position
+	iPoint spawn;
+
+	PhysBody* pBody;
 	SDL_Texture* texture;
 };

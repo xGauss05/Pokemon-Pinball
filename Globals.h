@@ -38,3 +38,4 @@ enum update_status
 #define MINUN_SCORE 2000;
 #define ZIGZAGOON_SCORE 3000;
 #define SEEDOT_SCORE 3000;
+#define PELIPPER_SCORE 5000;

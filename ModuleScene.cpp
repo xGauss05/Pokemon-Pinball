@@ -397,6 +397,11 @@ void ModuleScene::drawScore() {
 	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 19, font, "PREV");
 	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 26, font, num_char);
 
+	// Pelipper score multiplier
+	temp = std::to_string(scoreMultiplier);
+	num_char = temp.c_str();
+	App->fonts->BlitText(142, 195, font, num_char);
+
 }
 
 void ModuleScene::doRayCast()
@@ -515,6 +520,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::PLUSLE_BUTTON);
 	App->pManager->CreateProp(PropType::SEEDOT_BUTTON);
 	App->pManager->CreateProp(PropType::ZIGZAGOON_BUTTON);
+	App->pManager->CreateProp(PropType::PELIPPER_BUTTON);
 
 	return ret;
 }

@@ -126,6 +126,7 @@ public:
 	int currentScore = 0;
 	int previousScore = 0;
 	int highestScore = 0;
+	int scoreMultiplier = 1;
 
 	// Font
 	int font;

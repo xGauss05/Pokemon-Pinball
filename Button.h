@@ -4,12 +4,14 @@
 #include "Prop.h"
 #include "ModulePhysics.h"
 #include "ModuleAudio.h"
+#include "ModuleScene.h"
 
 enum ButtonType {
 	MINUN,
 	PLUSLE,
 	ZIGZAGOON,
-	SEEDOT
+	SEEDOT,
+	PELIPPER
 };
 
 class Button :public Prop {
@@ -35,6 +37,10 @@ public:
 			x = 52;
 			y = 312;
 			break;
+		case ButtonType::PELIPPER:
+			x = 152;
+			y = 182;
+			break;
 		default:
 			break;
 		}
@@ -57,14 +63,24 @@ public:
 			switch (bodyB->prop->type) {
 			case PropType::BALL:
 				PlaySFX();
+				if (btnType == ButtonType::PELIPPER) {
+					App->scene->scoreMultiplier++;
+					if (App->scene->scoreMultiplier >= 4) {
+						App->scene->scoreMultiplier = 1;
+					}
+				}
 			}
 		}
 	}
+
+public:
+	int scoreMultiplier = 1;
 
 private:
 	int x;
 	int y;
 	int buttonSfx;
+	
 	ButtonType btnType;
 	PhysBody* pBody;
 };
