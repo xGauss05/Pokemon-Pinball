@@ -129,12 +129,18 @@ public:
 	Animation wailmerIdle;
 	Animation wailmerSpit;
 	Animation* wailmerAnim = nullptr;
+
 	// Animations (Seedot)
 	SDL_Texture* seedotTexture;
-	Animation basketIdle;
-	Animation* basketAnim = nullptr;
 	Animation seedotIdle;
 	Animation* seedotAnim = nullptr;
+	Animation basketIdle;
+	Animation* basketAnim = nullptr;
+
+	// Animations (Pelipper)
+	SDL_Texture* pelipperTexture;
+	Animation pelipperIdle;
+	Animation* pelipperAnim = nullptr;
 
 	// Score variables
 	int currentScore = 0;

@@ -103,23 +103,30 @@ void ModuleScene::initTextures()
 	wailmerIdle.speed = 1.0f;
 	wailmerIdle.loop = true;
 	wailmerAnim = &wailmerIdle;
-	
+
 	wailmerSpit.PushBack({ 78,0,38,29 });
 	wailmerSpit.PushBack({ 117,0,38,29 });
 	wailmerSpit.PushBack({ 156,0,38,29 });
 	wailmerIdle.speed = 0.05f;
-	
+
 	seedotTexture = App->textures->Load("pinball/Textures/seedot_sprite.png");
-	seedotIdle.PushBack({18,31,17,22});
-	seedotIdle.PushBack({36,31,17,22});
+	seedotIdle.PushBack({ 18,31,17,22 });
+	seedotIdle.PushBack({ 36,31,17,22 });
 	seedotIdle.speed = 0.05f;
 	seedotIdle.loop = true;
 	seedotAnim = &seedotIdle;
 
-	basketIdle.PushBack({0,12,27,17});
+	basketIdle.PushBack({ 0,12,27,17 });
 	basketIdle.loop = true;
 	basketAnim = &basketIdle;
-	
+
+	pelipperTexture = App->textures->Load("pinball/Textures/pelipper_sprite.png");
+	pelipperIdle.PushBack({ 0,0,43,36 });
+	pelipperIdle.PushBack({ 43,0,43,36 });
+	pelipperIdle.speed = 0.05f;
+	pelipperIdle.loop = true;
+	pelipperAnim = &pelipperIdle;
+
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -428,6 +435,8 @@ void ModuleScene::drawAnimations() {
 	wailmerAnim->Update();
 	seedotAnim->Update();
 	basketAnim->Update();
+	pelipperAnim->Update();
+
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
 	if (seedotMultiplier >= 2.5f) {
@@ -441,7 +450,7 @@ void ModuleScene::drawAnimations() {
 	}
 
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
-
+	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));
 }
 
 void ModuleScene::doRayCast()
