@@ -2,6 +2,8 @@
 #define __MODULE_DEBUG_H__
 
 #include "Module.h"
+#include <chrono>
+using namespace std::chrono;
 
 class ModuleDebug : public Module {
 public:
@@ -24,12 +26,18 @@ public:
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
 
+public:
+	microseconds elapsedCycle;
+	microseconds elapsedFrame;
+	double FPS;
+
 private:
 
 	// Simple debugging flag
 	bool debug;
 
 	bool variables = false;
+	bool time = false;
 };
 
 #endif // __MODULE_DEBUG_H__
