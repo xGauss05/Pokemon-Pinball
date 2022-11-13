@@ -16,8 +16,8 @@ public:
 	Ball(PropType type) : Prop(type) {
 		texture = App->textures->Load("pinball/Textures/ball.png");
 		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
-		x = 100;
-		y = 100;
+		x = 243;
+		y = 350;
 		radius = 8;
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
