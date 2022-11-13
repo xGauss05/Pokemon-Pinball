@@ -121,6 +121,7 @@ public:
 
 	// 2
 	PhysBody* mapCollisionRigthRail2;
+	PhysBody* mapCollisionTopRail2;
 
 	p2List<PhysBody*> mapCollisionsLayer2;
 
