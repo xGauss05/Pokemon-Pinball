@@ -9,6 +9,9 @@
 #include <string>
 using namespace std;
 
+#include <chrono>
+using namespace std::chrono;
+
 ModuleDebug::ModuleDebug(Application* app, bool start_enabled) : Module(app, start_enabled) {
 	debug = false;
 }
@@ -28,6 +31,9 @@ update_status ModuleDebug::Update() {
 	if (debug) {
 		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 			variables = !variables;
+
+		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+			time = !time;
 	}
 
 	return UPDATE_CONTINUE;
@@ -44,16 +50,8 @@ update_status ModuleDebug::PostUpdate() {
 
 void ModuleDebug::DebugDraw() {
 	
-	App->fonts->BlitText(10, 30, 0, "PRESS V FOR VARIABLES");
-
-	//Variables debug
-	if (variables) 
-	{
-		App->fonts->BlitText(10, 40, 0, "WORKING!");
-	}
-
 	//Physics objects
-	// Bonus code: this will iterate all objects in the world and draw the circles
+	// This will iterate all objects in the world and draw the circles
 	// You need to provide your own macro to translate meters to pixels
 	for (b2Body* b = App->physics->world->GetBodyList(); b; b = b->GetNext())
 	{
@@ -184,5 +182,29 @@ void ModuleDebug::DebugDraw() {
 			App->physics->mouse_joint = nullptr;
 			App->physics->mouse_body = nullptr;
 		}
+	}
+
+
+	App->fonts->BlitText(5, 40, 0, "PRESS V FOR VARIABLES");
+	App->fonts->BlitText(5, 50, 0, "PRESS T FOR TIME DEBUG");
+
+	//Time debug
+	if (time)
+	{
+		LOG("Elapsed Cycle:");
+		LOG(std::to_string(elapsedCycle.count()).c_str());
+		LOG("Elapsed Frame:");
+		LOG(std::to_string(elapsedFrame.count()).c_str());
+
+		App->fonts->BlitText(5, 70, 0, "CURRENT FPS ");
+		App->fonts->BlitText(100, 70, 0, std::to_string(FPS).c_str());
+		LOG("FPS:");
+		LOG(std::to_string(FPS).c_str());
+	}
+
+	//Variables debug
+	if (variables)
+	{
+		App->fonts->BlitText(5, 90, 0, "VARIABLES GO HERE");
 	}
 }

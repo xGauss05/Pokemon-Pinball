@@ -53,17 +53,20 @@ public:
 		{
 		case LEFT:
 			joint->SetLimits(-21 * DEGTORAD, 30 * DEGTORAD);
-			joint->SetMotorSpeed(20);
+			joint->SetMotorSpeed(-20);
 			joint->SetMaxMotorTorque(20);
 			break;
 		case RIGHT:
 			joint->SetLimits(-30 * DEGTORAD, 21 * DEGTORAD);
-			joint->SetMotorSpeed(-20);
+			joint->SetMotorSpeed(20);
 			joint->SetMaxMotorTorque(20);
 			break;
 		default:
 			break;
 		}
+
+		joint->EnableMotor(true);
+
 
 		flipperSfx = App->audio->LoadFx("pinball/Sounds/flipper.wav");
 
@@ -106,11 +109,31 @@ public:
 	}
 
 	void Kick() {
-		joint->EnableMotor(true);
+		switch (side)
+		{
+		case LEFT:
+			joint->SetMotorSpeed(20);
+			break;
+		case RIGHT:
+			joint->SetMotorSpeed(-20);
+			break;
+		default:
+			break;
+		}
 	}
 
 	void StopKick() {
-		joint->EnableMotor(false);
+		switch (side)
+		{
+		case LEFT:
+			joint->SetMotorSpeed(-20);
+			break;
+		case RIGHT:
+			joint->SetMotorSpeed(20);
+			break;
+		default:
+			break;
+		}
 	}
 
 	void PlaySFX() {
