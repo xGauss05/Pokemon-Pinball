@@ -413,6 +413,11 @@ void ModuleScene::drawScore() {
 
 }
 
+void ModuleScene::drawAnimations() {
+	wailmerAnim->Update();
+	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
+}
+
 void ModuleScene::doRayCast()
 {
 	// If user presses SPACE, enable RayCast
@@ -538,8 +543,7 @@ update_status ModuleScene::Update()
 {
 	drawScene();
 	drawScore();
-	wailmerAnim->Update();
-	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
+	
 	return UPDATE_CONTINUE;
 }
 
