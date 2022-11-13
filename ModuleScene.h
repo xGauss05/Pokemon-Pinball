@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Animation.h"
 
 class PhysBody;
 
@@ -121,6 +122,12 @@ public:
 	PhysBody* mapCollisionRigthRail2;
 
 	p2List<PhysBody*> mapCollisionsLayer2;
+
+	// Animations (Wailmer)
+	SDL_Texture* wailmerTexture;
+	Animation wailmerIdle;
+	Animation wailmerSpit;
+	Animation* wailmerAnim = nullptr;
 
 	// Score variables
 	int currentScore = 0;

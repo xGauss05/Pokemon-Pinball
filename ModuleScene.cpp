@@ -97,6 +97,19 @@ void ModuleScene::initTextures()
 	groundAssets.add(&redArrow2);
 	groundAssets.add(&redArrow3);
 
+	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
+	wailmerIdle.PushBack({ 0,0,38,29 });
+	wailmerIdle.PushBack({ 39,0,38,29 });
+	wailmerIdle.speed = 1.0f;
+	wailmerIdle.loop = true;
+	wailmerAnim = &wailmerIdle;
+	
+	wailmerSpit.PushBack({ 78,0,38,29 });
+	wailmerSpit.PushBack({ 117,0,38,29 });
+	wailmerSpit.PushBack({ 156,0,38,29 });
+	wailmerIdle.speed = 0.05f;
+	
+	
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -525,7 +538,8 @@ update_status ModuleScene::Update()
 {
 	drawScene();
 	drawScore();
-
+	wailmerAnim->Update();
+	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 	return UPDATE_CONTINUE;
 }
 
