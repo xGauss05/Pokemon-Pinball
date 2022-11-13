@@ -24,6 +24,7 @@ public:
 	void initTextures();
 	void initMapCollisions();
 	void drawScene();
+	void drawScore();
 	void doRayCast();
 
 	void switchLayer(int newLayer);

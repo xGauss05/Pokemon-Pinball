@@ -9,6 +9,8 @@
 #include "ModuleFonts.h"
 #include "PropsManager.h"
 
+#include <string>
+
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
@@ -376,6 +378,12 @@ void ModuleScene::drawScene()
 
 }
 
+void ModuleScene::drawScore() {
+	std::string temp = std::to_string(score);
+	char const* num_char = temp.c_str();
+	App->fonts->BlitText(App->renderer->camera.x + 5, SCREEN_HEIGHT - 10, font, num_char);
+}
+
 void ModuleScene::doRayCast()
 {
 	// If user presses SPACE, enable RayCast
@@ -477,7 +485,7 @@ bool ModuleScene::Start()
 	App->audio->PlayMusic("pinball/Music/bgm.ogg");
 
 	currentLayer = 0;
-
+	score = 0;
 	initTextures();
 	initMapCollisions();
 
@@ -498,9 +506,8 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	// Keep playing
-
 	drawScene();
+	drawScore();
 
 	return UPDATE_CONTINUE;
 }
