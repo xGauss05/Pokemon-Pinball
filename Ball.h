@@ -18,7 +18,7 @@ public:
 		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
 		x = 244;
 		y = 360;
-		radius = 6;
+		radius = 8;
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
 
