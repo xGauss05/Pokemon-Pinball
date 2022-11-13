@@ -84,7 +84,7 @@ public:
 				break;
 			case PropType::PELIPPER_BUTTON:
 				score = PELIPPER_SCORE;
-				App->scene->currentScore += score * App->scene->scoreMultiplier;
+				App->scene->currentScore += score * App->scene->pelipperMultiplier;
 				LOG("Ball collided PELIPPER_BUTTON");
 				break;
 			default:

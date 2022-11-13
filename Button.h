@@ -65,9 +65,9 @@ public:
 				PlaySFX();
 				switch (btnType) {
 				case ButtonType::PELIPPER:
-					App->scene->scoreMultiplier++;
-					if (App->scene->scoreMultiplier >= 4) {
-						App->scene->scoreMultiplier = 1;
+					App->scene->pelipperMultiplier++;
+					if (App->scene->pelipperMultiplier >= 4) {
+						App->scene->pelipperMultiplier = 1;
 					}
 					break;
 				case ButtonType::SEEDOT:

@@ -418,7 +418,7 @@ void ModuleScene::drawScore() {
 	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 26, font, num_char);
 
 	// Pelipper score multiplier
-	temp = std::to_string(scoreMultiplier);
+	temp = std::to_string(pelipperMultiplier);
 	num_char = temp.c_str();
 	App->fonts->BlitText(142, 195, font, num_char);
 
