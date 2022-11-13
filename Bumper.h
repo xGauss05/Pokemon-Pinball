@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "Application.h"
 #include "Module.h"
 #include "Prop.h"
@@ -24,18 +25,19 @@ public:
 		{
 		case BumperPlace::BBOTTOM:
 			x = 115;
-			y = 165;
+			y = 167;
 			break;
 		case BumperPlace::BLEFT:
-			x = 95;
-			y = 138;
+			x = 98;
+			y = 142;
 			break;
 		case BumperPlace::BRIGHT:
-			x = 132;
-			y = 138;
+			x = 134;
+			y = 142;
 			break;
 		}
-		radius = 8;
+		radius = 5;
+		force = 10;
 
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->body->SetType(b2BodyType::b2_staticBody);
@@ -43,7 +45,7 @@ public:
 		pBody->listener = (Module*)App->pManager;
 		initAnim();
 		bumperSfx = App->audio->LoadFx("pinball/Sounds/shroomish_hit.wav");
-
+		
 
 	}
 
@@ -69,13 +71,13 @@ public:
 		if (currentAnim == &idleAnim)
 		{
 			idleAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*2, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*3, &currentAnim->GetCurrentFrame());
+			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
 		}
 
 		if (currentAnim == &hitAnim)
 		{
 			hitAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*2, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*3, &currentAnim->GetCurrentFrame());
+			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
 		}
 
 	}
@@ -88,6 +90,17 @@ public:
 		PlaySFX();
 		currentAnim = &hitAnim;
 		currentAnim->Reset();
+
+		if (bodyB->prop != NULL) {
+			if (bodyB->prop->type == PropType::BALL) {
+				int angle = atan((pBody->body->GetPosition().y - bodyB->body->GetPosition().y) / (pBody->body->GetPosition().x - bodyB->body->GetPosition().x));
+				float xForce = force * cos(angle);
+				float yForce = force * sin(angle);
+				
+				bodyB->body->ApplyForceToCenter({ xForce, yForce }, true);
+				
+			}
+		}
 	}
 
 	bool Update() {
@@ -106,6 +119,7 @@ private:
 	int x;
 	int y;
 	int radius;
+	int force;
 
 	PhysBody* pBody;
 
