@@ -27,7 +27,7 @@ public:
 
 		joint->EnableMotor(true);
 		joint->SetMotorSpeed(-releaseSpeed);
-		joint->SetMaxMotorForce(20);
+		joint->SetMaxMotorForce(30);
 
 		initAnim();
 		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
