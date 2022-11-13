@@ -4,6 +4,7 @@
 #include "Ball.h"
 #include "Spring.h"
 #include "Bumper.h"
+#include "Button.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -82,6 +83,18 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::SPRING:
 		prop = (Prop*)new Spring(type);
+		break;
+	case PropType::MINUN_BUTTON:
+		prop = (Prop*)new Button(type, ButtonType::MINUN);
+		break;
+	case PropType::PLUSLE_BUTTON:
+		prop = (Prop*)new Button(type, ButtonType::PLUSLE);
+		break;
+	case PropType::SEEDOT_BUTTON:
+		prop = (Prop*)new Button(type, ButtonType::SEEDOT);
+		break;
+	case PropType::ZIGZAGOON_BUTTON:
+		prop = (Prop*)new Button(type, ButtonType::ZIGZAGOON);
 		break;
 	case PropType::UNKNOWN:
 		break;

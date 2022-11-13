@@ -73,6 +73,7 @@ public:
 				LOG("Ball collided SEEDOT_BUTTON");
 				break;
 			default:
+				LOG("Ball collided ???");
 				break;
 			}
 			

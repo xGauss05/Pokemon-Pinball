@@ -488,6 +488,10 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::BUMPERLEFT);
 	App->pManager->CreateProp(PropType::BALL);
 	App->pManager->CreateProp(PropType::SPRING);
+	App->pManager->CreateProp(PropType::MINUN_BUTTON);
+	App->pManager->CreateProp(PropType::PLUSLE_BUTTON);
+	App->pManager->CreateProp(PropType::SEEDOT_BUTTON);
+	App->pManager->CreateProp(PropType::ZIGZAGOON_BUTTON);
 
 	return ret;
 }

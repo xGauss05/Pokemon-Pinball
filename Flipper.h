@@ -14,10 +14,11 @@ enum FlipperSide {
 	RIGHT
 };
 
-class Flipper : Prop {
+class Flipper : public Prop {
 public:
 	Flipper(PropType type, FlipperSide fSide) : Prop(type) {
 		side = fSide;
+		
 		switch (side)
 		{
 		case LEFT:
@@ -43,6 +44,7 @@ public:
 
 		pBody = App->physics->CreateRectangle(x, y, 32, 12);
 		pin = App->physics->CreateRectangle(xPin, yPin, 2, 2);
+		pBody->prop = this;
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pin->body->SetType(b2BodyType::b2_staticBody);
 

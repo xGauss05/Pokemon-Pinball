@@ -16,7 +16,7 @@ enum BumperPlace {
 	BRIGHT
 };
 
-class Bumper : Prop {
+class Bumper : public Prop {
 public:
 	Bumper(PropType type, BumperPlace bPlace) : Prop(type) {
 
@@ -39,9 +39,10 @@ public:
 
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->body->SetType(b2BodyType::b2_staticBody);
-
+		pBody->prop = this;
+		pBody->listener = (Module*)App->pManager;
 		initAnim();
-		bumperSfx = App->audio->LoadFx("pinball/Sounds/bumpers.wav");
+		bumperSfx = App->audio->LoadFx("pinball/Sounds/shroomish_hit.wav");
 
 	}
 
