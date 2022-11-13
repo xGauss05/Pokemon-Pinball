@@ -195,23 +195,56 @@ void ModuleScene::initMapCollisions()
 
 	}
 	{
-		int points[26] = {
-		50, 192,
-		63, 215,
-		54, 220,
-		54, 227,
-		33, 182,
-		35, 150,
-		57, 123,
-		79, 107,
-		79, 129,
-		67, 145,
-		94, 196,
-		87, 200,
-		65, 182
+		int points[44] = {
+		36, 233,
+		25, 209,
+		29, 174,
+		40, 147,
+		58, 124,
+		80, 107,
+		80, 130,
+		72, 136,
+		69, 147,
+		95, 193,
+		95, 197,
+		86, 201,
+		64, 182,
+		52, 188,
+		63, 214,
+		54, 221,
+		55, 227,
+		49, 217,
+		43, 201,
+		27, 210,
+		42, 243,
+		36, 238
 		};
 
-		mapCollisionMarket0 = App->physics->CreateChain(0, 0, points, 26);
+		mapCollisionMarket0 = App->physics->CreateChain(0, 0, points, 44);
+
+	}
+
+	{
+		int points[8] = {
+		96, 102,
+		101, 102,
+		101, 120,
+		96, 120
+		};
+
+		mapCollisionTopRectA0 = App->physics->CreateChain(0, 0, points, 8);
+
+	}
+
+	{
+		int points[8] = {
+		117, 100,
+		122, 100,
+		122, 118,
+		117, 118
+		};
+
+		mapCollisionTopRectB0 = App->physics->CreateChain(0, 0, points, 8);
 
 	}
 
@@ -220,16 +253,95 @@ void ModuleScene::initMapCollisions()
 	mapCollisionLeft0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionRight0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionGeneral0->body->SetType(b2BodyType::b2_staticBody);
-
+	mapCollisionTopRectA0->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionTopRectB0->body->SetType(b2BodyType::b2_staticBody);
 
 	mapCollisionsLayer0.add(mapCollisionLake0);
 	mapCollisionsLayer0.add(mapCollisionMarket0);
 	mapCollisionsLayer0.add(mapCollisionLeft0);
 	mapCollisionsLayer0.add(mapCollisionRight0);
 	mapCollisionsLayer0.add(mapCollisionGeneral0);
+	mapCollisionsLayer0.add(mapCollisionTopRectA0);
+	mapCollisionsLayer0.add(mapCollisionTopRectB0);
+
+	{
+		int points[46] = {
+	39, 237,
+	19, 195,
+	12, 155,
+	15, 111,
+	29, 79,
+	57, 55,
+	89, 46,
+	126, 49,
+	145, 60,
+	158, 76,
+	165, 98,
+	165, 134,
+	148, 134,
+	148, 96,
+	137, 74,
+	116, 62,
+	87, 62,
+	64, 71,
+	42, 89,
+	31, 115,
+	28, 153,
+	36, 188,
+	53, 223
+		};
+
+		mapCollisionLeftRail1 = App->physics->CreateChain(0, 0, points, 46);
+
+	}
+
+	{
+		int points[20] = {
+	177, 228,
+	190, 206,
+	226, 170,
+	232, 155,
+	232, 113,
+	249, 113,
+	249, 161,
+	243, 179,
+	205, 217,
+	191, 244
+		};
+
+		mapCollisionRightRail1 = App->physics->CreateChain(0, 0, points, 20);
+
+	}
+
+	mapCollisionLeftRail1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionRightRail1->body->SetType(b2BodyType::b2_staticBody);
+
+	mapCollisionsLayer1.add(mapCollisionLeftRail1);
+	mapCollisionsLayer1.add(mapCollisionRightRail1);
+
+	{
+		int points[8] = {
+		234, 60,
+		234, 443,
+		252, 443,
+		252, 60
+		};
+
+		mapCollisionRigthRail2 = App->physics->CreateChain(0, 0, points, 8);
+
+	}
+
+	mapCollisionRigthRail2->body->SetType(b2BodyType::b2_staticBody);
+
+	mapCollisionsLayer2.add(mapCollisionRigthRail2);
 
 
+	switchLayer(2);
+	switchLayer(1);
 	switchLayer(0);
+
+	switchLayer(2);
+
 
 }
 
@@ -245,25 +357,19 @@ void ModuleScene::drawScene()
 	}
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 0) {
-		App->pManager->BlitPropsByLayer(0);
-	}
+	App->pManager->BlitPropsByLayer(0);
 
 	// Blit Layer1
 	App->renderer->Blit(mapLayer1, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 1) {
-		App->pManager->BlitPropsByLayer(1);
-	}
+	App->pManager->BlitPropsByLayer(1);
 
 	// Blit Layer2
 	App->renderer->Blit(mapLayer2, 0, 0);
 
 	// TODO Blit Pokeball here if this layer
-	if (currentLayer == 2) {
-		App->pManager->BlitPropsByLayer(2);
-	}
+	App->pManager->BlitPropsByLayer(2);
 
 	// Blit Layer3
 	App->renderer->Blit(mapLayer3, 0, 0);
@@ -369,10 +475,11 @@ bool ModuleScene::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 	App->audio->PlayMusic("pinball/Music/bgm.ogg");
-	initTextures();
-	initMapCollisions();
 
 	currentLayer = 0;
+
+	initTextures();
+	initMapCollisions();
 
 	App->pManager->CreateProp(PropType::FLIPPER_LEFT);
 	App->pManager->CreateProp(PropType::FLIPPER_RIGHT);

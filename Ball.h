@@ -16,9 +16,9 @@ public:
 	Ball(PropType type) : Prop(type) {
 		texture = App->textures->Load("pinball/Textures/ball.png");
 		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
-		x = 100;
-		y = 100;
-		radius = 8;
+		x = 244;
+		y = 360;
+		radius = 6;
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
 
@@ -32,7 +32,7 @@ public:
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - radius), METERS_TO_PIXELS(pBody->body->GetPosition().y - radius), NULL, 1.0f, pBody->GetRotation());
+		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 8), METERS_TO_PIXELS(pBody->body->GetPosition().y - 8), NULL, 1.0f, pBody->GetRotation());
 	}
 
 	void OnCollision(PhysBody* bodyB) {

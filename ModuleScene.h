@@ -105,16 +105,19 @@ public:
 	PhysBody* mapCollisionLeft0;
 	PhysBody* mapCollisionRight0;
 	PhysBody* mapCollisionGeneral0;
+	PhysBody* mapCollisionTopRectA0;
+	PhysBody* mapCollisionTopRectB0;
 
 	p2List<PhysBody*> mapCollisionsLayer0;
 
 	// 1
-
+	PhysBody* mapCollisionLeftRail1;
+	PhysBody* mapCollisionRightRail1;
 
 	p2List<PhysBody*> mapCollisionsLayer1;
 
 	// 2
-
+	PhysBody* mapCollisionRigthRail2;
 
 	p2List<PhysBody*> mapCollisionsLayer2;
 
