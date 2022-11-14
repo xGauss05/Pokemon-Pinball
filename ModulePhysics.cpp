@@ -291,6 +291,17 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 		physB->listener->OnCollision(physB, physA);
 }
 
+void ModulePhysics::EndContact(b2Contact* contact)
+{
+	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+	if (physA && physA->listener != NULL)
+		physA->listener->EndCollision(physA, physB);
+	if (physB && physB->listener != NULL)
+		physB->listener->EndCollision(physB, physA);
+}
+
 // PHYS BODY FUNCTIONS -------------------------------------------------------------------------------
 
 PhysBody::PhysBody() : listener(NULL), body(NULL), prop(nullptr)

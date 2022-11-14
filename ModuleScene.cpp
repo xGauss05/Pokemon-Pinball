@@ -732,6 +732,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
 	App->pManager->CreateProp(PropType::SENSOR_COINS);
 	App->pManager->CreateProp(PropType::SENSOR_SPRING);
+	App->pManager->CreateProp(PropType::SENSOR_MOUNTAIN);
 
 	return ret;
 }
