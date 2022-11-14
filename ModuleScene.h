@@ -28,6 +28,7 @@ public:
 	void drawScore();
 	void drawAnimations();
 	void doRayCast();
+	void ResetTable();
 
 	void switchLayer(int newLayer);
 

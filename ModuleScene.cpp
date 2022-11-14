@@ -554,6 +554,7 @@ void ModuleScene::drawAnimations() {
 	else {
 		if (zigzagoonAnim != &zigzagoonIdle) zigzagoonAnim = &zigzagoonIdle;
 	}
+
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) pikachuTrigger = false;
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) pikachuTrigger = true;
@@ -613,6 +614,17 @@ void ModuleScene::doRayCast()
 		if (normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
+}
+
+void ModuleScene::ResetTable() {
+	previousScore = currentScore;
+	if (currentScore > highestScore) {
+		highestScore = currentScore;
+	}
+	currentScore = 0;
+	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
+	pelipperMultiplier = 1;
+	seedotMultiplier = 1.0f;
 }
 
 void ModuleScene::switchLayer(int newLayer)

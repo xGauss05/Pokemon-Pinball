@@ -47,6 +47,7 @@ public:
 			case PropType::BALL:
 				PlaySFX();
 				App->scene->lifes--;
+				App->scene->ResetTable();
 				switchLayer = true;
 				break;
 			}
