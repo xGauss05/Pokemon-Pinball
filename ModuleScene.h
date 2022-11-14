@@ -141,6 +141,7 @@ public:
 	// Animations (Pelipper)
 	SDL_Texture* pelipperTexture;
 	Animation pelipperIdle;
+	Animation pelipperBack;
 	Animation* pelipperAnim = nullptr;
 
 	// Animations (Zigzagoon)
@@ -172,6 +173,7 @@ public:
 	int lifes = 2;
 	bool plusleTrigger = false;
 	bool minunTrigger = false;
+	bool pelipperTrigger = false;
 
 	// Font
 	int font;

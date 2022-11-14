@@ -127,6 +127,12 @@ void ModuleScene::initTextures()
 	pelipperIdle.loop = true;
 	pelipperAnim = &pelipperIdle;
 
+	for (int i = 2; i < 5; i++) {
+		pelipperBack.PushBack({ i * 43, 0,43,36 });
+	}
+	pelipperBack.speed = 0.05f;
+	pelipperBack.loop = true;
+
 	zigzagoonTexture = App->textures->Load("pinball/Textures/zigzagoon_sprite.png");
 	zigzagoonIdle.PushBack({ 0, 0,46,35 });
 	zigzagoonIdle.PushBack({ 46,0,46,35 });
@@ -143,7 +149,7 @@ void ModuleScene::initTextures()
 	minunAnim = &minunIdle;
 
 	for (int i = 0; i < 7; i++) {
-		minunJump.PushBack({i*30, 36,30,36});
+		minunJump.PushBack({ i * 30, 36,30,36 });
 	}
 	minunJump.speed = 0.2f;
 	minunJump.loop = true;
@@ -518,6 +524,14 @@ void ModuleScene::drawAnimations() {
 	else {
 		if (plusleAnim != &plusleIdle) plusleAnim = &plusleIdle;
 	}
+
+	if (pelipperTrigger) {
+		if (pelipperAnim != &pelipperBack) pelipperAnim = &pelipperBack;
+	}
+	else {
+		if (pelipperAnim != &pelipperIdle) pelipperAnim = &pelipperIdle;
+	}
+
 
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
 	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));

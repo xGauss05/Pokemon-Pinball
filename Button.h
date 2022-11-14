@@ -71,6 +71,7 @@ public:
 					App->scene->plusleTrigger = !App->scene->plusleTrigger;
 					break;
 				case ButtonType::PELIPPER:
+					App->scene->pelipperTrigger = !App->scene->pelipperTrigger;
 					App->scene->pelipperMultiplier++;
 					if (App->scene->pelipperMultiplier >= 4) {
 						App->scene->pelipperMultiplier = 1;
