@@ -94,12 +94,12 @@ public:
 	GroundAsset dotsLight1;
 	GroundAsset dotsLight2;
 	GroundAsset dotsLight3;
-
+	*/
 	// Lives
 	GroundAsset livesLight1;
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
-	*/
+	
 	p2List<GroundAsset*> groundAssets;
 
 	// map collisions
@@ -175,11 +175,6 @@ public:
 	Animation pikachuIdle;
 	Animation* pikachuAnim = nullptr;
 
-	// Animations (Map Icons)
-	SDL_Texture* mapIconsTexture;
-	Animation pokeball;
-	Animation* pokeBallAnim;
-
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;
@@ -188,7 +183,7 @@ public:
 	float seedotMultiplier = 1.0f;
 
 	// Game variables
-	int lifes = 2;
+	int lives = 3;
 	bool plusleTrigger = false;
 	bool minunTrigger = false;
 	bool pelipperTrigger = false;

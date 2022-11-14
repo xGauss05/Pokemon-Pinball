@@ -79,13 +79,12 @@ void ModuleScene::initTextures()
 	dotsLight1;
 	dotsLight2;
 	dotsLight3;
+	*/
 
 	// Lives
-	livesLight1;
-	livesLight2;
-	livesLight3;
-
-	*/
+	livesLight1 = { 98, 338, { 232, 32, 12, 12 }, true };
+	livesLight2 = { 114, 338, { 232, 32, 12, 12 }, true };
+	livesLight3 = { 130, 338, { 232, 32, 12, 12 }, true };
 
 	groundAssets.add(&greenArrow1);
 	groundAssets.add(&greenArrow2);
@@ -96,6 +95,9 @@ void ModuleScene::initTextures()
 	groundAssets.add(&redArrow1);
 	groundAssets.add(&redArrow2);
 	groundAssets.add(&redArrow3);
+	groundAssets.add(&livesLight1);
+	groundAssets.add(&livesLight2);
+	groundAssets.add(&livesLight3);
 
 	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
 	wailmerIdle.PushBack({ 0,0,38,29 });
@@ -197,11 +199,6 @@ void ModuleScene::initTextures()
 	pikachuIdle.speed = 0.05f;
 	pikachuIdle.loop = true;
 	pikachuAnim = &pikachuIdle;
-
-	mapIconsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
-	pokeball.PushBack({ 232,32,12,12 });
-	pokeball.loop = true;
-	pokeBallAnim = &pokeball;
 
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
@@ -523,10 +520,6 @@ void ModuleScene::drawScore() {
 	num_char = temp.c_str();
 	App->fonts->BlitText(142, 195, font, num_char);
 
-	temp = std::to_string(lifes);
-	num_char = temp.c_str();
-	App->fonts->BlitText(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, font, num_char);
-
 }
 
 void ModuleScene::drawAnimations() {
@@ -540,7 +533,6 @@ void ModuleScene::drawAnimations() {
 	pikachuAnim->Update();
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
-	pokeBallAnim->Update();
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -600,7 +592,6 @@ void ModuleScene::drawAnimations() {
 	App->renderer->Blit(zigzagoonTexture, 195, 270, &(zigzagoonAnim->GetCurrentFrame()));
 	App->renderer->Blit(minunTexture, 66, 145, &(minunAnim->GetCurrentFrame()));
 	App->renderer->Blit(plusleTexture, 35, 162, &(plusleAnim->GetCurrentFrame()));
-	App->renderer->Blit(mapIconsTexture, SCREEN_WIDTH - 25, SCREEN_HEIGHT - 13, &(pokeBallAnim->GetCurrentFrame()));
 
 	if (!minunTrigger) App->renderer->Blit(lightningTexture, 66, 145, &(lightMinunAnim->GetCurrentFrame()));
 
@@ -650,13 +641,16 @@ void ModuleScene::doRayCast()
 }
 
 void ModuleScene::ResetTable() {
-	if (lifes <= -1) {
+	if (lives <= -1) {
 		previousScore = currentScore;
 		if (currentScore > highestScore) {
 			highestScore = currentScore;
 		}
 		currentScore = 0;
-		lifes = 2;
+		lives = 3;
+		livesLight1.isActive = true;
+		livesLight2.isActive = true;
+		livesLight3.isActive = true;
 	}
 	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
 	pelipperMultiplier = 1;
@@ -755,7 +749,17 @@ update_status ModuleScene::Update()
 	drawScene();
 	drawScore();
 	drawAnimations();
+	if (lives < 3) {
+		livesLight3.isActive = false;
+	}
 
+	if (lives < 2) {
+		livesLight2.isActive = false;
+	}
+
+	if (lives < 1) {
+		livesLight1.isActive = false;
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -771,5 +775,4 @@ bool ModuleScene::CleanUp() {
 
 	return true;
 }
-
 
