@@ -28,7 +28,17 @@ public:
 	}
 
 	void PlaySFX() {
+
 		App->audio->PlayFx(loseSfx);
+	}
+
+	bool Update() {
+		if (switchLayer) {
+			App->scene->switchLayer(2);
+			switchLayer = false;
+		}
+		
+		return true;
 	}
 
 	void OnCollision(PhysBody* bodyB) {
@@ -37,6 +47,7 @@ public:
 			case PropType::BALL:
 				PlaySFX();
 				App->scene->lifes--;
+				switchLayer = true;
 				break;
 			}
 		}
@@ -48,6 +59,6 @@ private:
 
 	// SFX
 	int loseSfx;
-
+	bool switchLayer = false;
 	PhysBody* pBody;
 };

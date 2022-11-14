@@ -162,6 +162,8 @@ public:
 	Animation plusleJump;
 	Animation* plusleAnim = nullptr;
 
+	
+
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;
@@ -174,6 +176,7 @@ public:
 	bool plusleTrigger = false;
 	bool minunTrigger = false;
 	bool pelipperTrigger = false;
+	bool zigzagoonTrigger = false;
 
 	// Font
 	int font;

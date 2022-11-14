@@ -140,6 +140,13 @@ void ModuleScene::initTextures()
 	zigzagoonIdle.loop = true;
 	zigzagoonAnim = &zigzagoonIdle;
 
+	for (int i = 2; i < 5; i++) {
+		zigzagoonDance.PushBack({ i * 46, 0,46,35 });
+	}
+	zigzagoonDance.speed = 0.1f;
+	zigzagoonDance.loop = true;
+
+
 	minunTexture = App->textures->Load("pinball/Textures/minun_sprite.png");
 	minunIdle.PushBack({ 0,0,30,36 });
 	minunIdle.PushBack({ 30,0,30,36 });
@@ -530,6 +537,13 @@ void ModuleScene::drawAnimations() {
 	}
 	else {
 		if (pelipperAnim != &pelipperIdle) pelipperAnim = &pelipperIdle;
+	}
+
+	if (zigzagoonTrigger) {
+		if (zigzagoonAnim != &zigzagoonDance) zigzagoonAnim = &zigzagoonDance;
+	}
+	else {
+		if (zigzagoonAnim != &zigzagoonIdle) zigzagoonAnim = &zigzagoonIdle;
 	}
 
 

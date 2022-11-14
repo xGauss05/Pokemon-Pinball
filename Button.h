@@ -64,6 +64,9 @@ public:
 			case PropType::BALL:
 				PlaySFX();
 				switch (btnType) {
+				case ButtonType::ZIGZAGOON:
+					App->scene->zigzagoonTrigger = !App->scene->zigzagoonTrigger;
+					break;
 				case ButtonType::MINUN:
 					App->scene->minunTrigger = !App->scene->minunTrigger;
 					break;
@@ -91,7 +94,7 @@ private:
 	int x;
 	int y;
 	int buttonSfx;
-	
+
 	ButtonType btnType;
 	PhysBody* pBody;
 };
