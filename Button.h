@@ -64,6 +64,12 @@ public:
 			case PropType::BALL:
 				PlaySFX();
 				switch (btnType) {
+				case ButtonType::MINUN:
+					App->scene->minunTrigger = !App->scene->minunTrigger;
+					break;
+				case ButtonType::PLUSLE:
+					App->scene->plusleTrigger = !App->scene->plusleTrigger;
+					break;
 				case ButtonType::PELIPPER:
 					App->scene->pelipperMultiplier++;
 					if (App->scene->pelipperMultiplier >= 4) {

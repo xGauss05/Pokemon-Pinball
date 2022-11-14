@@ -142,6 +142,12 @@ void ModuleScene::initTextures()
 	minunIdle.loop = true;
 	minunAnim = &minunIdle;
 
+	for (int i = 0; i < 7; i++) {
+		minunJump.PushBack({i*30, 36,30,36});
+	}
+	minunJump.speed = 0.2f;
+	minunJump.loop = true;
+
 	plusleTexture = App->textures->Load("pinball/Textures/plusle_sprite.png");
 	plusleIdle.PushBack({ 0,0,30,36 });
 	plusleIdle.PushBack({ 30,0,30,36 });
@@ -149,6 +155,12 @@ void ModuleScene::initTextures()
 	plusleIdle.speed = 0.05f;
 	plusleIdle.loop = true;
 	plusleAnim = &plusleIdle;
+
+	for (int i = 0; i < 7; i++) {
+		plusleJump.PushBack({ i * 30, 36,30,36 });
+	}
+	plusleJump.speed = 0.2f;
+	plusleJump.loop = true;
 
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
@@ -491,6 +503,20 @@ void ModuleScene::drawAnimations() {
 	}
 	if (seedotMultiplier >= 1.5f) {
 		App->renderer->Blit(seedotTexture, 18, 283, &(seedotAnim->GetCurrentFrame()));
+	}
+
+	if (minunTrigger) {
+		if (minunAnim != &minunJump) minunAnim = &minunJump;
+	}
+	else {
+		if (minunAnim != &minunIdle) minunAnim = &minunIdle;
+	}
+
+	if (plusleTrigger) {
+		if (plusleAnim != &plusleJump) plusleAnim = &plusleJump;
+	}
+	else {
+		if (plusleAnim != &plusleIdle) plusleAnim = &plusleIdle;
 	}
 
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));

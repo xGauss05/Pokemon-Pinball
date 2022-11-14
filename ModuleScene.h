@@ -94,7 +94,7 @@ public:
 	GroundAsset dotsLight2;
 	GroundAsset dotsLight3;
 
-	// Lives 
+	// Lives
 	GroundAsset livesLight1;
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
@@ -170,6 +170,8 @@ public:
 
 	// Game variables
 	int lifes = 2;
+	bool plusleTrigger = false;
+	bool minunTrigger = false;
 
 	// Font
 	int font;
