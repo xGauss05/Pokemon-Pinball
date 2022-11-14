@@ -71,7 +71,7 @@ public:
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case MOUNTAIN:
-			pBody1 = App->physics->CreateRectangleSensor(155, 115, 5, 5);
+			pBody1 = App->physics->CreateRectangleSensor(155, 120, 5, 5);
 			pBody1->prop = this;
 			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
@@ -120,7 +120,7 @@ public:
 				}
 				break;
 			case MOUNTAIN:
-				if (115 > otherBody->body->GetPosition().y) {
+				if (120 > otherBody->body->GetPosition().y) {
 					switchLayer = 0;
 				}
 				break;
