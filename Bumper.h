@@ -1,5 +1,4 @@
 #pragma once
-#include <math.h>
 #include "Application.h"
 #include "Module.h"
 #include "Prop.h"

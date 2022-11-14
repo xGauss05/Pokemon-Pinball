@@ -24,18 +24,20 @@ public:
 		switch (sPlace)
 		{
 		case SlingPlace::SLEFT:
-			App->physics->CreateChain(0, 0, pLeft, 6);
-			pBody = App->physics->CreateRectangle(77, 356, 1, 36);
-			//pBody->body->SetTransform({ 77, 356 }, 2);
+			pBody2 = App->physics->CreateChain(0, 0, pLeft, 6);
+			pBody = App->physics->CreateRectangle(78, 357, 1, 36);
+			pBody->body->SetTransform(pBody->body->GetPosition(),-0.6);
 			break;
 		case SlingPlace::SRIGHT:
-			App->physics->CreateChain(0, 0, pRight, 6);
-			pBody = App->physics->CreateRectangle(162, 356, 1, 36);
-			//pBody->body->SetTransform({ 162, 356 }, 1);
+			pBody2 = App->physics->CreateChain(0, 0, pRight, 6);
+			pBody = App->physics->CreateRectangle(160, 354, 1, 36);
+			pBody->body->SetTransform({ pBody->body->GetPosition() }, 0.6);
 			break;
 		}
+		force = 30;
 
 		pBody->body->SetType(b2BodyType::b2_staticBody);
+		pBody2->body->SetType(b2BodyType::b2_staticBody);
 		pBody->prop = this;
 		pBody->listener = (Module*)App->pManager;
 		texture = App->textures->Load("pinball/Textures/Assets_Map.png");
@@ -73,8 +75,15 @@ public:
 		if (bodyB->prop != NULL) {
 			if (bodyB->prop->type == PropType::BALL) {
 
-				//bodyB->body->ApplyForceToCenter({  }, true);
-
+				switch (place)
+				{
+					case SlingPlace::SLEFT:
+						bodyB->body->ApplyForceToCenter({ (float32)(force* 0.866), (float32)(-force*0.64) }, true);
+						break;
+					case SlingPlace::SRIGHT:
+						bodyB->body->ApplyForceToCenter({ (float32)(force*(-0.866)), (float32)(-force * 0.64) }, true);
+						break;
+				}
 			}
 		}
 	}
@@ -99,7 +108,10 @@ private:
 		171, 340,
 		171, 360 };
 
+	int force;
+
 	PhysBody* pBody;
+	PhysBody* pBody2;
 
 	int bumperSfx;
 

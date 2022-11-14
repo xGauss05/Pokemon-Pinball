@@ -740,6 +740,9 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_COINS);
 	App->pManager->CreateProp(PropType::SENSOR_SPRING);
 	App->pManager->CreateProp(PropType::SENSOR_MOUNTAIN);
+	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
+	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
+	
 
 	return ret;
 }
