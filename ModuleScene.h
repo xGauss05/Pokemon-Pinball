@@ -156,12 +156,19 @@ public:
 	Animation minunIdle;
 	Animation minunJump;
 	Animation* minunAnim = nullptr;
-
+	
 	// Animations (Plusle)
 	SDL_Texture* plusleTexture;
 	Animation plusleIdle;
 	Animation plusleJump;
 	Animation* plusleAnim = nullptr;
+	
+	// Animations (Minun & Plusle lightning)
+	SDL_Texture* lightningTexture;
+	Animation lightningPlusle;
+	Animation lightningMinun;
+	Animation* lightPlusleAnim = nullptr;
+	Animation* lightMinunAnim = nullptr;
 
 	// Animations (Pikachu)
 	SDL_Texture* pikachuTexture;

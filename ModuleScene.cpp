@@ -161,6 +161,21 @@ void ModuleScene::initTextures()
 	minunJump.speed = 0.2f;
 	minunJump.loop = true;
 
+	lightningTexture = App->textures->Load("pinball/Textures/lightning_sprite.png");
+	for (int i = 0; i < 9; i++) {
+		lightningPlusle.PushBack({ i * 31, 0,31,21 });
+	}
+	lightningPlusle.speed = 0.1f;
+	lightningPlusle.loop = true;
+	lightPlusleAnim = &lightningPlusle;
+
+	for (int i = 0; i < 9; i++) {
+		lightningMinun.PushBack({ i * 31, 22,31,21 });
+	}
+	lightningMinun.speed = 0.1f;
+	lightningMinun.loop = true;
+	lightMinunAnim = &lightningMinun;
+
 	plusleTexture = App->textures->Load("pinball/Textures/plusle_sprite.png");
 	plusleIdle.PushBack({ 0,0,30,36 });
 	plusleIdle.PushBack({ 30,0,30,36 });
@@ -514,6 +529,8 @@ void ModuleScene::drawAnimations() {
 	plusleAnim->Update();
 	minunAnim->Update();
 	pikachuAnim->Update();
+	lightMinunAnim->Update();
+	lightPlusleAnim->Update();
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -533,6 +550,8 @@ void ModuleScene::drawAnimations() {
 	else {
 		if (minunAnim != &minunIdle) minunAnim = &minunIdle;
 	}
+
+
 
 	if (plusleTrigger) {
 		if (plusleAnim != &plusleJump) plusleAnim = &plusleJump;
@@ -572,6 +591,10 @@ void ModuleScene::drawAnimations() {
 
 	App->renderer->Blit(minunTexture, 66, 145, &(minunAnim->GetCurrentFrame()));
 	App->renderer->Blit(plusleTexture, 35, 162, &(plusleAnim->GetCurrentFrame()));
+
+	if (!minunTrigger) App->renderer->Blit(lightningTexture, 66, 145, &(lightMinunAnim->GetCurrentFrame()));
+
+	if (!plusleTrigger) App->renderer->Blit(lightningTexture, 35, 162, &(lightPlusleAnim->GetCurrentFrame()));
 }
 
 void ModuleScene::doRayCast()
