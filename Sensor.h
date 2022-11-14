@@ -112,7 +112,7 @@ public:
 			switch (side)
 			{
 			case COINS:
-				if (227 < otherBody->body->GetPosition().y) {
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 227) {
 					switchLayer = 0;
 				}
 				else {
@@ -120,7 +120,7 @@ public:
 				}
 				break;
 			case MOUNTAIN:
-				if (120 > otherBody->body->GetPosition().y) {
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 120) {
 					switchLayer = 0;
 				}
 				break;
