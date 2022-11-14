@@ -175,6 +175,11 @@ public:
 	Animation pikachuIdle;
 	Animation* pikachuAnim = nullptr;
 
+	// Animations (Map Icons)
+	SDL_Texture* mapIconsTexture;
+	Animation pokeball;
+	Animation* pokeBallAnim;
+
 	// Score variables
 	int currentScore = 0;
 	int previousScore = 0;

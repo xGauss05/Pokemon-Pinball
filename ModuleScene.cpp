@@ -198,6 +198,11 @@ void ModuleScene::initTextures()
 	pikachuIdle.loop = true;
 	pikachuAnim = &pikachuIdle;
 
+	mapIconsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
+	pokeball.PushBack({ 232,32,12,12 });
+	pokeball.loop = true;
+	pokeBallAnim = &pokeball;
+
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -518,6 +523,10 @@ void ModuleScene::drawScore() {
 	num_char = temp.c_str();
 	App->fonts->BlitText(142, 195, font, num_char);
 
+	temp = std::to_string(lifes);
+	num_char = temp.c_str();
+	App->fonts->BlitText(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, font, num_char);
+
 }
 
 void ModuleScene::drawAnimations() {
@@ -531,6 +540,7 @@ void ModuleScene::drawAnimations() {
 	pikachuAnim->Update();
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
+	pokeBallAnim->Update();
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -588,9 +598,9 @@ void ModuleScene::drawAnimations() {
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
 	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));
 	App->renderer->Blit(zigzagoonTexture, 195, 270, &(zigzagoonAnim->GetCurrentFrame()));
-
 	App->renderer->Blit(minunTexture, 66, 145, &(minunAnim->GetCurrentFrame()));
 	App->renderer->Blit(plusleTexture, 35, 162, &(plusleAnim->GetCurrentFrame()));
+	App->renderer->Blit(mapIconsTexture, SCREEN_WIDTH - 25, SCREEN_HEIGHT - 13, &(pokeBallAnim->GetCurrentFrame()));
 
 	if (!minunTrigger) App->renderer->Blit(lightningTexture, 66, 145, &(lightMinunAnim->GetCurrentFrame()));
 
