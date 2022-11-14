@@ -640,11 +640,14 @@ void ModuleScene::doRayCast()
 }
 
 void ModuleScene::ResetTable() {
-	previousScore = currentScore;
-	if (currentScore > highestScore) {
-		highestScore = currentScore;
+	if (lifes <= -1) {
+		previousScore = currentScore;
+		if (currentScore > highestScore) {
+			highestScore = currentScore;
+		}
+		currentScore = 0;
+		lifes = 2;
 	}
-	currentScore = 0;
 	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
 	pelipperMultiplier = 1;
 	seedotMultiplier = 1.0f;

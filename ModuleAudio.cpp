@@ -78,7 +78,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 		return false;
 
 	bool ret = true;
-	
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 5);
 	if(music != NULL)
 	{
 		if(fade_time > 0.0f)

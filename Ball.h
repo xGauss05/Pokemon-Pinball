@@ -43,7 +43,13 @@ public:
 	}
 
 	bool Update() {
-		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) TeleportTo(spawn);
+
+		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) { 
+			iPoint position;
+			position.x = App->input->GetMouseX();
+			position.y = App->input->GetMouseY();
+			TeleportTo(position); 
+		}
 		if (lose) {
 			lose = false;
 			TeleportTo(spawn);
