@@ -65,7 +65,7 @@ public:
 			pBody3->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case COINS:
-			pBody1 = App->physics->CreateRectangleSensor(43, 227, 5, 5);
+			pBody1 = App->physics->CreateRectangleSensor(44, 229, 1, 1);
 			pBody1->prop = this;
 			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
@@ -112,7 +112,7 @@ public:
 			switch (side)
 			{
 			case COINS:
-				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 227) {
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 229) {
 					switchLayer = 0;
 				}
 				else {
