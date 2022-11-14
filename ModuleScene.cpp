@@ -175,6 +175,14 @@ void ModuleScene::initTextures()
 	plusleJump.speed = 0.2f;
 	plusleJump.loop = true;
 
+	pikachuTexture = App->textures->Load("pinball/Textures/pikachu_sprite.png");
+	for (int i = 0; i < 2; i++) {
+		pikachuIdle.PushBack({ i * 38, 0,38,91 });
+	}
+	pikachuIdle.speed = 0.05f;
+	pikachuIdle.loop = true;
+	pikachuAnim = &pikachuIdle;
+
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -505,6 +513,7 @@ void ModuleScene::drawAnimations() {
 	zigzagoonAnim->Update();
 	plusleAnim->Update();
 	minunAnim->Update();
+	pikachuAnim->Update();
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -545,7 +554,16 @@ void ModuleScene::drawAnimations() {
 	else {
 		if (zigzagoonAnim != &zigzagoonIdle) zigzagoonAnim = &zigzagoonIdle;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) pikachuTrigger = false;
 
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) pikachuTrigger = true;
+
+	if (pikachuTrigger) {
+		App->renderer->Blit(pikachuTexture, 191, 318, &(pikachuAnim->GetCurrentFrame()));
+	}
+	else {
+		App->renderer->Blit(pikachuTexture, 14, 318, &(pikachuAnim->GetCurrentFrame()));
+	}
 
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
 	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));

@@ -162,7 +162,10 @@ public:
 	Animation plusleJump;
 	Animation* plusleAnim = nullptr;
 
-	
+	// Animations (Pikachu)
+	SDL_Texture* pikachuTexture;
+	Animation pikachuIdle;
+	Animation* pikachuAnim = nullptr;
 
 	// Score variables
 	int currentScore = 0;
@@ -177,6 +180,7 @@ public:
 	bool minunTrigger = false;
 	bool pelipperTrigger = false;
 	bool zigzagoonTrigger = false;
+	bool pikachuTrigger = false;
 
 	// Font
 	int font;
