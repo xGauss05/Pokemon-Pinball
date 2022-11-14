@@ -93,10 +93,13 @@ int main(int argc, char ** argv)
 		high_resolution_clock::time_point endCycle = high_resolution_clock::now();
 		App->debug->elapsedCycle = duration_cast<microseconds>(endCycle - start);
 
+		//Time per frame in microseconds acording to taget FPS
+		int microSecCheck = (int)((1.0f / (float)App->debug->targetFPS) * 1E6);
+
 		//This is to cap FPS, the diplaying of FPS on screen is calculated underneath
-		if (App->debug->elapsedCycle < std::chrono::microseconds(16666))
+		if (App->debug->elapsedCycle < std::chrono::microseconds(microSecCheck))
 		{
-			std::this_thread::sleep_for(std::chrono::microseconds(std::chrono::microseconds(16666) - App->debug->elapsedCycle));
+			std::this_thread::sleep_for(std::chrono::microseconds(std::chrono::microseconds(microSecCheck) - App->debug->elapsedCycle));
 		}
 
 		//Time per cycle + delay

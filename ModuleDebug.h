@@ -29,6 +29,7 @@ public:
 public:
 	microseconds elapsedCycle;
 	microseconds elapsedFrame;
+	int targetFPS = 60;
 	double FPS;
 
 private:

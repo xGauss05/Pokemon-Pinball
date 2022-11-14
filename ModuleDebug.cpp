@@ -34,6 +34,14 @@ update_status ModuleDebug::Update() {
 
 		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
 			time = !time;
+
+		if (time == true)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_PAGEUP) == KEY_DOWN && targetFPS < 120)
+				targetFPS += 10;
+			if (App->input->GetKey(SDL_SCANCODE_PAGEDOWN) == KEY_DOWN && targetFPS > 10)
+				targetFPS -= 10;
+		}
 	}
 
 	return UPDATE_CONTINUE;
@@ -196,8 +204,10 @@ void ModuleDebug::DebugDraw() {
 		LOG("Elapsed Frame:");
 		LOG(std::to_string(elapsedFrame.count()).c_str());
 
-		App->fonts->BlitText(5, 70, 0, "CURRENT FPS ");
-		App->fonts->BlitText(100, 70, 0, std::to_string(FPS).c_str());
+		App->fonts->BlitText(5, 70, 0, "TARGET FPS ");
+		App->fonts->BlitText(100, 70, 0, std::to_string(targetFPS).c_str());
+		App->fonts->BlitText(5, 80, 0, "CURRENT FPS ");
+		App->fonts->BlitText(100, 80, 0, std::to_string(FPS).c_str());
 		LOG("FPS:");
 		LOG(std::to_string(FPS).c_str());
 	}
