@@ -117,6 +117,9 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::SENSOR_COINS:
 		prop = (Prop*)new Sensor(type, SensorSide::COINS);
 		break;
+	case PropType::SENSOR_MOUNTAIN:
+		prop = (Prop*)new Sensor(type, SensorSide::MOUNTAIN);
+		break;
 	case PropType::SENSOR_SPRING:
 		prop = (Prop*)new Sensor(type, SensorSide::SPRING);
 		break;

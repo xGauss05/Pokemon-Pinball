@@ -15,6 +15,7 @@ enum SensorSide {
 	HOLE,
 	UPGRADE,
 	COINS,
+	MOUNTAIN, 
 	SPRING
 };
 
@@ -65,11 +66,15 @@ public:
 			break;
 		case COINS:
 			pBody1 = App->physics->CreateRectangleSensor(43, 227, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(155, 115, 5, 5);
-			pBody1->prop = pBody2->prop = this;
-			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case MOUNTAIN:
+			pBody1 = App->physics->CreateRectangleSensor(155, 115, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case SPRING:
 			pBody1 = App->physics->CreateRectangleSensor(240, 82, 5, 5);
@@ -86,6 +91,11 @@ public:
 
 	bool Update() {
 
+		if (switchLayer != -1) {
+			App->scene->switchLayer(switchLayer);
+			switchLayer = -1;
+		}
+
 		return true;
 	}
 
@@ -93,8 +103,31 @@ public:
 
 	}
 
-	void OnCollision(PhysBody* bodyB) {
+	void OnCollision(PhysBody* otherBody) {
 		
+	}
+
+	void EndCollision(PhysBody* otherBody) {
+		if (otherBody->prop != NULL && otherBody->prop->type == PropType::BALL) {
+			switch (side)
+			{
+			case COINS:
+				if (227 < otherBody->body->GetPosition().y) {
+					switchLayer = 0;
+				}
+				else {
+					switchLayer = 1;
+				}
+				break;
+			case MOUNTAIN:
+				if (115 > otherBody->body->GetPosition().y) {
+					switchLayer = 0;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 private:
@@ -106,5 +139,6 @@ private:
 	PhysBody* pBody3 = nullptr;
 	PhysBody* pBody4 = nullptr;
 
+	int switchLayer = -1;
 
 };
