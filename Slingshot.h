@@ -29,49 +29,22 @@ public:
 		case SlingPlace::RIGHT:
 			x = 134;
 			y = 142;
+			pBody = App->physics->CreateChain(x, y, pRight, 3);
 			break;
 		}
 
-		
+		texture = App->textures->Load("pinball/Textures/Assets_Map.png");
 		pBody->body->SetType(b2BodyType::b2_staticBody);
 		pBody->prop = this;
 		pBody->listener = (Module*)App->pManager;
-		initAnim();
-		bumperSfx = App->audio->LoadFx("pinball/Sounds/shroomish_hit.wav");
+		bumperSfx = App->audio->LoadFx("pinball/Sounds/bumpers.wav");
 
 
 	}
 
-	void initAnim()
-	{
-		texture = App->textures->Load("pinball/Textures/shroomish_sprite.png");
-
-		idleAnim.PushBack({ 0, 0, 27, 32 });
-		idleAnim.PushBack({ 27, 0, 27, 32 });
-		idleAnim.speed = 0.05;
-
-		hitAnim.PushBack({ 54, 0, 27, 32 });
-		hitAnim.PushBack({ 81, 0, 27, 32 });
-		hitAnim.speed = 0.2f;
-		hitAnim.loop = false;
-
-		currentAnim = &idleAnim;
-	}
+	
 
 	void Blit() {
-
-
-		/*/if (currentAnim == &idleAnim)
-		{
-			idleAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius * 3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius * 4, &currentAnim->GetCurrentFrame());
-		}
-
-		if (currentAnim == &hitAnim)
-		{
-			hitAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius * 3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius * 4, &currentAnim->GetCurrentFrame());
-		}*/
 
 	}
 
@@ -81,13 +54,10 @@ public:
 
 	void OnCollision(PhysBody* bodyB) {
 		PlaySFX();
-		currentAnim = &hitAnim;
-		currentAnim->Reset();
+		Blit();
 
 		if (bodyB->prop != NULL) {
 			if (bodyB->prop->type == PropType::BALL) {
-				int angle = atan((pBody->body->GetPosition().y - bodyB->body->GetPosition().y) / (pBody->body->GetPosition().x - bodyB->body->GetPosition().x));
-				
 
 				bodyB->body->ApplyForceToCenter({  }, true);
 
@@ -96,30 +66,30 @@ public:
 	}
 
 	bool Update() {
-		if (currentAnim == &hitAnim && currentAnim->HasFinished()) {
-			currentAnim = &idleAnim;
-		}
+		
 		return true;
 	}
 
 	bool PostUpdate() {
-		Blit();
+		
 		return true;
 	}
 
 private:
 	int x;
 	int y;
-	int* pLeft;
-	int* pRight;
+	int pLeft[6] = {
+		67, 343,
+		86, 368,
+		66, 360 };
+	int pRight[6] = { 
+		171, 340,
+		153, 368,
+		171, 359 };
 
 	PhysBody* pBody;
 
 	int bumperSfx;
 
 	SDL_Texture* texture;
-
-	Animation* currentAnim;
-	Animation idleAnim;
-	Animation hitAnim;
 };
