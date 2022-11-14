@@ -623,6 +623,8 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_GET);
 	App->pManager->CreateProp(PropType::SENSOR_HOLE);
 	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
+	App->pManager->CreateProp(PropType::SENSOR_COINS);
+	App->pManager->CreateProp(PropType::SENSOR_SPRING);
 
 	return ret;
 }

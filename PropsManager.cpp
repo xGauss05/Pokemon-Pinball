@@ -114,6 +114,12 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::SENSOR_UPGRADE:
 		prop = (Prop*)new Sensor(type, SensorSide::UPGRADE);
 		break;
+	case PropType::SENSOR_COINS:
+		prop = (Prop*)new Sensor(type, SensorSide::COINS);
+		break;
+	case PropType::SENSOR_SPRING:
+		prop = (Prop*)new Sensor(type, SensorSide::SPRING);
+		break;
 	case PropType::UNKNOWN:
 		break;
 	default:

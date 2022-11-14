@@ -13,7 +13,9 @@ enum SensorSide {
 	EVO,
 	GET,
 	HOLE,
-	UPGRADE
+	UPGRADE,
+	COINS,
+	SPRING
 };
 
 class Sensor : public Prop {
@@ -61,6 +63,22 @@ public:
 			pBody2->body->SetType(b2BodyType::b2_staticBody);
 			pBody3->body->SetType(b2BodyType::b2_staticBody);
 			break;
+		case COINS:
+			pBody1 = App->physics->CreateRectangleSensor(43, 227, 5, 5);
+			pBody2 = App->physics->CreateRectangleSensor(155, 115, 5, 5);
+			pBody1->prop = pBody2->prop = this;
+			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
+			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case SPRING:
+			pBody1 = App->physics->CreateRectangleSensor(240, 82, 5, 5);
+			pBody2 = App->physics->CreateRectangleSensor(180, 31, 5, 5);
+			pBody1->prop = pBody2->prop = this;
+			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
+			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
 		default:
 			break;
 		}
@@ -85,10 +103,10 @@ private:
 
 	SensorSide side;
 
-	PhysBody* pBody1;
-	PhysBody* pBody2;
-	PhysBody* pBody3;
-	PhysBody* pBody4;
+	PhysBody* pBody1 = nullptr;
+	PhysBody* pBody2 = nullptr;
+	PhysBody* pBody3 = nullptr;
+	PhysBody* pBody4 = nullptr;
 
 
 };
