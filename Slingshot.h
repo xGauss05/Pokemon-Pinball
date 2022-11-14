@@ -11,32 +11,34 @@ class ModulePhysics;
 class SDL_Texture;
 
 enum SlingPlace {
-	LEFT,
-	RIGHT
+	SLEFT,
+	SRIGHT
 };
 
 class Slingshot : public Prop {
 public:
 	Slingshot(PropType type, SlingPlace sPlace) : Prop(type) {
 
+		place = sPlace;
+
 		switch (sPlace)
 		{
-		case SlingPlace::LEFT:
-			x = 98;
-			y = 142;
-			pBody = App->physics->CreateChain(x, y, pLeft, 3);
+		case SlingPlace::SLEFT:
+			App->physics->CreateChain(0, 0, pLeft, 6);
+			pBody = App->physics->CreateRectangle(77, 356, 1, 36);
+			//pBody->body->SetTransform({ 77, 356 }, 2);
 			break;
-		case SlingPlace::RIGHT:
-			x = 134;
-			y = 142;
-			pBody = App->physics->CreateChain(x, y, pRight, 3);
+		case SlingPlace::SRIGHT:
+			App->physics->CreateChain(0, 0, pRight, 6);
+			pBody = App->physics->CreateRectangle(162, 356, 1, 36);
+			//pBody->body->SetTransform({ 162, 356 }, 1);
 			break;
 		}
 
-		texture = App->textures->Load("pinball/Textures/Assets_Map.png");
 		pBody->body->SetType(b2BodyType::b2_staticBody);
 		pBody->prop = this;
 		pBody->listener = (Module*)App->pManager;
+		texture = App->textures->Load("pinball/Textures/Assets_Map.png");
 		bumperSfx = App->audio->LoadFx("pinball/Sounds/bumpers.wav");
 
 
@@ -45,7 +47,19 @@ public:
 	
 
 	void Blit() {
-
+		SDL_Rect left;
+		SDL_Rect right;
+		switch (place)
+		{
+		case SlingPlace::SLEFT:
+			left = { 0, 59, 23, 34 };
+			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &left);
+			break;
+		case SlingPlace::SRIGHT:
+			right = { 25, 59, 23, 34 };
+			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &right);
+			break;
+		}
 	}
 
 	void PlaySFX() {
@@ -59,7 +73,7 @@ public:
 		if (bodyB->prop != NULL) {
 			if (bodyB->prop->type == PropType::BALL) {
 
-				bodyB->body->ApplyForceToCenter({  }, true);
+				//bodyB->body->ApplyForceToCenter({  }, true);
 
 			}
 		}
@@ -76,20 +90,20 @@ public:
 	}
 
 private:
-	int x;
-	int y;
 	int pLeft[6] = {
-		67, 343,
-		86, 368,
-		66, 360 };
+		66, 360,
+		66, 340,
+		86, 370};
 	int pRight[6] = { 
+		151, 370,
 		171, 340,
-		153, 368,
-		171, 359 };
+		171, 360 };
 
 	PhysBody* pBody;
 
 	int bumperSfx;
+
+	SlingPlace place;
 
 	SDL_Texture* texture;
 };
