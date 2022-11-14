@@ -44,7 +44,10 @@ public:
 
 	bool Update() {
 		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) TeleportTo(spawn);
-
+		if (lose) {
+			lose = false;
+			TeleportTo(spawn);
+		}
 		return true;
 	}
 
@@ -88,7 +91,7 @@ public:
 				LOG("Ball collided PELIPPER_BUTTON");
 				break;
 			case PropType::TROUGH:
-				//TeleportTo(spawn);
+				lose = true;
 				LOG("Ball collided TROUGH");
 				break;
 			default:
@@ -97,6 +100,7 @@ public:
 			}
 		}
 	}
+
 
 	void BlitByLayer(int layer) {
 		int l = App->scene->currentLayer;
@@ -120,7 +124,7 @@ private:
 
 	// Spawn position
 	iPoint spawn;
-
+	bool lose;
 	PhysBody* pBody;
 	SDL_Texture* texture;
 };

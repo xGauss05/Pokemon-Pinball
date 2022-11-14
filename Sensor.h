@@ -89,14 +89,12 @@ public:
 		return true;
 	}
 
-
-
 	void PlaySFX() {
 
 	}
 
 	void OnCollision(PhysBody* bodyB) {
-
+		
 	}
 
 private:
