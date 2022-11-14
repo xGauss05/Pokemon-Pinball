@@ -619,6 +619,10 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::ZIGZAGOON_BUTTON);
 	App->pManager->CreateProp(PropType::PELIPPER_BUTTON);
 	App->pManager->CreateProp(PropType::TROUGH);
+	App->pManager->CreateProp(PropType::SENSOR_EVO);
+	App->pManager->CreateProp(PropType::SENSOR_GET);
+	App->pManager->CreateProp(PropType::SENSOR_HOLE);
+	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
 
 	return ret;
 }

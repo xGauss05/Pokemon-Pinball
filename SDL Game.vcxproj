@@ -94,6 +94,7 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="PropsManager.h" />
+    <ClInclude Include="Sensor.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="Trough.h" />
   </ItemGroup>

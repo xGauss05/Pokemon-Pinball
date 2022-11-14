@@ -17,7 +17,7 @@ public:
 
 		loseSfx = App->audio->LoadFx("pinball/Sounds/lose.wav");
 		x = 120;
-		y = SCREEN_HEIGHT+20;
+		y = SCREEN_HEIGHT + 20;
 
 		pBody = App->physics->CreateRectangleSensor(x, y, 45, 5);
 		pBody->listener = (Module*)App->pManager;

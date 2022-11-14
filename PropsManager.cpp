@@ -6,6 +6,7 @@
 #include "Bumper.h"
 #include "Button.h"
 #include "Trough.h"
+#include "Sensor.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -100,6 +101,18 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::TROUGH:
 		prop = (Prop*)new Trough(type);
+		break;
+	case PropType::SENSOR_EVO:
+		prop = (Prop*)new Sensor(type, SensorSide::EVO);
+		break;
+	case PropType::SENSOR_GET:
+		prop = (Prop*)new Sensor(type, SensorSide::GET);
+		break;
+	case PropType::SENSOR_HOLE:
+		prop = (Prop*)new Sensor(type, SensorSide::HOLE);
+		break;
+	case PropType::SENSOR_UPGRADE:
+		prop = (Prop*)new Sensor(type, SensorSide::UPGRADE);
 		break;
 	case PropType::UNKNOWN:
 		break;
