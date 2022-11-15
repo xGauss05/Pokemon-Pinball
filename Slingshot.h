@@ -25,12 +25,12 @@ public:
 		{
 		case SlingPlace::SLEFT:
 			pBody2 = App->physics->CreateChain(0, 0, pLeft, 6);
-			pBody = App->physics->CreateRectangle(78, 357, 1, 35);
-			pBody->body->SetTransform(pBody->body->GetPosition(),-0.6);
+			pBody = App->physics->CreateRectangleSensor(78, 356, 1, 34);
+			pBody->body->SetTransform(pBody->body->GetPosition(), -0.6);
 			break;
 		case SlingPlace::SRIGHT:
 			pBody2 = App->physics->CreateChain(0, 0, pRight, 6);
-			pBody = App->physics->CreateRectangle(161, 357, 1, 35);
+			pBody = App->physics->CreateRectangleSensor(161, 356, 1, 34);
 			pBody->body->SetTransform({ pBody->body->GetPosition() }, 0.6);
 			break;
 		}
@@ -45,8 +45,6 @@ public:
 
 
 	}
-
-	
 
 	void Blit() {
 		SDL_Rect left;
@@ -74,27 +72,28 @@ public:
 
 		if (bodyB->prop != NULL) {
 			if (bodyB->prop->type == PropType::BALL) {
-
 				switch (place)
 				{
-					case SlingPlace::SLEFT:
-						bodyB->body->ApplyLinearImpulse({ (float32)(force * 0.866), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
-						break;
-					case SlingPlace::SRIGHT:
-						bodyB->body->ApplyLinearImpulse({ (float32)(force * (-0.866)), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
-						break;
+				case SlingPlace::SLEFT:
+					bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
+					bodyB->body->ApplyLinearImpulse({ (float32)(0.5 * 0.866), (float32)(-0.5 * 0.64) }, bodyB->body->GetPosition(), true);
+					break;
+				case SlingPlace::SRIGHT:
+					bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
+					bodyB->body->ApplyLinearImpulse({ (float32)(0.5 * (-0.866)), (float32)(-0.5 * 0.64) }, bodyB->body->GetPosition(), true);
+					break;
 				}
 			}
 		}
 	}
 
 	bool Update() {
-		
+
 		return true;
 	}
 
 	bool PostUpdate() {
-		
+
 		return true;
 	}
 
@@ -102,8 +101,8 @@ private:
 	int pLeft[6] = {
 		66, 360,
 		66, 340,
-		86, 370};
-	int pRight[6] = { 
+		86, 370 };
+	int pRight[6] = {
 		152, 370,
 		172, 340,
 		172, 360 };

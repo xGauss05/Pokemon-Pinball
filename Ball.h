@@ -31,7 +31,8 @@ public:
 		data->center= b2Vec2(0.0f, 0);
 		data->mass = 0.1f;
 		pBody->body->SetMassData(data);
-
+		pBody->body->SetBullet(true);
+	
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0.0f);
 		pBody->prop = this;
@@ -107,6 +108,16 @@ public:
 			case PropType::TROUGH:
 				lose = true;
 				LOG("Ball collided TROUGH");
+				break;
+			case PropType::SLINGSHOT_LEFT:
+				App->scene->currentScore += SLINGSHOT_SCORE;
+			
+				LOG("Ball collided SLINGSHOT_LEFT");
+				break;
+			case PropType::SLINGSHOT_RIGHT:
+				App->scene->currentScore += SLINGSHOT_SCORE;
+				
+				LOG("Ball collided SLINGSHOT_RIGHT");
 				break;
 			default:
 				LOG("Ball collided ???");
