@@ -73,6 +73,7 @@ public:
 
 		if (release) {
 			release = false;
+			App->scene->switchLayer(2);
 			TeleportTo(afterRelease);
 			pBody->body->ApplyForceToCenter({-30, 0}, true);
 

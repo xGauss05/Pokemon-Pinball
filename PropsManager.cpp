@@ -132,6 +132,9 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::SENSOR_TOP_RAIL:
 		prop = (Prop*)new Sensor(type, SensorSide::TOP_RAIL);
 		break;
+	case PropType::SENSOR_LAKE_RAIL:
+		prop = (Prop*)new Sensor(type, SensorSide::LAKE_RAIL);
+		break;
 	case PropType::SLINGSHOT_RIGHT:
 		prop = (Prop*)new Slingshot(type, SlingPlace::SRIGHT);
 		break;
