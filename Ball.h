@@ -24,6 +24,14 @@ public:
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
 
+		pBody->body->ResetMassData();
+
+		b2MassData* data = new b2MassData;
+		
+		data->center= b2Vec2(0.0f, 0);
+		data->mass = 0.1f;
+		pBody->body->SetMassData(data);
+
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0.0f);
 		pBody->prop = this;
