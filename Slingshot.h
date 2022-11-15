@@ -25,16 +25,16 @@ public:
 		{
 		case SlingPlace::SLEFT:
 			pBody2 = App->physics->CreateChain(0, 0, pLeft, 6);
-			pBody = App->physics->CreateRectangle(78, 357, 1, 36);
+			pBody = App->physics->CreateRectangle(78, 357, 1, 35);
 			pBody->body->SetTransform(pBody->body->GetPosition(),-0.6);
 			break;
 		case SlingPlace::SRIGHT:
 			pBody2 = App->physics->CreateChain(0, 0, pRight, 6);
-			pBody = App->physics->CreateRectangle(160, 354, 1, 36);
+			pBody = App->physics->CreateRectangle(161, 357, 1, 35);
 			pBody->body->SetTransform({ pBody->body->GetPosition() }, 0.6);
 			break;
 		}
-		force = 30;
+		force = 0.5;
 
 		pBody->body->SetType(b2BodyType::b2_staticBody);
 		pBody2->body->SetType(b2BodyType::b2_staticBody);
@@ -78,10 +78,10 @@ public:
 				switch (place)
 				{
 					case SlingPlace::SLEFT:
-						bodyB->body->ApplyForceToCenter({ (float32)(force* 0.866), (float32)(-force*0.64) }, true);
+						bodyB->body->ApplyLinearImpulse({ (float32)(force * 0.866), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
 						break;
 					case SlingPlace::SRIGHT:
-						bodyB->body->ApplyForceToCenter({ (float32)(force*(-0.866)), (float32)(-force * 0.64) }, true);
+						bodyB->body->ApplyLinearImpulse({ (float32)(force * (-0.866)), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
 						break;
 				}
 			}
@@ -104,11 +104,11 @@ private:
 		66, 340,
 		86, 370};
 	int pRight[6] = { 
-		151, 370,
-		171, 340,
-		171, 360 };
+		152, 370,
+		172, 340,
+		172, 360 };
 
-	int force;
+	float32 force;
 
 	PhysBody* pBody;
 	PhysBody* pBody2;
