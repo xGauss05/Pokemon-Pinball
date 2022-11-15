@@ -8,6 +8,7 @@
 #include "Trough.h"
 #include "Sensor.h"
 #include "Slingshot.h"
+#include "Wailmer.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -140,6 +141,9 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::SLINGSHOT_LEFT:
 		prop = (Prop*)new Slingshot(type, SlingPlace::SLEFT);
+		break;
+	case PropType::WAILMER:
+		prop = (Prop*)new Wailmer(type);
 		break;
 	case PropType::UNKNOWN:
 		break;

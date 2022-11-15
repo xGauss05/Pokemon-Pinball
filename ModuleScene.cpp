@@ -34,7 +34,6 @@ void ModuleScene::initTextures()
 
 	assetsTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 
-
 	// Load Assets for the Map
 	// Arrows
 	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, false };
@@ -99,17 +98,18 @@ void ModuleScene::initTextures()
 	groundAssets.add(&livesLight3);
 
 	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
-	wailmerIdle.PushBack({ 0,0,38,29 });
-	wailmerIdle.PushBack({ 39,0,38,29 });
-	wailmerIdle.speed = 1.0f;
+	wailmerIdle.PushBack({ 0,0,40,29 });
+	wailmerIdle.PushBack({ 40,0,40,29 });
+	wailmerIdle.speed = 0.05f;
 	wailmerIdle.loop = true;
 	wailmerAnim = &wailmerIdle;
 
-	wailmerSpit.PushBack({ 78,0,38,29 });
-	wailmerSpit.PushBack({ 117,0,38,29 });
-	wailmerSpit.PushBack({ 156,0,38,29 });
-	wailmerIdle.speed = 0.05f;
-
+	wailmerSpit.PushBack({ 80,0,40,29 });
+	wailmerSpit.PushBack({ 120,0,40,29 });
+	wailmerSpit.PushBack({ 160,0,40,29 });
+	wailmerSpit.loop = false;
+	wailmerSpit.speed = 0.2f;
+	
 	seedotTexture = App->textures->Load("pinball/Textures/seedot_sprite.png");
 	seedotIdle.PushBack({ 18,31,17,22 });
 	seedotIdle.PushBack({ 36,31,17,22 });
@@ -552,8 +552,6 @@ void ModuleScene::drawAnimations() {
 		if (minunAnim != &minunIdle) minunAnim = &minunIdle;
 	}
 
-
-
 	if (plusleTrigger) {
 		if (plusleAnim != &plusleJump) plusleAnim = &plusleJump;
 	}
@@ -752,6 +750,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_LAKE_RAIL);
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
+	App->pManager->CreateProp(PropType::WAILMER);
 	
 	return ret;
 }
@@ -774,6 +773,15 @@ update_status ModuleScene::Update()
 	if (getMultiplier >= 2 && !redArrow2.isActive) redArrow2.isActive = true;
 	if (getMultiplier >= 3 && !redArrow3.isActive) redArrow3.isActive = true;
 	
+	if (wailmerTrigger && wailmerAnim != &wailmerSpit) {
+		wailmerAnim = &wailmerSpit;
+	}
+
+	if (wailmerAnim->HasFinished() && wailmerAnim != &wailmerIdle) {
+		wailmerAnim = &wailmerIdle;
+		wailmerSpit.Reset();
+		wailmerTrigger = false;
+	}
 	return UPDATE_CONTINUE;
 }
 

@@ -125,6 +125,9 @@
     <ClInclude Include="Slingshot.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
+    <ClInclude Include="Wailmer.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

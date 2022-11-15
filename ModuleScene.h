@@ -191,6 +191,7 @@ public:
 	bool pelipperTrigger = false;
 	bool zigzagoonTrigger = false;
 	bool pikachuTrigger = false;
+	bool wailmerTrigger = false;
 	bool evoTopFlag = false;
 	bool evoBotFlag = false;
 	bool getTopFlag = false;

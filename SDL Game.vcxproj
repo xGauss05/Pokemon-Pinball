@@ -98,6 +98,7 @@
     <ClInclude Include="Slingshot.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="Trough.h" />
+    <ClInclude Include="Wailmer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

@@ -62,6 +62,7 @@ public:
 			TeleportTo(spawn);
 			App->scene->switchLayer(2);
 		}
+
 	}
 
 	bool Update() {
@@ -88,8 +89,10 @@ public:
 
 		}
 
-		
-
+		if (wailmerSpit) {
+			wailmerSpit = false;
+			pBody->body->ApplyLinearImpulse({ (float32)(-0.55), (float32)(0.55) }, pBody->body->GetPosition(), true);
+		}
 		return true;
 	}
 
@@ -150,6 +153,13 @@ public:
 				LOG("y ball: %d", METERS_TO_PIXELS(pBody->body->GetPosition().y));
 				LOG("y sensor: %d", METERS_TO_PIXELS(bodyB->body->GetPosition().y));
 				break;
+			case PropType::WAILMER:
+
+				App->scene->currentScore += WAILMER_SCORE;
+				App->scene->wailmerTrigger = true;
+				wailmerSpit = true;
+				LOG("Ball collided WAILMER");
+				break;
 			default:
 				LOG("Ball collided ???");
 
@@ -193,7 +203,7 @@ private:
 
 	// Spawn position
 	iPoint spawn, afterRelease;
-	bool lose, release;
+	bool lose, release, wailmerSpit;
 	PhysBody* pBody;
 	SDL_Texture* texture;
 };
