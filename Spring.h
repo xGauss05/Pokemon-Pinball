@@ -25,9 +25,15 @@ public:
 		joint->SetLimits(PIXEL_TO_METERS(-pathLength), PIXEL_TO_METERS(pathLength));
 		joint->EnableLimit(true);
 
+		pBody->body->ResetMassData();
+		b2MassData* data = new b2MassData;
+		data->center = b2Vec2(0.0f, 0);
+		data->mass = 3.0f;
+		pBody->body->SetMassData(data);
+
 		joint->EnableMotor(true);
 		joint->SetMotorSpeed(-releaseSpeed);
-		joint->SetMaxMotorForce(30);
+		joint->SetMaxMotorForce(700);
 
 		initAnim();
 		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
@@ -106,7 +112,7 @@ private:
 	PhysBody* path;
 	int pathLength = 7;
 	float contractionSpeed = 0.3f;
-	float releaseSpeed = 20.0f;
+	float releaseSpeed = 200.0f;
 
 	b2PrismaticJoint* joint;
 
