@@ -10,7 +10,8 @@ class ModulePhysics;
 class SDL_Texture;
 
 enum SensorSide {
-	EVO,
+	EVO_TOP,
+	EVO_BOT,
 	GET,
 	HOLE,
 	UPGRADE,
@@ -26,13 +27,17 @@ public:
 		this->side = sSide;
 		switch (sSide)
 		{
-		case EVO:
-			pBody1 = App->physics->CreateRectangleSensor(29, 247, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(43, 115, 5, 5);
-			pBody1->prop = pBody2->prop = this;
-			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+		case EVO_TOP:
+			pBody1 = App->physics->CreateRectangleSensor(43, 131, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case EVO_BOT:
+			pBody1 = App->physics->CreateRectangleSensor(26, 247, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case GET:
 			pBody1 = App->physics->CreateRectangleSensor(210, 247, 5, 5);
@@ -104,11 +109,24 @@ public:
 	}
 
 	void OnCollision(PhysBody* otherBody) {
-		
+		if (otherBody->prop != NULL && otherBody->prop->type == PropType::BALL) {
+			switch (side)
+			{
+			case EVO_TOP:
+				if (App->scene->evoBotFlag) {
+					App->scene->evoTopFlag = true;
+				}
+				break;
+			case EVO_BOT:
+				App->scene->evoBotFlag = true;
+				break;
+			}
+		}
 	}
 
 	void EndCollision(PhysBody* otherBody) {
 		if (otherBody->prop != NULL && otherBody->prop->type == PropType::BALL) {
+			int score;
 			switch (side)
 			{
 			case COINS:
@@ -123,6 +141,25 @@ public:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 120) {
 					switchLayer = 0;
 				}
+				break;
+			case EVO_TOP:
+				if (App->scene->evoBotFlag && App->scene->evoTopFlag) {
+					score = EVO_SCORE;
+					LOG("BOTH LIGHTS EVO");
+					if (App->scene->evoMultiplier < 3) {
+						App->scene->evoMultiplier++;
+					}
+					
+					App->scene->evoBotFlag = App->scene->evoTopFlag = false;
+					App->scene->currentScore += score*App->scene->evoMultiplier;
+				}
+				break;
+			case EVO_BOT:
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) >
+					METERS_TO_PIXELS(pBody1->body->GetPosition().y)) {
+					App->scene->evoBotFlag = false;
+				}
+
 				break;
 			default:
 				break;

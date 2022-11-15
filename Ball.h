@@ -125,8 +125,13 @@ public:
 				
 				LOG("Ball collided SLINGSHOT_RIGHT");
 				break;
+			case PropType::SENSOR_EVO_BOT:
+				LOG("y ball: %d", METERS_TO_PIXELS(pBody->body->GetPosition().y));
+				LOG("y sensor: %d", METERS_TO_PIXELS(bodyB->body->GetPosition().y));
+				break;
 			default:
 				LOG("Ball collided ???");
+				
 				break;
 			}
 		}

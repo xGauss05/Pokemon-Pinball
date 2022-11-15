@@ -99,7 +99,7 @@ public:
 	GroundAsset livesLight1;
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
-	
+
 	p2List<GroundAsset*> groundAssets;
 
 	// map collisions
@@ -156,13 +156,13 @@ public:
 	Animation minunIdle;
 	Animation minunJump;
 	Animation* minunAnim = nullptr;
-	
+
 	// Animations (Plusle)
 	SDL_Texture* plusleTexture;
 	Animation plusleIdle;
 	Animation plusleJump;
 	Animation* plusleAnim = nullptr;
-	
+
 	// Animations (Minun & Plusle lightning)
 	SDL_Texture* lightningTexture;
 	Animation lightningPlusle;
@@ -176,11 +176,12 @@ public:
 	Animation* pikachuAnim = nullptr;
 
 	// Score variables
-	int currentScore = 0;
-	int previousScore = 0;
-	int highestScore = 0;
+	unsigned int currentScore = 0;
+	unsigned int previousScore = 0;
+	unsigned int highestScore = 0;
 	int pelipperMultiplier = 1;
 	float seedotMultiplier = 1.0f;
+	int evoMultiplier = 0;
 
 	// Game variables
 	int lives = 3;
@@ -189,6 +190,8 @@ public:
 	bool pelipperTrigger = false;
 	bool zigzagoonTrigger = false;
 	bool pikachuTrigger = false;
+	bool evoTopFlag = false;
+	bool evoBotFlag = false;
 
 	// Font
 	int font;

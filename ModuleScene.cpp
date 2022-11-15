@@ -13,7 +13,6 @@
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
 	// Initialise all the internal class variables, at least to NULL pointer
 	ray_on = false;
 }
@@ -38,9 +37,9 @@ void ModuleScene::initTextures()
 
 	// Load Assets for the Map
 	// Arrows
-	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, true };
-	greenArrow2 = { 43, 273, {16, 0, 16, 24}, true };
-	greenArrow3 = { 53, 289, {32, 0,  16, 24}, true };
+	greenArrow1 = { 33, 257, { 0, 0, 16, 24 }, false };
+	greenArrow2 = { 43, 273, {16, 0, 16, 24}, false };
+	greenArrow3 = { 53, 289, {32, 0,  16, 24}, false };
 	blueArrow1 = { 47, 232, {48, 0, 16, 24}, true };
 	blueArrow2 = { 54, 247, {64, 0, 16, 24}, true };
 	blueArrow3 = { 61, 262, {80, 0, 16, 24}, true };
@@ -652,6 +651,10 @@ void ModuleScene::ResetTable() {
 		livesLight2.isActive = true;
 		livesLight3.isActive = true;
 	}
+	evoMultiplier = 0;
+	greenArrow1.isActive = false;
+	greenArrow2.isActive = false;
+	greenArrow3.isActive = false;
 	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
 	pelipperMultiplier = 1;
 	seedotMultiplier = 1.0f;
@@ -733,7 +736,8 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::ZIGZAGOON_BUTTON);
 	App->pManager->CreateProp(PropType::PELIPPER_BUTTON);
 	App->pManager->CreateProp(PropType::TROUGH);
-	App->pManager->CreateProp(PropType::SENSOR_EVO);
+	App->pManager->CreateProp(PropType::SENSOR_EVO_BOT);
+	App->pManager->CreateProp(PropType::SENSOR_EVO_TOP);
 	App->pManager->CreateProp(PropType::SENSOR_GET);
 	App->pManager->CreateProp(PropType::SENSOR_HOLE);
 	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
@@ -752,17 +756,15 @@ update_status ModuleScene::Update()
 	drawScene();
 	drawScore();
 	drawAnimations();
-	if (lives < 3) {
-		livesLight3.isActive = false;
-	}
 
-	if (lives < 2) {
-		livesLight2.isActive = false;
-	}
+	if (lives < 3 && livesLight3.isActive) livesLight3.isActive = false;
+	if (lives < 2 && livesLight2.isActive) livesLight2.isActive = false;
+	if (lives < 1 && livesLight1.isActive) livesLight1.isActive = false;
 
-	if (lives < 1) {
-		livesLight1.isActive = false;
-	}
+	if (evoMultiplier >= 1 && !greenArrow1.isActive) greenArrow1.isActive = true;
+	if (evoMultiplier >= 2 && !greenArrow2.isActive) greenArrow2.isActive = true;
+	if (evoMultiplier >= 3 && !greenArrow3.isActive) greenArrow3.isActive = true;
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -778,4 +780,3 @@ bool ModuleScene::CleanUp() {
 
 	return true;
 }
-

@@ -40,3 +40,4 @@ enum update_status
 #define SEEDOT_SCORE 3000;
 #define PELIPPER_SCORE 5000;
 #define SLINGSHOT_SCORE 500;
+#define EVO_SCORE 2000;

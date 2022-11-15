@@ -103,8 +103,11 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::TROUGH:
 		prop = (Prop*)new Trough(type);
 		break;
-	case PropType::SENSOR_EVO:
-		prop = (Prop*)new Sensor(type, SensorSide::EVO);
+	case PropType::SENSOR_EVO_BOT:
+		prop = (Prop*)new Sensor(type, SensorSide::EVO_BOT);
+		break;
+	case PropType::SENSOR_EVO_TOP:
+		prop = (Prop*)new Sensor(type, SensorSide::EVO_TOP);
 		break;
 	case PropType::SENSOR_GET:
 		prop = (Prop*)new Sensor(type, SensorSide::GET);
