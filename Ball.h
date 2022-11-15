@@ -63,6 +63,12 @@ public:
 			lose = false;
 			TeleportTo(spawn);
 		}
+		
+		if (METERS_TO_PIXELS(pBody->body->GetPosition().y) >= SCREEN_HEIGHT+50) {
+			TeleportTo(spawn);
+			App->scene->switchLayer(2);
+		}
+
 		return true;
 	}
 
