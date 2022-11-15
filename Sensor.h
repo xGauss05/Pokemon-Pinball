@@ -18,7 +18,8 @@ enum SensorSide {
 	UPGRADE,
 	COINS,
 	MOUNTAIN,
-	SPRING
+	SPRING_IN,
+	SPRING_OUT
 };
 
 class Sensor : public Prop {
@@ -87,13 +88,17 @@ public:
 			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
-		case SPRING:
-			pBody1 = App->physics->CreateRectangleSensor(240, 82, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(180, 31, 5, 5);
-			pBody1->prop = pBody2->prop = this;
-			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+		case SPRING_IN:
+			pBody1 = App->physics->CreateRectangleSensor(242, 82, 8, 5);
+			pBody1->prop = this;
+			pBody1->listener  = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case SPRING_OUT:
+			/*pBody1 = App->physics->CreateRectangleSensor(242, 82, 8, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);*/
 			break;
 		default:
 			break;
@@ -144,6 +149,9 @@ public:
 			int score;
 			switch (side)
 			{
+			case SPRING_IN:
+				
+				break;
 			case COINS:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 229) {
 					switchLayer = 0;

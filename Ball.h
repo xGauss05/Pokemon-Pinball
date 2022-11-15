@@ -19,8 +19,10 @@ public:
 		x = 100;
 		y = 100;
 		radius = 8;
-		spawn.x = 243;
-		spawn.y = 350;
+			
+		spawn = iPoint(243, 350);
+		afterRelease = iPoint(178,34);
+
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->listener = (Module*)App->pManager;
 
@@ -52,6 +54,10 @@ public:
 	}
 
 	bool Update() {
+		if (switchLayer != -1) {
+			App->scene->switchLayer(switchLayer);
+			switchLayer = -1;
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) { 
 			iPoint position;
@@ -62,8 +68,15 @@ public:
 		if (lose) {
 			lose = false;
 			TeleportTo(spawn);
+			pBody->body->ApplyLinearImpulse({ (float32)(-50), 0 }, pBody->body->GetPosition(), true);
 		}
-		
+
+		if (release) {
+			release = false;
+			TeleportTo(afterRelease);
+
+		}
+
 		if (METERS_TO_PIXELS(pBody->body->GetPosition().y) >= SCREEN_HEIGHT+50) {
 			TeleportTo(spawn);
 			App->scene->switchLayer(2);
@@ -137,6 +150,16 @@ public:
 		}
 	}
 
+	void EndCollision(PhysBody* otherBody) {
+		if (otherBody->prop != NULL) {
+			switch (otherBody->prop->type) {
+			case PropType::SENSOR_SPRING_IN:
+				LOG("Ball END collided SPRING");
+					release = true;
+				break;
+			}
+		}
+	}
 
 	void BlitByLayer(int layer) {
 		int l = App->scene->currentLayer;
@@ -146,6 +169,7 @@ public:
 	}
 
 	void TeleportTo(iPoint position) {
+		//pBody->body->SetLinearVelocity(b2Vec2(0, 0));
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0.0f);
 		pBody->body->ApplyForce(b2Vec2(0.1f, 0.0f), pBody->body->GetWorldCenter(), true);
 	}
@@ -155,12 +179,14 @@ private:
 	int y;
 	int radius;
 
+	int switchLayer = -1;
+
 	// SFX
 	int ballSfx;
 
 	// Spawn position
-	iPoint spawn;
-	bool lose;
+	iPoint spawn, afterRelease;
+	bool lose, release;
 	PhysBody* pBody;
 	SDL_Texture* texture;
 };

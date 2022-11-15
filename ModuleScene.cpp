@@ -746,7 +746,8 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_HOLE);
 	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
 	App->pManager->CreateProp(PropType::SENSOR_COINS);
-	App->pManager->CreateProp(PropType::SENSOR_SPRING);
+	App->pManager->CreateProp(PropType::SENSOR_SPRING_IN);
+	//App->pManager->CreateProp(PropType::SENSOR_SPRING_OUT);
 	App->pManager->CreateProp(PropType::SENSOR_MOUNTAIN);
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);

@@ -12,7 +12,6 @@
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
 
-
 PropsManager::PropsManager(Application* app, bool start_enabled) : Module(app, start_enabled) {
 
 }
@@ -127,8 +126,11 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::SENSOR_MOUNTAIN:
 		prop = (Prop*)new Sensor(type, SensorSide::MOUNTAIN);
 		break;
-	case PropType::SENSOR_SPRING:
-		prop = (Prop*)new Sensor(type, SensorSide::SPRING);
+	case PropType::SENSOR_SPRING_IN:
+		prop = (Prop*)new Sensor(type, SensorSide::SPRING_IN);
+		break;
+	case PropType::SENSOR_SPRING_OUT:
+		prop = (Prop*)new Sensor(type, SensorSide::SPRING_OUT);
 		break;
 	case PropType::SLINGSHOT_RIGHT:
 		prop = (Prop*)new Slingshot(type, SlingPlace::SRIGHT);
