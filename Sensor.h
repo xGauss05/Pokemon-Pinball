@@ -19,7 +19,8 @@ enum SensorSide {
 	COINS,
 	MOUNTAIN,
 	SPRING_IN,
-	TOP_RAIL
+	TOP_RAIL,
+	LAKE_RAIL
 };
 
 class Sensor : public Prop {
@@ -100,6 +101,12 @@ public:
 			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
+		case LAKE_RAIL:
+			pBody1 = App->physics->CreateRectangleSensor(186, 225, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
+			break;
 		default:
 			break;
 		}
@@ -168,6 +175,13 @@ public:
 			case TOP_RAIL:
 					switchLayer = 1;
 				break;
+			case LAKE_RAIL:
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 225) {
+					switchLayer = 0;
+				}
+				else {
+					switchLayer = 1;
+				}
 			case EVO_TOP:
 				if (App->scene->evoBotFlag && App->scene->evoTopFlag) {
 					score = EVO_SCORE;

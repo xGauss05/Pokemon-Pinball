@@ -401,16 +401,16 @@ void ModuleScene::initMapCollisions()
 
 	{
 		int points[20] = {
-	177, 228,
+	164, 250,
 	190, 206,
 	226, 170,
 	232, 155,
-	232, 113,
-	249, 113,
+	232, 60,
+	249, 60,
 	249, 161,
 	243, 179,
 	205, 217,
-	191, 244
+	184, 264
 		};
 
 		mapCollisionRightRail1 = App->physics->CreateChain(0, 0, points, 20);
@@ -749,6 +749,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_SPRING_IN);
 	App->pManager->CreateProp(PropType::SENSOR_TOP_RAIL);
 	App->pManager->CreateProp(PropType::SENSOR_MOUNTAIN);
+	App->pManager->CreateProp(PropType::SENSOR_LAKE_RAIL);
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
 	
