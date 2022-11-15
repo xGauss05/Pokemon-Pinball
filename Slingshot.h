@@ -76,11 +76,11 @@ public:
 				{
 				case SlingPlace::SLEFT:
 					bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
-					bodyB->body->ApplyLinearImpulse({ (float32)(0.5 * 0.866), (float32)(-0.5 * 0.64) }, bodyB->body->GetPosition(), true);
+					bodyB->body->ApplyLinearImpulse({ (float32)(force * 0.866), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
 					break;
 				case SlingPlace::SRIGHT:
 					bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
-					bodyB->body->ApplyLinearImpulse({ (float32)(0.5 * (-0.866)), (float32)(-0.5 * 0.64) }, bodyB->body->GetPosition(), true);
+					bodyB->body->ApplyLinearImpulse({ (float32)(force * (-0.866)), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
 					break;
 				}
 			}
