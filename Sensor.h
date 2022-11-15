@@ -12,11 +12,12 @@ class SDL_Texture;
 enum SensorSide {
 	EVO_TOP,
 	EVO_BOT,
-	GET,
+	GET_TOP,
+	GET_BOT,
 	HOLE,
 	UPGRADE,
 	COINS,
-	MOUNTAIN, 
+	MOUNTAIN,
 	SPRING
 };
 
@@ -25,6 +26,7 @@ public:
 	Sensor(PropType type, SensorSide sSide) : Prop(type) {
 
 		this->side = sSide;
+		blingSfx = App->audio->LoadFx("pinball/Sounds/bling.wav");
 		switch (sSide)
 		{
 		case EVO_TOP:
@@ -39,13 +41,17 @@ public:
 			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
-		case GET:
-			pBody1 = App->physics->CreateRectangleSensor(210, 247, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(202, 131, 5, 5);
-			pBody1->prop = pBody2->prop = this;
-			pBody1->listener = pBody2->listener = (Module*)App->pManager;
+		case GET_TOP:
+			pBody1 = App->physics->CreateRectangleSensor(202, 131, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case GET_BOT:
+			pBody1 = App->physics->CreateRectangleSensor(210, 247, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case HOLE:
 			pBody1 = App->physics->CreateRectangleSensor(32, 359, 5, 5);
@@ -92,6 +98,7 @@ public:
 		default:
 			break;
 		}
+		
 	}
 
 	bool Update() {
@@ -105,7 +112,7 @@ public:
 	}
 
 	void PlaySFX() {
-
+		App->audio->PlayFx(blingSfx);
 	}
 
 	void OnCollision(PhysBody* otherBody) {
@@ -119,6 +126,14 @@ public:
 				break;
 			case EVO_BOT:
 				App->scene->evoBotFlag = true;
+				break;
+			case GET_TOP:
+				if (App->scene->getBotFlag) {
+					App->scene->getTopFlag = true;
+				}
+				break;
+			case GET_BOT:
+				App->scene->getBotFlag = true;
 				break;
 			}
 		}
@@ -149,9 +164,9 @@ public:
 					if (App->scene->evoMultiplier < 3) {
 						App->scene->evoMultiplier++;
 					}
-					
 					App->scene->evoBotFlag = App->scene->evoTopFlag = false;
-					App->scene->currentScore += score*App->scene->evoMultiplier;
+					App->scene->currentScore += score * App->scene->evoMultiplier;
+					PlaySFX();
 				}
 				break;
 			case EVO_BOT:
@@ -159,7 +174,24 @@ public:
 					METERS_TO_PIXELS(pBody1->body->GetPosition().y)) {
 					App->scene->evoBotFlag = false;
 				}
-
+				break;
+			case GET_TOP:
+				if (App->scene->getBotFlag && App->scene->getTopFlag) {
+					score = GET_SCORE;
+					LOG("BOTH LIGHTS GET");
+					if (App->scene->getMultiplier < 3) {
+						App->scene->getMultiplier++;
+					}
+					App->scene->getBotFlag = App->scene->getTopFlag = false;
+					App->scene->currentScore += score * App->scene->getMultiplier;
+					PlaySFX();
+				}
+				break;
+			case GET_BOT:
+				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) >
+					METERS_TO_PIXELS(pBody1->body->GetPosition().y)) {
+					App->scene->getBotFlag = false;
+				}
 				break;
 			default:
 				break;
@@ -176,6 +208,7 @@ private:
 	PhysBody* pBody3 = nullptr;
 	PhysBody* pBody4 = nullptr;
 
+	int blingSfx;
 	int switchLayer = -1;
 
 };

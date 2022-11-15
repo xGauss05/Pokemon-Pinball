@@ -43,9 +43,9 @@ void ModuleScene::initTextures()
 	blueArrow1 = { 47, 232, {48, 0, 16, 24}, true };
 	blueArrow2 = { 54, 247, {64, 0, 16, 24}, true };
 	blueArrow3 = { 61, 262, {80, 0, 16, 24}, true };
-	redArrow1 = { 193, 257, {96, 0, 16, 24}, true };
-	redArrow2 = { 183, 273, {112, 0, 16, 24}, true };
-	redArrow3 = { 173, 289, {128, 0, 16, 24}, true };
+	redArrow1 = { 193, 257, {96, 0, 16, 24}, false };
+	redArrow2 = { 183, 273, {112, 0, 16, 24}, false };
+	redArrow3 = { 173, 289, {128, 0, 16, 24}, false };
 
 	/*
 	yellowArrow1;
@@ -651,10 +651,13 @@ void ModuleScene::ResetTable() {
 		livesLight2.isActive = true;
 		livesLight3.isActive = true;
 	}
-	evoMultiplier = 0;
+	evoMultiplier = getMultiplier = 0;
 	greenArrow1.isActive = false;
 	greenArrow2.isActive = false;
 	greenArrow3.isActive = false;
+	redArrow1.isActive = false;
+	redArrow2.isActive = false;
+	redArrow3.isActive = false;
 	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
 	pelipperMultiplier = 1;
 	seedotMultiplier = 1.0f;
@@ -738,7 +741,8 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::TROUGH);
 	App->pManager->CreateProp(PropType::SENSOR_EVO_BOT);
 	App->pManager->CreateProp(PropType::SENSOR_EVO_TOP);
-	App->pManager->CreateProp(PropType::SENSOR_GET);
+	App->pManager->CreateProp(PropType::SENSOR_GET_BOT);
+	App->pManager->CreateProp(PropType::SENSOR_GET_TOP);
 	App->pManager->CreateProp(PropType::SENSOR_HOLE);
 	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
 	App->pManager->CreateProp(PropType::SENSOR_COINS);
@@ -747,7 +751,6 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
 	
-
 	return ret;
 }
 
@@ -764,6 +767,10 @@ update_status ModuleScene::Update()
 	if (evoMultiplier >= 1 && !greenArrow1.isActive) greenArrow1.isActive = true;
 	if (evoMultiplier >= 2 && !greenArrow2.isActive) greenArrow2.isActive = true;
 	if (evoMultiplier >= 3 && !greenArrow3.isActive) greenArrow3.isActive = true;
+
+	if (getMultiplier >= 1 && !redArrow1.isActive) redArrow1.isActive = true;
+	if (getMultiplier >= 2 && !redArrow2.isActive) redArrow2.isActive = true;
+	if (getMultiplier >= 3 && !redArrow3.isActive) redArrow3.isActive = true;
 	
 	return UPDATE_CONTINUE;
 }

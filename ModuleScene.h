@@ -182,6 +182,7 @@ public:
 	int pelipperMultiplier = 1;
 	float seedotMultiplier = 1.0f;
 	int evoMultiplier = 0;
+	int getMultiplier = 0;
 
 	// Game variables
 	int lives = 3;
@@ -192,6 +193,8 @@ public:
 	bool pikachuTrigger = false;
 	bool evoTopFlag = false;
 	bool evoBotFlag = false;
+	bool getTopFlag = false;
+	bool getBotFlag = false;
 
 	// Font
 	int font;
