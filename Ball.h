@@ -74,6 +74,7 @@ public:
 		if (release) {
 			release = false;
 			TeleportTo(afterRelease);
+			pBody->body->ApplyForceToCenter({-30, 0}, true);
 
 		}
 
