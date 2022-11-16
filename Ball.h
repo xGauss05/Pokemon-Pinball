@@ -27,7 +27,7 @@ public:
 		radius = 8;
 
 		spawn = iPoint(243, 350);
-		
+
 		afterRelease = iPoint(178, 34);
 
 		pBody = App->physics->CreateCircle(spawn.x, spawn.y, radius);
@@ -42,7 +42,7 @@ public:
 		data->I = 0.01f;
 		pBody->body->SetMassData(data);
 		pBody->body->SetBullet(true);
-		
+
 		pBody->body->SetFixedRotation(false);
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawn.x), PIXEL_TO_METERS(spawn.y)), 0.0f);
@@ -72,7 +72,6 @@ public:
 			TeleportTo(spawn);
 			App->scene->switchLayer(2);
 		}
-
 	}
 
 	bool Update() {
@@ -93,7 +92,7 @@ public:
 		default:
 			break;
 		}
-		
+
 		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) {
 			iPoint position;
 			position.x = App->input->GetMouseX();
@@ -128,69 +127,73 @@ public:
 			int score;
 			switch (bodyB->prop->type) {
 			case PropType::BUMPERTOP:
-				App->scene->currentScore += BUMPER_SCORE;
+				score = BUMPER_SCORE;
 				LOG("Ball collided BUMPERTOP");
 				break;
 			case PropType::BUMPERRIGHT:
-				App->scene->currentScore += BUMPER_SCORE;
+				score = BUMPER_SCORE;
 				LOG("Ball collided BUMPERIGHT");
 				break;
 			case PropType::BUMPERLEFT:
-				App->scene->currentScore += BUMPER_SCORE;
+				score = BUMPER_SCORE;	
 				LOG("Ball collided BUMPERLEFT");
 				break;
 			case PropType::MINUN_BUTTON:
-				App->scene->currentScore += MINUN_SCORE;
+				score = MINUN_SCORE;
 				LOG("Ball collided MINUN_BUTTON");
 				break;
 			case PropType::PLUSLE_BUTTON:
-				App->scene->currentScore += PLUSLE_SCORE;
+				score = PLUSLE_SCORE;
 				LOG("Ball collided PLUSLE_BUTTON");
 				break;
 			case PropType::ZIGZAGOON_BUTTON:
-				App->scene->currentScore += ZIGZAGOON_SCORE;
+				score = ZIGZAGOON_SCORE;
 				LOG("Ball collided ZIGZAGOON_BUTTON");
 				break;
 			case PropType::SEEDOT_BUTTON:
 				score = SEEDOT_SCORE;
-				App->scene->currentScore += score * App->scene->seedotMultiplier;
+				score *= App->scene->seedotMultiplier;
 				LOG("Ball collided SEEDOT_BUTTON");
 				break;
 			case PropType::PELIPPER_BUTTON:
 				score = PELIPPER_SCORE;
-				App->scene->currentScore += score * App->scene->pelipperMultiplier;
+				score *= App->scene->pelipperMultiplier;
 				LOG("Ball collided PELIPPER_BUTTON");
 				break;
 			case PropType::TROUGH:
+				score = 0;
 				lose = true;
 				LOG("Ball collided TROUGH");
 				break;
 			case PropType::SLINGSHOT_LEFT:
-				App->scene->currentScore += SLINGSHOT_SCORE;
-
+				score = SLINGSHOT_SCORE;
 				LOG("Ball collided SLINGSHOT_LEFT");
 				break;
 			case PropType::SLINGSHOT_RIGHT:
-				App->scene->currentScore += SLINGSHOT_SCORE;
-
+				score = SLINGSHOT_SCORE;
 				LOG("Ball collided SLINGSHOT_RIGHT");
 				break;
-			case PropType::SENSOR_EVO_BOT:
-				LOG("y ball: %d", METERS_TO_PIXELS(pBody->body->GetPosition().y));
-				LOG("y sensor: %d", METERS_TO_PIXELS(bodyB->body->GetPosition().y));
+			case PropType::SENSOR_UP_LEFT:
+				score = UP_SCORE;
+				break;
+			case PropType::SENSOR_UP_MID:
+				score = UP_SCORE;
+				break;
+			case PropType::SENSOR_UP_RIGHT:
+				score = UP_SCORE;
 				break;
 			case PropType::WAILMER:
-
-				App->scene->currentScore += WAILMER_SCORE;
+				score = WAILMER_SCORE;
 				App->scene->wailmerTrigger = true;
 				wailmerSpit = true;
 				LOG("Ball collided WAILMER");
 				break;
 			default:
 				LOG("Ball collided ???");
-
+				score = 0;
 				break;
 			}
+			App->scene->currentScore += score * App->scene->ballMultiplier;
 		}
 	}
 

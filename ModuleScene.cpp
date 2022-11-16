@@ -52,10 +52,6 @@ void ModuleScene::initTextures()
 	yellowArrow3;
 	yellowArrow4;
 
-	// Bumpers
-	bumperLeft;
-	bumperRight;
-
 	// TODO Water Animation
 
 	// TODO Screen Animation
@@ -72,12 +68,11 @@ void ModuleScene::initTextures()
 
 	// Saver
 	saverLatios;
-
-	// Dots
-	dotsLight1;
-	dotsLight2;
-	dotsLight3;
 	*/
+	// Dots
+	dotsLight1 = { 84, 105, { 216, 32, 8, 8 }, false };;
+	dotsLight2 = { 105, 105, { 216, 32, 8, 8 }, false };;
+	dotsLight3 = { 126, 105, { 216, 32, 8, 8 }, false };;
 
 	// Lives
 	livesLight1 = { 98, 338, { 232, 32, 12, 12 }, true };
@@ -96,6 +91,9 @@ void ModuleScene::initTextures()
 	groundAssets.add(&livesLight1);
 	groundAssets.add(&livesLight2);
 	groundAssets.add(&livesLight3);
+	groundAssets.add(&dotsLight1);
+	groundAssets.add(&dotsLight2);
+	groundAssets.add(&dotsLight3);
 
 	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
 	wailmerIdle.PushBack({ 0,0,40,29 });
@@ -109,7 +107,7 @@ void ModuleScene::initTextures()
 	wailmerSpit.PushBack({ 160,0,40,29 });
 	wailmerSpit.loop = false;
 	wailmerSpit.speed = 0.2f;
-	
+
 	seedotTexture = App->textures->Load("pinball/Textures/seedot_sprite.png");
 	seedotIdle.PushBack({ 18,31,17,22 });
 	seedotIdle.PushBack({ 36,31,17,22 });
@@ -645,19 +643,15 @@ void ModuleScene::ResetTable() {
 		}
 		currentScore = 0;
 		lives = 3;
-		livesLight1.isActive = true;
-		livesLight2.isActive = true;
-		livesLight3.isActive = true;
+		livesLight1.isActive = livesLight2.isActive = livesLight3.isActive = true;
 	}
 	evoMultiplier = getMultiplier = 0;
-	greenArrow1.isActive = false;
-	greenArrow2.isActive = false;
-	greenArrow3.isActive = false;
-	redArrow1.isActive = false;
-	redArrow2.isActive = false;
-	redArrow3.isActive = false;
+	greenArrow1.isActive = greenArrow2.isActive = greenArrow3.isActive = false;
+	redArrow1.isActive = redArrow2.isActive = redArrow3.isActive = false;
+	dotsLight1.isActive = dotsLight2.isActive = dotsLight3.isActive = false;
+	upLeftFlag = upMidFlag = upRightFlag = false;
 	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
-	pelipperMultiplier = 1;
+	pelipperMultiplier = ballMultiplier = 1;
 	seedotMultiplier = 1.0f;
 }
 
@@ -742,7 +736,9 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_GET_BOT);
 	App->pManager->CreateProp(PropType::SENSOR_GET_TOP);
 	App->pManager->CreateProp(PropType::SENSOR_HOLE);
-	App->pManager->CreateProp(PropType::SENSOR_UPGRADE);
+	App->pManager->CreateProp(PropType::SENSOR_UP_LEFT);
+	App->pManager->CreateProp(PropType::SENSOR_UP_MID);
+	App->pManager->CreateProp(PropType::SENSOR_UP_RIGHT);
 	App->pManager->CreateProp(PropType::SENSOR_COINS);
 	App->pManager->CreateProp(PropType::SENSOR_SPRING_IN);
 	App->pManager->CreateProp(PropType::SENSOR_TOP_RAIL);
@@ -751,7 +747,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
 	App->pManager->CreateProp(PropType::WAILMER);
-	
+
 	return ret;
 }
 
@@ -772,7 +768,7 @@ update_status ModuleScene::Update()
 	if (getMultiplier >= 1 && !redArrow1.isActive) redArrow1.isActive = true;
 	if (getMultiplier >= 2 && !redArrow2.isActive) redArrow2.isActive = true;
 	if (getMultiplier >= 3 && !redArrow3.isActive) redArrow3.isActive = true;
-	
+
 	if (wailmerTrigger && wailmerAnim != &wailmerSpit) {
 		wailmerAnim = &wailmerSpit;
 	}
@@ -783,11 +779,18 @@ update_status ModuleScene::Update()
 		wailmerTrigger = false;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && ballMultiplier < 4) {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && ballMultiplier < 4) {
 		ballMultiplier++;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && ballMultiplier > 1) {
 		ballMultiplier--;
+	}
+
+	if (dotsLight1.isActive && dotsLight2.isActive && dotsLight3.isActive) {
+		dotsLight1.isActive = dotsLight2.isActive = dotsLight3.isActive = false;
+		if (ballMultiplier < 4) {
+			ballMultiplier++;
+		}
 	}
 
 	return UPDATE_CONTINUE;

@@ -89,12 +89,13 @@ public:
 
 	// Saver
 	GroundAsset saverLatios;
+	*/
 
 	// Dots
 	GroundAsset dotsLight1;
 	GroundAsset dotsLight2;
 	GroundAsset dotsLight3;
-	*/
+	
 	// Lives
 	GroundAsset livesLight1;
 	GroundAsset livesLight2;
@@ -197,6 +198,9 @@ public:
 	bool evoBotFlag = false;
 	bool getTopFlag = false;
 	bool getBotFlag = false;
+	bool upLeftFlag = false;
+	bool upMidFlag = false;
+	bool upRightFlag = false;
 
 	// Font
 	int font;

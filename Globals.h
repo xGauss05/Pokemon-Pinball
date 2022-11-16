@@ -43,3 +43,4 @@ enum update_status
 #define SLINGSHOT_SCORE 500;
 #define EVO_SCORE 2000;
 #define GET_SCORE 3000;
+#define UP_SCORE 1000;

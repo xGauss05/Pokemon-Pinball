@@ -15,7 +15,9 @@ enum SensorSide {
 	GET_TOP,
 	GET_BOT,
 	HOLE,
-	UPGRADE,
+	UP_LEFT,
+	UP_MID,
+	UP_RIGHT,
 	COINS,
 	MOUNTAIN,
 	SPRING_IN,
@@ -67,15 +69,23 @@ public:
 			pBody3->body->SetType(b2BodyType::b2_staticBody);
 			pBody4->body->SetType(b2BodyType::b2_staticBody);
 			break;
-		case UPGRADE:
+		case UP_LEFT:
 			pBody1 = App->physics->CreateRectangleSensor(87, 118, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(108, 118, 5, 5);
-			pBody3 = App->physics->CreateRectangleSensor(129, 118, 5, 5);
-			pBody1->prop = pBody2->prop = pBody3->prop = this;
-			pBody1->listener = pBody2->listener = pBody3->listener = (Module*)App->pManager;
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
-			pBody3->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case UP_MID:
+			pBody1 = App->physics->CreateRectangleSensor(108, 118, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case UP_RIGHT:
+			pBody1 = App->physics->CreateRectangleSensor(129, 118, 5, 5);
+			pBody1->prop = this;
+			pBody1->listener = (Module*)App->pManager;
+			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case COINS:
 			pBody1 = App->physics->CreateRectangleSensor(44, 229, 1, 1);
@@ -92,7 +102,7 @@ public:
 		case SPRING_IN:
 			pBody1 = App->physics->CreateRectangleSensor(242, 82, 8, 5);
 			pBody1->prop = this;
-			pBody1->listener  = (Module*)App->pManager;
+			pBody1->listener = (Module*)App->pManager;
 			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case TOP_RAIL:
@@ -110,7 +120,7 @@ public:
 		default:
 			break;
 		}
-		
+
 	}
 
 	bool Update() {
@@ -147,6 +157,21 @@ public:
 			case GET_BOT:
 				App->scene->getBotFlag = true;
 				break;
+			case UP_LEFT:
+				if (App->scene->dotsLight1.isActive != true) {
+					App->scene->dotsLight1.isActive = true;
+				}
+				break;
+			case UP_MID:
+				if (App->scene->dotsLight2.isActive != true) {
+					App->scene->dotsLight2.isActive = true;
+				}
+				break;
+			case UP_RIGHT:
+				if (App->scene->dotsLight3.isActive != true) {
+					App->scene->dotsLight3.isActive = true;
+				}
+				break;
 			}
 		}
 	}
@@ -157,7 +182,7 @@ public:
 			switch (side)
 			{
 			case SPRING_IN:
-				
+
 				break;
 			case COINS:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 229) {
@@ -173,7 +198,7 @@ public:
 				}
 				break;
 			case TOP_RAIL:
-					switchLayer = 1;
+				switchLayer = 1;
 				break;
 			case LAKE_RAIL:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) > 225) {
