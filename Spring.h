@@ -78,7 +78,7 @@ public:
 	void BlitByLayer(int layer) {
 		if (layer == 0) {
 			idleAnim.Update();
-			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { compressionAnim.Update(); }
+			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) { compressionAnim.Update(); }
 
 			if (currentAnim == &idleAnim)
 			{
@@ -95,10 +95,10 @@ public:
 	}
 
 	bool Update() {
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 			StartLoading();
 		}
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
 			Release();
 		}
 		return true;

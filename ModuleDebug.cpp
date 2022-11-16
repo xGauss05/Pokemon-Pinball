@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 
+#include "ModuleScene.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
 #include <string>
@@ -29,6 +30,12 @@ update_status ModuleDebug::Update() {
 		debug = !debug;
 
 	if (debug) {
+		if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && App->scene->ballMultiplier < 4)
+			App->scene->ballMultiplier++;
+		
+		if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && App->scene->ballMultiplier > 1)
+			App->scene->ballMultiplier--;
+
 		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 			variables = !variables;
 

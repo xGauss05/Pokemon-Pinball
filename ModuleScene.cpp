@@ -779,13 +779,6 @@ update_status ModuleScene::Update()
 		wailmerTrigger = false;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && ballMultiplier < 4) {
-		ballMultiplier++;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && ballMultiplier > 1) {
-		ballMultiplier--;
-	}
-
 	if (dotsLight1.isActive && dotsLight2.isActive && dotsLight3.isActive) {
 		dotsLight1.isActive = dotsLight2.isActive = dotsLight3.isActive = false;
 		if (ballMultiplier < 4) {
