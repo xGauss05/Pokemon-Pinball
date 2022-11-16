@@ -49,6 +49,19 @@ update_status ModuleDebug::Update() {
 			if (App->input->GetKey(SDL_SCANCODE_PAGEDOWN) == KEY_DOWN && targetFPS > 10)
 				targetFPS -= 10;
 		}
+		if (variables == true)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && App->physics->GRAVITY_Y < 20.0f)
+			{
+				App->physics->GRAVITY_Y += 1.0f;
+				App->physics->world->SetGravity(b2Vec2(GRAVITY_X, App->physics->GRAVITY_Y));
+			}
+			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && App->physics->GRAVITY_Y > -20.0f)
+			{
+				App->physics->GRAVITY_Y -= 1.0f;
+				App->physics->world->SetGravity(b2Vec2(GRAVITY_X, App->physics->GRAVITY_Y));
+			}
+		}
 	}
 
 	return UPDATE_CONTINUE;
@@ -222,6 +235,7 @@ void ModuleDebug::DebugDraw() {
 	//Variables debug
 	if (variables)
 	{
-		App->fonts->BlitText(5, 90, 0, "VARIABLES GO HERE");
+		App->fonts->BlitText(5, 100, 0, "GRAVITY ");
+		App->fonts->BlitText(100, 100, 0, std::to_string(App->physics->GRAVITY_Y).c_str());
 	}
 }
