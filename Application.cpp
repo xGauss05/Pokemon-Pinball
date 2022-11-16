@@ -21,9 +21,9 @@ Application::Application()
 	audio = new ModuleAudio(this, true);
 	scene = new ModuleScene(this);
 	physics = new ModulePhysics(this);
-	fonts = new ModuleFonts(this);
-	debug = new ModuleDebug(this);
 	pManager = new PropsManager(this);
+	debug = new ModuleDebug(this);
+	fonts = new ModuleFonts(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order

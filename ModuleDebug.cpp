@@ -30,27 +30,44 @@ update_status ModuleDebug::Update() {
 		debug = !debug;
 
 	if (debug) {
-		if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && App->scene->ballMultiplier < 4)
+
+		if (currentScreen == Screen::HOME)
+		{
+			/*if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && App->scene->ballMultiplier < 4)
 			App->scene->ballMultiplier++;
-		
+
 		if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && App->scene->ballMultiplier > 1)
-			App->scene->ballMultiplier--;
+			App->scene->ballMultiplier--;*/
 
-		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-			variables = !variables;
+			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+				time = true;
 
-		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-			time = !time;
+			if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+				gravity = true;
+
+			if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+				sprites = true;
+
+			if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+				colliders = true;
+
+			if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+				variables = true;
+		}
 
 		if (time == true)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_PAGEUP) == KEY_DOWN && targetFPS < 120)
+			currentScreen = Screen::TIME;
+
+			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && targetFPS < 120)
 				targetFPS += 10;
-			if (App->input->GetKey(SDL_SCANCODE_PAGEDOWN) == KEY_DOWN && targetFPS > 10)
+			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && targetFPS > 10)
 				targetFPS -= 10;
 		}
-		if (variables == true)
+		if (gravity == true)
 		{
+			currentScreen = Screen::GRAVITY;
+
 			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && App->physics->GRAVITY_Y < 20.0f)
 			{
 				App->physics->GRAVITY_Y += 1.0f;
@@ -61,6 +78,24 @@ update_status ModuleDebug::Update() {
 				App->physics->GRAVITY_Y -= 1.0f;
 				App->physics->world->SetGravity(b2Vec2(GRAVITY_X, App->physics->GRAVITY_Y));
 			}
+		}
+		if (sprites == true)
+		{
+			currentScreen = Screen::SPRITES;
+		}
+		if (colliders == true)
+		{
+			currentScreen = Screen::COLLIDERS;
+		}
+		if (variables == true)
+		{
+			currentScreen = Screen::VARIABLES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
+		{
+			currentScreen = Screen::HOME;
+			variables = false; time = false; gravity = false; sprites = false; colliders = false;
 		}
 	}
 
@@ -212,30 +247,77 @@ void ModuleDebug::DebugDraw() {
 		}
 	}
 
+	SDL_Rect bg;
+	if (time)			{ bg = { 5,75,500,185 }; }
+	else if (gravity)	{ bg = { 5,75,500,170 }; }
+	else if (variables)	{ bg = { 5,75,500,110 }; }
+	else if (sprites)	{ bg = { 5,75,500,25 }; }
+	else if (colliders)	{ bg = { 5,75,500,25 }; }
+	else				{ bg = { 5,75,500,145 }; }
+	SDL_SetRenderDrawColor(App->renderer->renderer, 0, 0, 0, 175);
+	SDL_RenderFillRect(App->renderer->renderer, &bg);
 
-	App->fonts->BlitText(5, 40, 0, "PRESS V FOR VARIABLES");
-	App->fonts->BlitText(5, 50, 0, "PRESS T FOR TIME DEBUG");
-
-	//Time debug
-	if (time)
+	switch (currentScreen)
 	{
+	case Screen::HOME:
+		App->fonts->BlitText(5, 40, 0, "PRESS A NUMBER TO OPEN ITS MENU");
+
+		App->fonts->BlitText(5, 60, 0, "1. TIME OPTIONS");
+		App->fonts->BlitText(5, 70, 0, "2. GRAVITY OPTIONS");
+		App->fonts->BlitText(5, 80, 0, "3. SPRITES OPTIONS");
+		App->fonts->BlitText(5, 90, 0, "4. SHOW COLLIDERS");
+		App->fonts->BlitText(5, 100, 0, "V. SHOW VARIABLES");
+		break;
+		
+	case Screen::TIME:
+		App->fonts->BlitText(5, 40, 0, "TIME OPTIONS");
+		App->fonts->BlitText(5, 60, 0, "PRESS HOME TO INCREASE AND");
+		App->fonts->BlitText(5, 70, 0, "END TO DECREASE THE VALUE");
+
 		LOG("Elapsed Cycle:");
 		LOG(std::to_string(elapsedCycle.count()).c_str());
 		LOG("Elapsed Frame:");
 		LOG(std::to_string(elapsedFrame.count()).c_str());
 
-		App->fonts->BlitText(5, 70, 0, "TARGET FPS ");
-		App->fonts->BlitText(100, 70, 0, std::to_string(targetFPS).c_str());
-		App->fonts->BlitText(5, 80, 0, "CURRENT FPS ");
-		App->fonts->BlitText(100, 80, 0, std::to_string(FPS).c_str());
+		App->fonts->BlitText(5, 90, 0, "TARGET FPS ");
+		App->fonts->BlitText(100, 90, 0, std::to_string(targetFPS).c_str());
+		App->fonts->BlitText(5, 100, 0, "CURRENT FPS ");
+		App->fonts->BlitText(100, 100, 0, std::to_string(FPS).c_str());
 		LOG("FPS:");
 		LOG(std::to_string(FPS).c_str());
-	}
 
-	//Variables debug
-	if (variables)
-	{
-		App->fonts->BlitText(5, 100, 0, "GRAVITY ");
-		App->fonts->BlitText(100, 100, 0, std::to_string(App->physics->GRAVITY_Y).c_str());
+		App->fonts->BlitText(5, 120, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::GRAVITY:
+		App->fonts->BlitText(5, 40, 0, "GRAVITY OPTIONS");
+		App->fonts->BlitText(5, 60, 0, "PRESS HOME TO INCREASE AND");
+		App->fonts->BlitText(5, 70, 0, "END TO DECREASE THE VALUE");
+
+		App->fonts->BlitText(5, 90, 0, "GRAVITY ");
+		App->fonts->BlitText(120, 90, 0, std::to_string(App->physics->GRAVITY_Y).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::COLLIDERS:
+		App->fonts->BlitText(5, 40, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::SPRITES:
+		App->fonts->BlitText(5, 40, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::VARIABLES:
+		App->fonts->BlitText(5, 40, 0, "VARIABLES");
+		App->fonts->BlitText(5, 60, 0, "VARIABLES GO HERE");
+
+		App->fonts->BlitText(5, 80, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::NONE:
+		break;
+	default:
+		break;
 	}
 }

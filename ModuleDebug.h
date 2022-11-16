@@ -5,6 +5,17 @@
 #include <chrono>
 using namespace std::chrono;
 
+enum class Screen
+{
+	HOME,
+	TIME,
+	GRAVITY,
+	COLLIDERS,
+	SPRITES,
+	VARIABLES,
+	NONE
+};
+
 class ModuleDebug : public Module {
 public:
 	// Constructor
@@ -34,11 +45,16 @@ public:
 
 private:
 
+	Screen currentScreen = Screen::HOME;
+
 	// Simple debugging flag
 	bool debug;
 
-	bool variables = false;
 	bool time = false;
+	bool gravity = false;
+	bool colliders = false;
+	bool sprites = false;
+	bool variables = false;
 };
 
 #endif // __MODULE_DEBUG_H__
