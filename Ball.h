@@ -15,6 +15,13 @@ class Ball : public Prop {
 public:
 	Ball(PropType type) : Prop(type) {
 		texture = App->textures->Load("pinball/Textures/ball.png");
+		pokeball.PushBack({ 0,0,15,15 });
+		superball.PushBack({ 16,0,15,15 });
+		ultraball.PushBack({ 32,0,15,15 });
+		masterball.PushBack({ 48,0,15,15 });
+		pokeball.loop = superball.loop = ultraball.loop = masterball.loop = true;
+		pokeball.speed = superball.speed = ultraball.speed = masterball.speed = 1;
+		ballAnim = &pokeball;
 		ballSfx = App->audio->LoadFx("pinball/Sounds/ball_collides.wav");
 
 		radius = 8;
@@ -50,10 +57,11 @@ public:
 		App->renderer->Blit(texture,
 			METERS_TO_PIXELS(pBody->body->GetPosition().x - radius),
 			METERS_TO_PIXELS(pBody->body->GetPosition().y - radius),
-			NULL,
+			&(ballAnim->GetCurrentFrame()),
 			1.0f,
 			pBody->GetRotation());
 	}
+
 	bool PreUpdate() {
 		if (switchLayer != -1) {
 			App->scene->switchLayer(switchLayer);
@@ -68,8 +76,24 @@ public:
 	}
 
 	bool Update() {
-		
 
+		switch (App->scene->ballMultiplier) {
+		case 1:
+			if (ballAnim != &pokeball) ballAnim = &pokeball;
+			break;
+		case 2:
+			if (ballAnim != &superball) ballAnim = &superball;
+			break;
+		case 3:
+			if (ballAnim != &ultraball) ballAnim = &ultraball;
+			break;
+		case 4:
+			if (ballAnim != &masterball) ballAnim = &masterball;
+			break;
+		default:
+			break;
+		}
+		
 		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) {
 			iPoint position;
 			position.x = App->input->GetMouseX();
@@ -202,7 +226,9 @@ private:
 
 	// SFX
 	int ballSfx;
-
+	// Ball animations
+	Animation pokeball, superball, ultraball, masterball;
+	Animation* ballAnim = nullptr;;
 	// Spawn position
 	iPoint spawn, afterRelease;
 	bool lose, release, wailmerSpit;

@@ -782,6 +782,14 @@ update_status ModuleScene::Update()
 		wailmerSpit.Reset();
 		wailmerTrigger = false;
 	}
+
+	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && ballMultiplier < 4) {
+		ballMultiplier++;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && ballMultiplier > 1) {
+		ballMultiplier--;
+	}
+
 	return UPDATE_CONTINUE;
 }
 

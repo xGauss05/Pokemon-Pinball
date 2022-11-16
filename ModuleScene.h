@@ -183,6 +183,7 @@ public:
 	float seedotMultiplier = 1.0f;
 	int evoMultiplier = 0;
 	int getMultiplier = 0;
+	int ballMultiplier = 1;
 
 	// Game variables
 	int lives = 3;
