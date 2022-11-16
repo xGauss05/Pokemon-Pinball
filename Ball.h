@@ -32,9 +32,11 @@ public:
 
 		data->center = b2Vec2(0.0f, 0.0f);
 		data->mass = 0.1f;
+		data->I = 0.01f;
 		pBody->body->SetMassData(data);
 		pBody->body->SetBullet(true);
-
+		
+		pBody->body->SetFixedRotation(false);
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawn.x), PIXEL_TO_METERS(spawn.y)), 0.0f);
 		pBody->prop = this;
