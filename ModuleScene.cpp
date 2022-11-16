@@ -875,6 +875,18 @@ update_status ModuleScene::PostUpdate()
 bool ModuleScene::CleanUp() {
 
 	LOG("Unloading Intro scene");
+	App->textures->Unload(mapLayer0);
+	App->textures->Unload(mapLayer1);
+	App->textures->Unload(mapLayer2);
+	App->textures->Unload(mapLayer3);
+	App->textures->Unload(wailmerTexture);
+	App->textures->Unload(seedotTexture);
+	App->textures->Unload(pelipperTexture);
+	App->textures->Unload(zigzagoonTexture);
+	App->textures->Unload(minunTexture);
+	App->textures->Unload(plusleTexture);
+	App->textures->Unload(lightningTexture);
+	App->textures->Unload(pikachuTexture);
 
 	return true;
 }

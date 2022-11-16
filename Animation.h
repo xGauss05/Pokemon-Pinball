@@ -59,10 +59,6 @@ public:
 		this->currentFrame = index;
 	}
 
-	/*SDL_Rect& GetCurrentFrame() {
-		return frames[(int)currentFrame];
-	}*/
-
 	SDL_Rect& GetCurrentFrame()
 	{
 		int actualFrame = currentFrame;

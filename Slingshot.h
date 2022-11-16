@@ -40,10 +40,8 @@ public:
 		pBody2->body->SetType(b2BodyType::b2_staticBody);
 		pBody->prop = this;
 		pBody->listener = (Module*)App->pManager;
-		texture = App->textures->Load("pinball/Textures/Assets_Map.png");
+		slingshotTexture = App->textures->Load("pinball/Textures/Assets_Map.png");
 		bumperSfx = App->audio->LoadFx("pinball/Sounds/bumpers.wav");
-
-
 	}
 
 	void Blit() {
@@ -53,11 +51,11 @@ public:
 		{
 		case SlingPlace::SLEFT:
 			left = { 0, 59, 23, 34 };
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &left);
+			App->renderer->Blit(slingshotTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &left);
 			break;
 		case SlingPlace::SRIGHT:
 			right = { 25, 59, 23, 34 };
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &right);
+			App->renderer->Blit(slingshotTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x), METERS_TO_PIXELS(pBody->body->GetPosition().y), &right);
 			break;
 		}
 	}
@@ -97,11 +95,25 @@ public:
 		return true;
 	}
 
+	bool CleanUp() {
+		App->textures->Unload(slingshotTexture);
+
+		delete pBody;
+		pBody = nullptr;
+
+		delete pBody2;
+		pBody2 = nullptr;
+
+		return true;
+	}
+
 private:
+
 	int pLeft[6] = {
 		66, 360,
 		66, 345,
 		86, 370 };
+
 	int pRight[6] = {
 		152, 370,
 		172, 345,
@@ -116,5 +128,5 @@ private:
 
 	SlingPlace place;
 
-	SDL_Texture* texture;
+	SDL_Texture* slingshotTexture;
 };

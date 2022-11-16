@@ -38,12 +38,7 @@ public:
 		}
 	}
 
-	bool PreUpdate() {
-		
-	}
-
 	bool Update() {
-
 		return true;
 	}
 
@@ -66,6 +61,13 @@ public:
 				break;
 			}
 		}
+	}
+
+	bool CleanUp() {
+		delete pBody;
+		pBody = nullptr;
+
+		return true;
 	}
 
 
