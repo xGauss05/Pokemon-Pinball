@@ -22,7 +22,7 @@ public:
 		switch (side)
 		{
 		case LEFT:
-			texture = App->textures->Load("pinball/Textures/flipper_left.png");
+			flipperTexture = App->textures->Load("pinball/Textures/flipper_left.png");
 
 			x = 97;
 			y = 398;
@@ -30,7 +30,7 @@ public:
 			yPin = y - 1;
 			break;
 		case RIGHT:
-			texture = App->textures->Load("pinball/Textures/flipper_right.png");
+			flipperTexture = App->textures->Load("pinball/Textures/flipper_right.png");
 
 			x = 143;
 			y = 398;
@@ -74,7 +74,7 @@ public:
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 16), METERS_TO_PIXELS(pBody->body->GetPosition().y - 6), NULL, 1.0f, pBody->GetRotation());
+		App->renderer->Blit(flipperTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x - 16), METERS_TO_PIXELS(pBody->body->GetPosition().y - 6), NULL, 1.0f, pBody->GetRotation());
 	}
 
 	bool Update() {
@@ -140,7 +140,22 @@ public:
 		App->audio->PlayFx(flipperSfx);
 	}
 
+	bool CleanUp() {
+		App->textures->Unload(flipperTexture);
+
+		delete pin;
+		pin = nullptr;
+
+		delete pBody;
+		pBody = nullptr;
+
+		joint = nullptr;
+
+		return true;
+	}
+
 private:
+
 	int x;
 	int y;
 
@@ -149,9 +164,10 @@ private:
 
 	int flipperSfx;
 	FlipperSide side;
+
 	PhysBody* pBody;
 	PhysBody* pin;
 	b2RevoluteJoint* joint;
 
-	SDL_Texture* texture;
+	SDL_Texture* flipperTexture;
 };

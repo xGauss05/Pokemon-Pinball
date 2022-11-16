@@ -14,7 +14,7 @@ class SDL_Texture;
 class Ball : public Prop {
 public:
 	Ball(PropType type) : Prop(type) {
-		texture = App->textures->Load("pinball/Textures/ball.png");
+		ballTexture = App->textures->Load("pinball/Textures/ball.png");
 		pokeball.PushBack({ 0,0,15,15 });
 		superball.PushBack({ 16,0,15,15 });
 		ultraball.PushBack({ 32,0,15,15 });
@@ -54,7 +54,7 @@ public:
 	}
 
 	void Blit() {
-		App->renderer->Blit(texture,
+		App->renderer->Blit(ballTexture,
 			METERS_TO_PIXELS(pBody->body->GetPosition().x - radius),
 			METERS_TO_PIXELS(pBody->body->GetPosition().y - radius),
 			&(ballAnim->GetCurrentFrame()),
@@ -111,13 +111,13 @@ public:
 			App->scene->switchLayer(2);
 			TeleportTo(afterRelease);
 			pBody->body->ApplyForceToCenter({ -30, 0 }, true);
-
 		}
 
 		if (wailmerSpit) {
 			wailmerSpit = false;
 			pBody->body->ApplyLinearImpulse({ (float32)(-0.55), (float32)(0.55) }, pBody->body->GetPosition(), true);
 		}
+
 		return true;
 	}
 
@@ -210,15 +210,22 @@ public:
 
 	void BlitByLayer(int layer) {
 		int l = App->scene->currentLayer;
-		if (l == layer) {
-			Blit();
-		}
+		if (l == layer) Blit();
 	}
 
 	void TeleportTo(iPoint position) {
-		//pBody->body->SetLinearVelocity(b2Vec2(0, 0));
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0.0f);
 		pBody->body->ApplyForce(b2Vec2(0.1f, 0.0f), pBody->body->GetWorldCenter(), true);
+	}
+
+	bool CleanUp() {
+		App->textures->Unload(ballTexture);
+
+		ballAnim = nullptr;
+
+		delete pBody;
+
+		return true;
 	}
 
 private:
@@ -229,12 +236,14 @@ private:
 
 	// SFX
 	int ballSfx;
+
 	// Ball animations
 	Animation pokeball, superball, ultraball, masterball;
-	Animation* ballAnim = nullptr;;
+	Animation* ballAnim = nullptr;
+
 	// Spawn position
 	iPoint spawn, afterRelease;
 	bool lose, release, wailmerSpit;
 	PhysBody* pBody;
-	SDL_Texture* texture;
+	SDL_Texture* ballTexture;
 };

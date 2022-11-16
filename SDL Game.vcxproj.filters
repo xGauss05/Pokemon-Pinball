@@ -116,16 +116,16 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
-    <ClInclude Include="Trough.h">
+    <ClInclude Include="Slingshot.h">
+      <Filter>Header Files\Modules\Gameplay\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="Wailmer.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
     <ClInclude Include="Sensor.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
-    <ClInclude Include="Slingshot.h">
-      <Filter>Header Files\Modules\Gameplay\Props</Filter>
-    </ClInclude>
-    <ClInclude Include="Wailmer.h">
+    <ClInclude Include="Trough.h">
       <Filter>Header Files\Modules\Gameplay\Props</Filter>
     </ClInclude>
   </ItemGroup>

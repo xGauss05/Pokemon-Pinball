@@ -238,41 +238,45 @@ void ModuleScene::initMapCollisions()
 
 		mapCollisionGeneral0 = App->physics->CreateChain(0, 0, points, 62);
 	}
+
 	{
-		int points[50] = {
-		141, 100,
-		139, 118,
-		150, 120,
-		164, 125,
-		164, 143,
-		142, 181,
-		148, 177,
-		165, 186,
-		156, 217,
-		161, 216,
-		175, 188,
-		193, 197,
-		178, 226,
-		177, 231,
-		197, 194,
-		210, 206,
-		190, 244,
-		197, 239,
-		207, 219,
-		211, 211,
-		210, 180,
-		203, 152,
-		192, 129,
-		175, 112,
-		156, 102
+		int points[56] = {
+			157, 219,
+			176, 185,
+			200, 191,
+			175, 231,
+			176, 231,
+			201, 191,
+			210, 190,
+			211, 209,
+			192, 244,
+			193, 244,
+			212, 209,
+			211, 182,
+			205, 159,
+			197, 142,
+			186, 125,
+			169, 109,
+			141, 102,
+			138, 108,
+			138, 117,
+			151, 120,
+			167, 130,
+			167, 145,
+			142, 176,
+			142, 182,
+			148, 176,
+			164, 184,
+			163, 197,
+			155, 218
 		};
 
-		mapCollisionLake0 = App->physics->CreateChain(0, 0, points, 50);
+		mapCollisionLake0 = App->physics->CreateChain(0, 0, points, 56);
 	}
+
 	{
-		int points[12] = {
-		196, 344,
-		191, 344,
+		int points[10] = {
+		196, 342,
 		191, 373,
 		160, 392,
 		163, 398,
@@ -280,49 +284,45 @@ void ModuleScene::initMapCollisions()
 		};
 
 
-		mapCollisionRight0 = App->physics->CreateChain(0, 0, points, 12);
+		mapCollisionRight0 = App->physics->CreateChain(0, 0, points, 10);
 
 	}
+
 	{
-		int points[12] = {
-		44, 344,
-		49, 344,
+		int points[10] = {
+		44, 342,
 		49, 373,
 		80, 392,
 		77, 398,
 		44, 378
 		};
 
-		mapCollisionLeft0 = App->physics->CreateChain(0, 0, points, 12);
+		mapCollisionLeft0 = App->physics->CreateChain(0, 0, points, 10);
 
 	}
+
 	{
-		int points[44] = {
-		36, 233,
-		25, 209,
-		29, 174,
-		40, 147,
-		58, 124,
-		80, 107,
-		80, 130,
-		72, 136,
-		69, 147,
-		95, 193,
-		95, 197,
-		86, 201,
+		int points[34] = {
+		52, 222,
+		64, 215,
+		52, 189,
 		64, 182,
-		52, 188,
-		63, 214,
-		54, 221,
-		55, 227,
-		49, 217,
-		43, 201,
-		27, 210,
-		42, 243,
-		36, 238
+		87, 202,
+		96, 197,
+		81, 175,
+		72, 156,
+		72, 139,
+		80, 130,
+		80, 107,
+		66, 116,
+		52, 131,
+		40, 145,
+		33, 164,
+		36, 187,
+		42, 201
 		};
 
-		mapCollisionMarket0 = App->physics->CreateChain(0, 0, points, 44);
+		mapCollisionMarket0 = App->physics->CreateChain(0, 0, points, 34);
 
 	}
 
@@ -350,8 +350,21 @@ void ModuleScene::initMapCollisions()
 
 	}
 
+	{
+		int points[8] = {
+		41, 244,
+		40, 244,
+		28, 221,
+		29, 221
+		};
+
+		mapCollisionMarketRail0 = App->physics->CreateChain(0, 0, points, 8);
+
+	}
+
 	mapCollisionLake0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionMarket0->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionMarketRail0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionLeft0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionRight0->body->SetType(b2BodyType::b2_staticBody);
 	mapCollisionGeneral0->body->SetType(b2BodyType::b2_staticBody);
@@ -360,6 +373,7 @@ void ModuleScene::initMapCollisions()
 
 	mapCollisionsLayer0.add(mapCollisionLake0);
 	mapCollisionsLayer0.add(mapCollisionMarket0);
+	mapCollisionsLayer0.add(mapCollisionMarketRail0);
 	mapCollisionsLayer0.add(mapCollisionLeft0);
 	mapCollisionsLayer0.add(mapCollisionRight0);
 	mapCollisionsLayer0.add(mapCollisionGeneral0);
@@ -367,59 +381,119 @@ void ModuleScene::initMapCollisions()
 	mapCollisionsLayer0.add(mapCollisionTopRectB0);
 
 	{
-		int points[46] = {
-	48, 255,
-	17, 195,
-	10, 155,
-	14, 111,
-	28, 79,
-	56, 53,
-	88, 44,
-	126, 49,
-	145, 60,
-	158, 76,
-	165, 98,
-	165, 150,
-	146, 150,
-	146, 96,
-	136, 76,
-	116, 66,
-	87, 64,
-	64, 71,
-	42, 89,
-	31, 115,
-	28, 153,
-	36, 188,
-	65, 245
+		int points[52] = {
+		41, 244,
+		40, 244,
+		22, 209,
+		10, 164,
+		10, 120,
+		23, 83,
+		43, 62,
+		71, 46,
+		98, 43,
+		123, 45,
+		139, 53,
+		159, 72,
+		166, 97,
+		166, 136,
+		165, 136,
+		165, 97,
+		158, 72,
+		139, 54,
+		123, 46,
+		98, 44,
+		71, 47,
+		43, 63,
+		24, 83,
+		11, 120,
+		11, 164,
+		23, 209
 		};
 
-		mapCollisionLeftRail1 = App->physics->CreateChain(0, 0, points, 46);
+		mapCollisionLeftRailA1 = App->physics->CreateChain(0, 0, points, 52);
+
+	}
+
+	{
+		int points[48] = {
+		57, 226,
+		42, 199,
+		35, 173,
+		32, 144,
+		33, 118,
+		43, 90,
+		66, 71,
+		83, 64,
+		119, 65,
+		134, 76,
+		146, 97,
+		146, 141,
+		147, 141,
+		147, 97,
+		135, 76,
+		119, 64,
+		83, 63,
+		66, 70,
+		42, 90,
+		32, 118,
+		31, 144,
+		34, 173,
+		41, 199,
+		56, 226
+		};
+
+		mapCollisionLeftRailB1 = App->physics->CreateChain(0, 0, points, 48);
 
 	}
 
 	{
 		int points[20] = {
-	164, 250,
-	190, 206,
-	226, 170,
-	232, 155,
-	232, 60,
-	249, 60,
-	249, 161,
-	243, 179,
-	205, 217,
-	184, 264
+		177, 230,
+		189, 207,
+		228, 163,
+		231, 153,
+		231, 60,
+		230, 60,
+		230, 153,
+		227, 163,
+		188, 207,
+		176, 230
 		};
 
-		mapCollisionRightRail1 = App->physics->CreateChain(0, 0, points, 20);
+		mapCollisionRightRailA1 = App->physics->CreateChain(0, 0, points, 20);
 
 	}
 
-	mapCollisionLeftRail1->body->SetType(b2BodyType::b2_staticBody);
-	mapCollisionRightRail1->body->SetType(b2BodyType::b2_staticBody);
+	{
+		int points[20] = {
+		189, 244,
+		205, 215,
+		241, 178,
+		249, 164,
+		249, 55,
+		250, 55,
+		250, 164,
+		242, 178,
+		206, 215,
+		190, 244
+		};
 
-	mapCollisionsLayer1.add(mapCollisionLeftRail1);
-	mapCollisionsLayer1.add(mapCollisionRightRail1);
+		mapCollisionRightRailB1 = App->physics->CreateChain(0, 0, points, 20);
+
+	}
+
+
+	mapCollisionLeftRailA1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionLeftRailB1->body->SetType(b2BodyType::b2_staticBody);
+
+	mapCollisionRightRailA1->body->SetType(b2BodyType::b2_staticBody);
+	mapCollisionRightRailB1->body->SetType(b2BodyType::b2_staticBody);
+
+	mapCollisionsLayer1.add(mapCollisionLeftRailA1);
+	mapCollisionsLayer1.add(mapCollisionLeftRailB1);
+
+	mapCollisionsLayer1.add(mapCollisionRightRailA1);
+	mapCollisionsLayer1.add(mapCollisionRightRailB1);
 
 	{
 		int points[8] = {
@@ -717,6 +791,9 @@ bool ModuleScene::Start()
 	currentScore = 0;
 	initTextures();
 	initMapCollisions();
+	switchLayer(0);
+	switchLayer(1);
+	switchLayer(2);
 
 	App->pManager->CreateProp(PropType::FLIPPER_LEFT);
 	App->pManager->CreateProp(PropType::FLIPPER_RIGHT);
@@ -798,6 +875,18 @@ update_status ModuleScene::PostUpdate()
 bool ModuleScene::CleanUp() {
 
 	LOG("Unloading Intro scene");
+	App->textures->Unload(mapLayer0);
+	App->textures->Unload(mapLayer1);
+	App->textures->Unload(mapLayer2);
+	App->textures->Unload(mapLayer3);
+	App->textures->Unload(wailmerTexture);
+	App->textures->Unload(seedotTexture);
+	App->textures->Unload(pelipperTexture);
+	App->textures->Unload(zigzagoonTexture);
+	App->textures->Unload(minunTexture);
+	App->textures->Unload(plusleTexture);
+	App->textures->Unload(lightningTexture);
+	App->textures->Unload(pikachuTexture);
 
 	return true;
 }

@@ -54,11 +54,15 @@ public:
 		return true;
 	}
 
+	virtual void PlaySFX() {
+
+	}
+
 	virtual bool Update()
 	{
 		return true;
 	}
-
+	
 	virtual bool PostUpdate()
 	{
 		return true;

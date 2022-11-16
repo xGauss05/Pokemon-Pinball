@@ -44,13 +44,11 @@ public:
 		pBody->listener = (Module*)App->pManager;
 		initAnim();
 		bumperSfx = App->audio->LoadFx("pinball/Sounds/shroomish_hit.wav");
-		
-
 	}
 
 	void initAnim()
 	{
-		texture = App->textures->Load("pinball/Textures/shroomish_sprite.png");
+		shroomishTexture = App->textures->Load("pinball/Textures/shroomish_sprite.png");
 
 		idleAnim.PushBack({ 0, 0, 27, 32 });
 		idleAnim.PushBack({ 27, 0, 27, 32 });
@@ -65,18 +63,16 @@ public:
 	}
 
 	void Blit() {
-
-
 		if (currentAnim == &idleAnim)
 		{
 			idleAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
+			App->renderer->Blit(shroomishTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
 		}
 
 		if (currentAnim == &hitAnim)
 		{
 			hitAnim.Update();
-			App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
+			App->renderer->Blit(shroomishTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - radius*3, METERS_TO_PIXELS(pBody->body->GetPosition().y) - radius*4, &currentAnim->GetCurrentFrame());
 		}
 
 	}
@@ -103,14 +99,23 @@ public:
 	}
 
 	bool Update() {
-		if (currentAnim == &hitAnim && currentAnim->HasFinished()) {
-			currentAnim = &idleAnim;
-		}
+		if (currentAnim == &hitAnim && currentAnim->HasFinished()) currentAnim = &idleAnim;
+		
 		return true;
 	}
 
 	bool PostUpdate() {
 		Blit();
+		return true;
+	}
+
+	bool CleanUp() {
+		App->textures->Unload(shroomishTexture);
+
+		currentAnim = nullptr;
+
+		delete pBody;
+
 		return true;
 	}
 
@@ -124,7 +129,7 @@ private:
 
 	int bumperSfx;
 
-	SDL_Texture* texture;
+	SDL_Texture* shroomishTexture;
 
 	Animation* currentAnim;
 	Animation idleAnim;

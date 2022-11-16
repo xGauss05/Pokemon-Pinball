@@ -17,7 +17,6 @@ enum ButtonType {
 class Button :public Prop {
 public:
 	Button(PropType type, ButtonType btnType) : Prop(type) {
-		// noTexture needed
 		this->btnType = btnType;
 		buttonSfx = App->audio->LoadFx("pinball/Sounds/button_hit.wav");
 		switch (btnType) {
@@ -51,7 +50,6 @@ public:
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0.0f);
 		pBody->body->SetType(b2BodyType::b2_staticBody);
 		pBody->prop = this;
-
 	}
 
 	void PlaySFX() {
@@ -88,6 +86,12 @@ public:
 				}
 			}
 		}
+	}
+	
+	bool CleanUp() {
+		delete pBody;
+
+		return true;
 	}
 
 private:

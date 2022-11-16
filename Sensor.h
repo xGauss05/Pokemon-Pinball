@@ -249,6 +249,22 @@ public:
 		}
 	}
 
+	bool CleanUp() {
+		delete pBody1;
+		pBody1 = nullptr;
+
+		delete pBody2;
+		pBody2 = nullptr;
+
+		delete pBody3;
+		pBody3 = nullptr;
+
+		delete pBody4;
+		pBody4 = nullptr;
+
+		return true;
+	}
+
 private:
 
 	SensorSide side;

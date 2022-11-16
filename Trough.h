@@ -28,7 +28,6 @@ public:
 	}
 
 	void PlaySFX() {
-
 		App->audio->PlayFx(loseSfx);
 	}
 
@@ -53,6 +52,13 @@ public:
 			}
 		}
 	}
+	
+	bool CleanUp() {
+		delete pBody;
+		pBody = nullptr;
+
+		return true;
+	}
 
 private:
 	int x;
@@ -60,6 +66,7 @@ private:
 
 	// SFX
 	int loseSfx;
+
 	bool switchLayer = false;
 	PhysBody* pBody;
 };

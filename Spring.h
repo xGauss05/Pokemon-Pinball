@@ -21,7 +21,6 @@ public:
 
 		joint = (b2PrismaticJoint*)App->physics->CreatePrismaticJoint(pBody, path, x, y, b2Vec2(0.0f, -1.0f));
 
-
 		joint->SetLimits(PIXEL_TO_METERS(-pathLength), PIXEL_TO_METERS(pathLength));
 		joint->EnableLimit(true);
 
@@ -42,7 +41,7 @@ public:
 
 	void initAnim()
 	{
-		texture = App->textures->Load("pinball/Textures/spoink_sprite.png");
+		spoinkTexture = App->textures->Load("pinball/Textures/spoink_sprite.png");
 
 		idleAnim.PushBack({ 0, 0, 20, 40 });
 		idleAnim.PushBack({ 20, 0, 20, 40 });
@@ -82,11 +81,11 @@ public:
 
 			if (currentAnim == &idleAnim)
 			{
-				App->renderer->Blit(texture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11, &currentAnim->GetCurrentFrame());
+				App->renderer->Blit(spoinkTexture, METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9, METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11, &currentAnim->GetCurrentFrame());
 			}
 			if (currentAnim == &compressionAnim)
 			{
-				App->renderer->Blit(texture,
+				App->renderer->Blit(spoinkTexture,
 					METERS_TO_PIXELS(pBody->body->GetPosition().x) - 9,
 					METERS_TO_PIXELS(pBody->body->GetPosition().y) - 11 - 4,
 					&currentAnim->GetCurrentFrame());
@@ -104,6 +103,22 @@ public:
 		return true;
 	}
 
+	bool CleanUp() {
+		App->textures->Unload(spoinkTexture);
+
+		delete pBody;
+		pBody = nullptr;
+
+		delete path;
+		path = nullptr;
+
+		joint = nullptr;
+
+		currentAnim = nullptr;
+
+		return true;
+	}
+
 private:
 	int x = 243;
 	int y = 395;
@@ -116,7 +131,7 @@ private:
 
 	b2PrismaticJoint* joint;
 
-	SDL_Texture* texture;
+	SDL_Texture* spoinkTexture;
 	
 	Animation* currentAnim;
 	Animation idleAnim;
