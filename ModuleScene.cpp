@@ -56,23 +56,22 @@ void ModuleScene::initTextures()
 
 	// TODO Screen Animation
 
-	// TODO Hole Animation
-
 	// TODO P Animation
-
-	// H-O-L-E Letters
-	holeLight1;
-	holeLight2;
-	holeLight3;
-	holeLight4;
 
 	// Saver
 	saverLatios;
 	*/
+
+	// H-O-L-E Letters
+	holeLight1 = { 28, 343, { 152, 32, 10, 10 }, false };
+	holeLight2 = { 52, 343, { 168, 32, 10, 10 }, false };
+	holeLight3 = { 178, 343, { 184, 32, 10, 10 }, false };
+	holeLight4 = { 202, 343, { 200, 32, 10, 10 }, false };
+
 	// Dots
-	dotsLight1 = { 84, 105, { 216, 32, 8, 8 }, false };;
-	dotsLight2 = { 105, 105, { 216, 32, 8, 8 }, false };;
-	dotsLight3 = { 126, 105, { 216, 32, 8, 8 }, false };;
+	dotsLight1 = { 84, 105, { 216, 32, 8, 8 }, false };
+	dotsLight2 = { 105, 105, { 216, 32, 8, 8 }, false };
+	dotsLight3 = { 126, 105, { 216, 32, 8, 8 }, false };
 
 	// Lives
 	livesLight1 = { 98, 338, { 232, 32, 12, 12 }, true };
@@ -94,6 +93,10 @@ void ModuleScene::initTextures()
 	groundAssets.add(&dotsLight1);
 	groundAssets.add(&dotsLight2);
 	groundAssets.add(&dotsLight3);
+	groundAssets.add(&holeLight1);
+	groundAssets.add(&holeLight2);
+	groundAssets.add(&holeLight3);
+	groundAssets.add(&holeLight4);
 
 	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
 	wailmerIdle.PushBack({ 0,0,40,29 });
@@ -812,7 +815,10 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_EVO_TOP);
 	App->pManager->CreateProp(PropType::SENSOR_GET_BOT);
 	App->pManager->CreateProp(PropType::SENSOR_GET_TOP);
-	App->pManager->CreateProp(PropType::SENSOR_HOLE);
+	App->pManager->CreateProp(PropType::SENSOR_H);
+	App->pManager->CreateProp(PropType::SENSOR_O);
+	App->pManager->CreateProp(PropType::SENSOR_L);
+	App->pManager->CreateProp(PropType::SENSOR_E);
 	App->pManager->CreateProp(PropType::SENSOR_UP_LEFT);
 	App->pManager->CreateProp(PropType::SENSOR_UP_MID);
 	App->pManager->CreateProp(PropType::SENSOR_UP_RIGHT);
@@ -860,6 +866,60 @@ update_status ModuleScene::Update()
 		dotsLight1.isActive = dotsLight2.isActive = dotsLight3.isActive = false;
 		if (ballMultiplier < 4) {
 			ballMultiplier++;
+		}
+	}
+
+	if (holeLight1.isActive && holeLight2.isActive && holeLight3.isActive && holeLight4.isActive && !hasGivenLife) {
+		if (lives < 3) {
+			lives++;
+			switch (lives) {
+			case 1:
+				livesLight1.isActive = true;
+				break;
+			case 2:
+				livesLight2.isActive = true;
+				break;
+			case 3:
+				livesLight3.isActive = true;
+				break;
+			}
+		}
+		hasGivenLife = true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		if (holeLight1.isActive || holeLight2.isActive || holeLight3.isActive || holeLight4.isActive) {
+			if (!hasGivenLife) {
+				bool auxiliar1 = holeLight4.isActive;
+				bool auxiliar2 = holeLight3.isActive;
+				holeLight3.isActive = auxiliar1;
+
+				auxiliar1 = holeLight2.isActive;
+				holeLight2.isActive = auxiliar2;
+
+				auxiliar2 = holeLight1.isActive;
+				holeLight1.isActive = auxiliar1;
+
+				holeLight4.isActive = auxiliar2;
+			}
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		if (holeLight1.isActive || holeLight2.isActive || holeLight3.isActive || holeLight4.isActive) {
+			if (!hasGivenLife) {
+				bool auxiliar1 = holeLight1.isActive;
+				bool auxiliar2 = holeLight2.isActive;
+				holeLight2.isActive = auxiliar1;
+
+				auxiliar1 = holeLight3.isActive;
+				holeLight3.isActive = auxiliar2;
+
+				auxiliar2 = holeLight4.isActive;
+				holeLight4.isActive = auxiliar1;
+
+				holeLight1.isActive = auxiliar2;
+			}
 		}
 	}
 

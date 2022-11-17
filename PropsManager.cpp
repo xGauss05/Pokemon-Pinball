@@ -115,8 +115,17 @@ Prop* PropsManager::CreateProp(PropType type)
 	case PropType::SENSOR_GET_TOP:
 		prop = (Prop*)new Sensor(type, SensorSide::GET_TOP);
 		break;
-	case PropType::SENSOR_HOLE:
-		prop = (Prop*)new Sensor(type, SensorSide::HOLE);
+	case PropType::SENSOR_H:
+		prop = (Prop*)new Sensor(type, SensorSide::H);
+		break;
+	case PropType::SENSOR_O:
+		prop = (Prop*)new Sensor(type, SensorSide::O);
+		break;
+	case PropType::SENSOR_L:
+		prop = (Prop*)new Sensor(type, SensorSide::L);
+		break;
+	case PropType::SENSOR_E:
+		prop = (Prop*)new Sensor(type, SensorSide::E);
 		break;
 	case PropType::SENSOR_UP_LEFT:
 		prop = (Prop*)new Sensor(type, SensorSide::UP_LEFT);

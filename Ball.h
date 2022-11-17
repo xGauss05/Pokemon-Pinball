@@ -182,6 +182,18 @@ public:
 			case PropType::SENSOR_UP_RIGHT:
 				score = UP_SCORE;
 				break;
+			case PropType::SENSOR_H:
+				score = HOLE_SCORE;
+				break;
+			case PropType::SENSOR_O:
+				score = HOLE_SCORE;
+				break;
+			case PropType::SENSOR_L:
+				score = HOLE_SCORE;
+				break;
+			case PropType::SENSOR_E:
+				score = HOLE_SCORE;
+				break;
 			case PropType::WAILMER:
 				score = WAILMER_SCORE;
 				App->scene->wailmerTrigger = true;

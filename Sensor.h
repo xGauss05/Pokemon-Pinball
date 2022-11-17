@@ -14,7 +14,10 @@ enum SensorSide {
 	EVO_BOT,
 	GET_TOP,
 	GET_BOT,
-	HOLE,
+	H,
+	O,
+	L,
+	E,
 	UP_LEFT,
 	UP_MID,
 	UP_RIGHT,
@@ -35,92 +38,60 @@ public:
 		{
 		case EVO_TOP:
 			pBody1 = App->physics->CreateRectangleSensor(43, 131, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case EVO_BOT:
 			pBody1 = App->physics->CreateRectangleSensor(26, 247, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case GET_TOP:
 			pBody1 = App->physics->CreateRectangleSensor(202, 131, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case GET_BOT:
 			pBody1 = App->physics->CreateRectangleSensor(210, 247, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
-		case HOLE:
+		case H:
 			pBody1 = App->physics->CreateRectangleSensor(32, 359, 5, 5);
-			pBody2 = App->physics->CreateRectangleSensor(56, 359, 5, 5);
-			pBody3 = App->physics->CreateRectangleSensor(182, 359, 5, 5);
-			pBody4 = App->physics->CreateRectangleSensor(206, 359, 5, 5);
-			pBody1->prop = pBody2->prop = pBody3->prop = pBody4->prop = this;
-			pBody1->listener = pBody2->listener = pBody3->listener = pBody4->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
-			pBody2->body->SetType(b2BodyType::b2_staticBody);
-			pBody3->body->SetType(b2BodyType::b2_staticBody);
-			pBody4->body->SetType(b2BodyType::b2_staticBody);
+			break;
+		case O:
+			pBody1 = App->physics->CreateRectangleSensor(56, 359, 5, 5);
+			break;
+		case L:
+			pBody1 = App->physics->CreateRectangleSensor(182, 359, 5, 5);
+			break;
+		case E:
+			pBody1 = App->physics->CreateRectangleSensor(206, 359, 5, 5);
 			break;
 		case UP_LEFT:
 			pBody1 = App->physics->CreateRectangleSensor(87, 118, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case UP_MID:
 			pBody1 = App->physics->CreateRectangleSensor(108, 118, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case UP_RIGHT:
 			pBody1 = App->physics->CreateRectangleSensor(129, 118, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case COINS:
 			pBody1 = App->physics->CreateRectangleSensor(44, 229, 1, 1);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case MOUNTAIN:
 			pBody1 = App->physics->CreateRectangleSensor(155, 120, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case SPRING_IN:
 			pBody1 = App->physics->CreateRectangleSensor(242, 82, 8, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case TOP_RAIL:
 			pBody1 = App->physics->CreateRectangleSensor(105, 47, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		case LAKE_RAIL:
 			pBody1 = App->physics->CreateRectangleSensor(186, 225, 5, 5);
-			pBody1->prop = this;
-			pBody1->listener = (Module*)App->pManager;
-			pBody1->body->SetType(b2BodyType::b2_staticBody);
 			break;
 		default:
+			pBody1 = App->physics->CreateRectangleSensor(0, 0, 5, 5);
 			break;
 		}
 
+		pBody1->prop = this;
+		pBody1->listener = (Module*)App->pManager;
+		pBody1->body->SetType(b2BodyType::b2_staticBody);
 	}
 
 	bool Update() {
@@ -243,6 +214,26 @@ public:
 					App->scene->getBotFlag = false;
 				}
 				break;
+			case H:
+				if (App->scene->holeLight1.isActive != true) {
+					App->scene->holeLight1.isActive = true;
+				}
+				break;
+			case O:
+				if (App->scene->holeLight2.isActive != true) {
+					App->scene->holeLight2.isActive = true;
+				}
+				break;
+			case L:
+				if (App->scene->holeLight3.isActive != true) {
+					App->scene->holeLight3.isActive = true;
+				}
+				break;
+			case E:
+				if (App->scene->holeLight4.isActive != true) {
+					App->scene->holeLight4.isActive = true;
+				}
+				break;
 			default:
 				break;
 			}
@@ -253,15 +244,6 @@ public:
 		delete pBody1;
 		pBody1 = nullptr;
 
-		delete pBody2;
-		pBody2 = nullptr;
-
-		delete pBody3;
-		pBody3 = nullptr;
-
-		delete pBody4;
-		pBody4 = nullptr;
-
 		return true;
 	}
 
@@ -270,9 +252,6 @@ private:
 	SensorSide side;
 
 	PhysBody* pBody1 = nullptr;
-	PhysBody* pBody2 = nullptr;
-	PhysBody* pBody3 = nullptr;
-	PhysBody* pBody4 = nullptr;
 
 	int blingSfx;
 	int switchLayer = -1;
