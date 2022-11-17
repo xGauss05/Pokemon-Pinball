@@ -948,5 +948,47 @@ bool ModuleScene::CleanUp() {
 	App->textures->Unload(lightningTexture);
 	App->textures->Unload(pikachuTexture);
 
+	wailmerAnim = nullptr;
+	basketAnim = nullptr;
+	pelipperAnim = nullptr;
+	zigzagoonAnim = nullptr;
+	plusleAnim = nullptr;
+	minunAnim = nullptr;
+	lightPlusleAnim = nullptr;
+	lightMinunAnim = nullptr;
+
+	mapCollisionsLayer0.clear();
+	mapCollisionsLayer1.clear();
+	mapCollisionsLayer2.clear();
+
+	delete mapCollisionLake0;
+	mapCollisionLake0 = nullptr;
+	delete mapCollisionMarket0;
+	mapCollisionMarket0 = nullptr;
+	delete mapCollisionMarketRail0;
+	mapCollisionMarketRail0 = nullptr;
+	delete mapCollisionLeft0;
+	mapCollisionLeft0 = nullptr;
+	delete mapCollisionRight0;
+	mapCollisionRight0 = nullptr;
+	delete mapCollisionGeneral0;
+	mapCollisionGeneral0 = nullptr;
+	delete mapCollisionTopRectA0;
+	mapCollisionTopRectA0 = nullptr;
+	delete mapCollisionTopRectB0;
+	mapCollisionTopRectB0 = nullptr;
+	delete mapCollisionLeftRailA1;
+	mapCollisionLeftRailA1 = nullptr;
+	delete mapCollisionLeftRailB1;
+	mapCollisionLeftRailB1 = nullptr;
+	delete mapCollisionRightRailA1;
+	mapCollisionRightRailA1 = nullptr;
+	delete mapCollisionRightRailB1;
+	mapCollisionRightRailB1 = nullptr;
+	delete mapCollisionRigthRail2;
+	mapCollisionRigthRail2 = nullptr;
+	delete mapCollisionTopRail2;
+	mapCollisionTopRail2 = nullptr;
+
 	return true;
 }
