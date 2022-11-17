@@ -64,14 +64,7 @@ public:
 	GroundAsset redArrow2;
 	GroundAsset redArrow3;
 	/*
-	GroundAsset yellowArrow1;
-	GroundAsset yellowArrow2;
-	GroundAsset yellowArrow3;
-	GroundAsset yellowArrow4;
-
 	// TODO Water Animation
-
-	// TODO Screen Animation
 
 	// TODO P Animation
 
@@ -124,6 +117,20 @@ public:
 	PhysBody* mapCollisionTopRail2;
 
 	p2List<PhysBody*> mapCollisionsLayer2;
+
+	// Animations (Yellow arrows)
+	Animation martArrow;
+	Animation* martArrowAnim = nullptr;
+	Animation bumperArrow;
+	Animation* bumperArrowAnim = nullptr;
+	Animation catchArrow;
+	Animation* catchArrowAnim = nullptr;
+	Animation hatchArrow;
+	Animation* hatchArrowAnim = nullptr;
+
+	// Animations (Screen)
+	Animation screen;
+	Animation* screenAnim = nullptr;
 
 	// Animations (Wailmer)
 	SDL_Texture* wailmerTexture;

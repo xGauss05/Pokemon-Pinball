@@ -47,14 +47,7 @@ void ModuleScene::initTextures()
 	redArrow3 = { 173, 289, {128, 0, 16, 24}, false };
 
 	/*
-	yellowArrow1;
-	yellowArrow2;
-	yellowArrow3;
-	yellowArrow4;
-
 	// TODO Water Animation
-
-	// TODO Screen Animation
 
 	// TODO P Animation
 
@@ -97,6 +90,52 @@ void ModuleScene::initTextures()
 	groundAssets.add(&holeLight2);
 	groundAssets.add(&holeLight3);
 	groundAssets.add(&holeLight4);
+
+	martArrow.PushBack({ 0,24,26,31 });
+	martArrow.PushBack({ 0,0,0,0 });
+	martArrow.speed = 0.05f;
+	martArrow.loop = true;
+	martArrowAnim = &martArrow;
+
+	bumperArrow.PushBack({ 32,24,31,21 });
+	bumperArrow.PushBack({ 0,0,0,0 });
+	bumperArrow.speed = 0.05f;
+	bumperArrow.loop = true;
+	bumperArrowAnim = &bumperArrow;
+
+	catchArrow.PushBack({ 65,24,29,31 });
+	catchArrow.PushBack({ 0,0,0,0 });
+	catchArrow.speed = 0.05f;
+	catchArrow.loop = true;
+	catchArrowAnim = &catchArrow;
+
+	hatchArrow.PushBack({ 97,24,29,31 });
+	hatchArrow.PushBack({ 0,0,0,0 });
+	hatchArrow.speed = 0.05f;
+	hatchArrow.loop = true;
+	hatchArrowAnim = &hatchArrow;
+
+	screen.PushBack({ 0,96,48,40 });
+	screen.PushBack({ 56,96,48,40 });
+	screen.PushBack({ 112,96,48,40 });
+	screen.PushBack({ 56,96,48,40 });
+	screen.PushBack({ 0,96,48,40 });
+	screen.PushBack({ 0,136,48,40 });
+	screen.PushBack({ 56,136,48,40 });
+	screen.PushBack({ 0,136,48,40 });
+	screen.PushBack({ 0,176,48,40 });
+	screen.PushBack({ 56,177,48,40 });
+	screen.PushBack({ 0,216,48,40 });
+	screen.PushBack({ 56,216,48,40 });
+	screen.PushBack({ 0,216,48,40 });
+	screen.PushBack({ 56,177,48,40 });
+	screen.PushBack({ 0,176,48,40 });
+	screen.PushBack({ 0,136,48,40 });
+	screen.PushBack({ 56,136,48,40 });
+	screen.PushBack({ 0,136,48,40 });
+	screen.loop = true;
+	screen.speed = 0.1f;
+	screenAnim = &screen;
 
 	wailmerTexture = App->textures->Load("pinball/Textures/wailmer_sprite.png");
 	wailmerIdle.PushBack({ 0,0,40,29 });
@@ -607,6 +646,18 @@ void ModuleScene::drawAnimations() {
 	pikachuAnim->Update();
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
+	screenAnim->Update();
+	martArrowAnim->Update();
+	bumperArrowAnim->Update();
+	catchArrowAnim->Update();
+	hatchArrowAnim->Update();
+
+	App->renderer->Blit(assetsTexture, 73, 214, &(martArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 104, 186, &(bumperArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 144, 222, &(catchArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 155, 249, &(hatchArrowAnim->GetCurrentFrame()));
+
+	App->renderer->Blit(assetsTexture, 22, 115, &(screenAnim->GetCurrentFrame()));
 
 	App->renderer->Blit(wailmerTexture, 168, 170, &(wailmerAnim->GetCurrentFrame()));
 
@@ -948,6 +999,7 @@ bool ModuleScene::CleanUp() {
 	App->textures->Unload(lightningTexture);
 	App->textures->Unload(pikachuTexture);
 
+	screenAnim = nullptr;
 	wailmerAnim = nullptr;
 	basketAnim = nullptr;
 	pelipperAnim = nullptr;
@@ -956,6 +1008,10 @@ bool ModuleScene::CleanUp() {
 	minunAnim = nullptr;
 	lightPlusleAnim = nullptr;
 	lightMinunAnim = nullptr;
+	martArrowAnim = nullptr;
+	bumperArrowAnim = nullptr;
+	catchArrowAnim = nullptr;
+	hatchArrowAnim = nullptr;
 
 	mapCollisionsLayer0.clear();
 	mapCollisionsLayer1.clear();
