@@ -69,27 +69,21 @@ public:
 	GroundAsset yellowArrow3;
 	GroundAsset yellowArrow4;
 
-	// Bumpers
-	GroundAsset bumperLeft;
-	GroundAsset bumperRight;
-
 	// TODO Water Animation
 
 	// TODO Screen Animation
 
-	// TODO Hole Animation
-
 	// TODO P Animation
+
+	// Saver
+	GroundAsset saverLatios;
+	*/
 
 	// H-O-L-E Letters
 	GroundAsset holeLight1;
 	GroundAsset holeLight2;
 	GroundAsset holeLight3;
 	GroundAsset holeLight4;
-
-	// Saver
-	GroundAsset saverLatios;
-	*/
 
 	// Dots
 	GroundAsset dotsLight1;
@@ -206,6 +200,7 @@ public:
 	bool upLeftFlag = false;
 	bool upMidFlag = false;
 	bool upRightFlag = false;
+	bool hasGivenLife = false;
 
 	// Font
 	int font;

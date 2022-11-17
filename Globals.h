@@ -44,3 +44,4 @@ enum update_status
 #define EVO_SCORE 2000;
 #define GET_SCORE 3000;
 #define UP_SCORE 1000;
+#define HOLE_SCORE 1000;
