@@ -772,6 +772,7 @@ void ModuleScene::ResetTable() {
 		currentScore = 0;
 		lives = 3;
 		livesLight1.isActive = livesLight2.isActive = livesLight3.isActive = true;
+		holeLight1.isActive = holeLight2.isActive = holeLight3.isActive = holeLight4.isActive = false;
 	}
 	evoMultiplier = getMultiplier = 0;
 	greenArrow1.isActive = greenArrow2.isActive = greenArrow3.isActive = false;
