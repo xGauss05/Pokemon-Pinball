@@ -589,6 +589,16 @@ void ModuleScene::drawScene()
 		}
 	}
 
+	martArrowAnim->Update();
+	bumperArrowAnim->Update();
+	catchArrowAnim->Update();
+	hatchArrowAnim->Update();
+
+	App->renderer->Blit(assetsTexture, 73, 214, &(martArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 104, 186, &(bumperArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 144, 222, &(catchArrowAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 155, 249, &(hatchArrowAnim->GetCurrentFrame()));
+
 	// TODO Blit Pokeball here if this layer
 	App->pManager->BlitPropsByLayer(0);
 
@@ -647,15 +657,7 @@ void ModuleScene::drawAnimations() {
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
 	screenAnim->Update();
-	martArrowAnim->Update();
-	bumperArrowAnim->Update();
-	catchArrowAnim->Update();
-	hatchArrowAnim->Update();
 
-	App->renderer->Blit(assetsTexture, 73, 214, &(martArrowAnim->GetCurrentFrame()));
-	App->renderer->Blit(assetsTexture, 104, 186, &(bumperArrowAnim->GetCurrentFrame()));
-	App->renderer->Blit(assetsTexture, 144, 222, &(catchArrowAnim->GetCurrentFrame()));
-	App->renderer->Blit(assetsTexture, 155, 249, &(hatchArrowAnim->GetCurrentFrame()));
 
 	App->renderer->Blit(assetsTexture, 22, 115, &(screenAnim->GetCurrentFrame()));
 
