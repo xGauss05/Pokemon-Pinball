@@ -10,8 +10,8 @@ enum class Screen
 	HOME,
 	TIME,
 	GRAVITY,
-	COLLIDERS,
 	SPRITES,
+	COLLIDERS,
 	VARIABLES,
 	NONE
 };

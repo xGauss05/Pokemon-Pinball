@@ -34,10 +34,10 @@ Application::Application()
 	AddModule(input);
 	AddModule(textures);
 	AddModule(audio);
-	AddModule(debug);
-	AddModule(fonts);
 	AddModule(physics);
 	AddModule(pManager);
+	AddModule(debug);
+	AddModule(fonts);
 
 	// Scenes	
 	AddModule(scene);
