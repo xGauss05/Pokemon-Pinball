@@ -37,7 +37,7 @@ public:
 		switch (sSide)
 		{
 		case EVO_TOP:
-			pBody1 = App->physics->CreateRectangleSensor(43, 131, 5, 5);
+			pBody1 = App->physics->CreateRectangleSensor(39, 131, 10, 5);
 			break;
 		case EVO_BOT:
 			pBody1 = App->physics->CreateRectangleSensor(26, 247, 5, 5);

@@ -773,6 +773,7 @@ void ModuleScene::ResetTable() {
 		lives = 3;
 		livesLight1.isActive = livesLight2.isActive = livesLight3.isActive = true;
 		holeLight1.isActive = holeLight2.isActive = holeLight3.isActive = holeLight4.isActive = false;
+		hasGivenLife = false;
 	}
 	evoMultiplier = getMultiplier = 0;
 	greenArrow1.isActive = greenArrow2.isActive = greenArrow3.isActive = false;
@@ -955,6 +956,17 @@ update_status ModuleScene::Update()
 				holeLight4.isActive = auxiliar2;
 			}
 		}
+
+		if (dotsLight1.isActive || dotsLight2.isActive || dotsLight3.isActive) {
+			bool auxiliar1 = dotsLight3.isActive;
+			bool auxiliar2 = dotsLight2.isActive;
+			dotsLight2.isActive = auxiliar1;
+
+			auxiliar1 = dotsLight1.isActive;
+			dotsLight1.isActive = auxiliar2;
+
+			dotsLight3.isActive = auxiliar1;
+		}
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
@@ -972,6 +984,17 @@ update_status ModuleScene::Update()
 
 				holeLight1.isActive = auxiliar2;
 			}
+		}
+
+		if (dotsLight1.isActive || dotsLight2.isActive || dotsLight3.isActive) {
+			bool auxiliar1 = dotsLight1.isActive;
+			bool auxiliar2 = dotsLight2.isActive;
+			dotsLight2.isActive = auxiliar1;
+
+			auxiliar1 = dotsLight3.isActive;
+			dotsLight3.isActive = auxiliar2;
+
+			dotsLight1.isActive = auxiliar1;
 		}
 	}
 
