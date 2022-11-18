@@ -35,8 +35,8 @@ public:
 		joint->SetMaxMotorForce(force);
 
 		initAnim();
-		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
-		chargeSFX = App->audio->LoadFx("pinball/Sounds/spoink_charge.wav");
+		releaseSfx = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
+		chargeSfx = App->audio->LoadFx("pinball/Sounds/spoink_charge.wav");
 	}
 
 	void initAnim()
@@ -63,7 +63,7 @@ public:
 		compressionAnim.Reset();
 		currentAnim = &compressionAnim;
 
-		App->audio->PlayFx(chargeSFX);
+		App->audio->PlayFx(chargeSfx);
 	}
 
 	void Release()
@@ -71,7 +71,7 @@ public:
 		joint->SetMotorSpeed(-releaseSpeed);
 		currentAnim = &idleAnim;
 
-		App->audio->PlayFx(releaseSFX);
+		App->audio->PlayFx(releaseSfx);
 	}
 
 	void BlitByLayer(int layer) {
@@ -120,6 +120,7 @@ public:
 	}
 
 public:
+
 	int force = 700;
 	b2PrismaticJoint* joint;
 
@@ -129,16 +130,20 @@ private:
 
 	PhysBody* pBody;
 	PhysBody* path;
+
 	int pathLength = 7;
 	float contractionSpeed = 0.3f;
 	float releaseSpeed = 200.0f;
 
-	SDL_Texture* spoinkTexture;
+	// SFX
+	int releaseSfx;
+	int chargeSfx;
 	
-	Animation* currentAnim;
+	// Animations
 	Animation idleAnim;
 	Animation compressionAnim;
+	Animation* currentAnim = nullptr;
 
-	int releaseSFX;
-	int chargeSFX;
+	SDL_Texture* spoinkTexture;
+
 };

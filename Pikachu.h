@@ -159,6 +159,7 @@ public:
 	}
 
 private:
+
 	float32 x;
 	float32 y;
 	float32 w;
@@ -167,17 +168,21 @@ private:
 
 	PhysBody* pBody;
 
+	// SFX
 	int pikachuHitSfx;
 	int pikachuThunderSfx;
+
+	// Pikachu flags
 	bool pikachuSide = false;
 	bool charged = false;
 
-	SDL_Texture* pikachuTexture;
-	SDL_Rect sign;
-
-	Animation* currentAnim;
+	// Animations
 	Animation idleAnim;
 	Animation hitAnim;
 	Animation chargedAnim;
 	Animation thunderAnim;
+	Animation* currentAnim = nullptr;
+
+	SDL_Rect sign;
+	SDL_Texture* pikachuTexture;
 };

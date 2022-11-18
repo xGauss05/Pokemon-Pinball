@@ -61,12 +61,15 @@ public:
 	}
 
 private:
+
 	int x;
 	int y;
+
+	PhysBody* pBody;
+
+	bool switchLayer = false;
 
 	// SFX
 	int loseSfx;
 
-	bool switchLayer = false;
-	PhysBody* pBody;
 };

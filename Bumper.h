@@ -120,20 +120,26 @@ public:
 	}
 
 public:
+
 	int force;
 
 private:
+
 	int x;
 	int y;
 	int radius;
 
 	PhysBody* pBody;
-
+	
+	// SFX
 	int bumperSfx;
 
-	SDL_Texture* shroomishTexture;
-
-	Animation* currentAnim;
+	// Bumper animations
 	Animation idleAnim;
 	Animation hitAnim;
+	Animation* currentAnim = nullptr;
+
+	// Shroomish texture
+	SDL_Texture* shroomishTexture;
+
 };

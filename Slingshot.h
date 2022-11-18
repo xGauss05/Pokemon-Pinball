@@ -11,8 +11,7 @@ class ModulePhysics;
 class SDL_Texture;
 
 enum SlingPlace {
-	SLEFT,
-	SRIGHT
+	SLEFT, SRIGHT
 };
 
 class Slingshot : public Prop {
@@ -108,6 +107,7 @@ public:
 	}
 
 public:
+
 	float32 force;
 
 private:
@@ -125,9 +125,11 @@ private:
 	PhysBody* pBody;
 	PhysBody* pBody2;
 
+	// SFX
 	int bumperSfx;
 
 	SlingPlace place;
 
 	SDL_Texture* slingshotTexture;
+
 };

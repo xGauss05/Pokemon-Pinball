@@ -165,7 +165,9 @@ public:
 	}
 
 public:
+
 	int force = 1000;
+
 	b2RevoluteJoint* joint;
 
 private:
@@ -176,11 +178,14 @@ private:
 	int xPin;
 	int yPin;
 
-	int flipperSfx;
-	FlipperSide side;
-
 	PhysBody* pBody;
 	PhysBody* pin;
 
+	// SFX
+	int flipperSfx;
+
+	FlipperSide side;
+
 	SDL_Texture* flipperTexture;
+
 };

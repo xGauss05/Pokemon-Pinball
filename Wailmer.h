@@ -73,6 +73,8 @@ public:
 
 private:
 
+	PhysBody* pBody;
+
 	// SFX
 	int spitSfx;
 	int swallowSfx;
@@ -80,7 +82,7 @@ private:
 	// Spawn position
 	iPoint position;
 
+	// Wailmer flags
 	bool hasSwallowed, release;
-	PhysBody* pBody;
-	
+
 };

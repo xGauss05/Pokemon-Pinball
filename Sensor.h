@@ -10,22 +10,10 @@ class ModulePhysics;
 class SDL_Texture;
 
 enum SensorSide {
-	EVO_TOP,
-	EVO_BOT,
-	GET_TOP,
-	GET_BOT,
-	H,
-	O,
-	L,
-	E,
-	UP_LEFT,
-	UP_MID,
-	UP_RIGHT,
-	COINS,
-	MOUNTAIN,
-	SPRING_IN,
-	TOP_RAIL,
-	LAKE_RAIL
+	EVO_TOP, EVO_BOT, GET_TOP, GET_BOT,
+	H, O, L, E, UP_LEFT, UP_MID,
+	UP_RIGHT, COINS, MOUNTAIN,
+	SPRING_IN, TOP_RAIL, LAKE_RAIL
 };
 
 class Sensor : public Prop {
@@ -37,61 +25,61 @@ public:
 		switch (sSide)
 		{
 		case EVO_TOP:
-			pBody1 = App->physics->CreateRectangleSensor(39, 131, 10, 5);
+			pBody = App->physics->CreateRectangleSensor(39, 131, 10, 5);
 			break;
 		case EVO_BOT:
-			pBody1 = App->physics->CreateRectangleSensor(26, 247, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(26, 247, 5, 5);
 			break;
 		case GET_TOP:
-			pBody1 = App->physics->CreateRectangleSensor(202, 131, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(202, 131, 5, 5);
 			break;
 		case GET_BOT:
-			pBody1 = App->physics->CreateRectangleSensor(210, 247, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(210, 247, 5, 5);
 			break;
 		case H:
-			pBody1 = App->physics->CreateRectangleSensor(32, 359, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(32, 359, 5, 5);
 			break;
 		case O:
-			pBody1 = App->physics->CreateRectangleSensor(56, 359, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(56, 359, 5, 5);
 			break;
 		case L:
-			pBody1 = App->physics->CreateRectangleSensor(182, 359, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(182, 359, 5, 5);
 			break;
 		case E:
-			pBody1 = App->physics->CreateRectangleSensor(206, 359, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(206, 359, 5, 5);
 			break;
 		case UP_LEFT:
-			pBody1 = App->physics->CreateRectangleSensor(87, 118, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(87, 118, 5, 5);
 			break;
 		case UP_MID:
-			pBody1 = App->physics->CreateRectangleSensor(108, 118, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(108, 118, 5, 5);
 			break;
 		case UP_RIGHT:
-			pBody1 = App->physics->CreateRectangleSensor(129, 118, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(129, 118, 5, 5);
 			break;
 		case COINS:
-			pBody1 = App->physics->CreateRectangleSensor(44, 229, 1, 1);
+			pBody = App->physics->CreateRectangleSensor(44, 229, 1, 1);
 			break;
 		case MOUNTAIN:
-			pBody1 = App->physics->CreateRectangleSensor(155, 120, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(155, 120, 5, 5);
 			break;
 		case SPRING_IN:
-			pBody1 = App->physics->CreateRectangleSensor(242, 82, 8, 5);
+			pBody = App->physics->CreateRectangleSensor(242, 82, 8, 5);
 			break;
 		case TOP_RAIL:
-			pBody1 = App->physics->CreateRectangleSensor(105, 47, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(105, 47, 5, 5);
 			break;
 		case LAKE_RAIL:
-			pBody1 = App->physics->CreateRectangleSensor(186, 225, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(186, 225, 5, 5);
 			break;
 		default:
-			pBody1 = App->physics->CreateRectangleSensor(0, 0, 5, 5);
+			pBody = App->physics->CreateRectangleSensor(0, 0, 5, 5);
 			break;
 		}
 
-		pBody1->prop = this;
-		pBody1->listener = (Module*)App->pManager;
-		pBody1->body->SetType(b2BodyType::b2_staticBody);
+		pBody->prop = this;
+		pBody->listener = (Module*)App->pManager;
+		pBody->body->SetType(b2BodyType::b2_staticBody);
 	}
 
 	bool Update() {
@@ -193,7 +181,7 @@ public:
 				break;
 			case EVO_BOT:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) >
-					METERS_TO_PIXELS(pBody1->body->GetPosition().y)) {
+					METERS_TO_PIXELS(pBody->body->GetPosition().y)) {
 					App->scene->evoBotFlag = false;
 				}
 				break;
@@ -211,7 +199,7 @@ public:
 				break;
 			case GET_BOT:
 				if (METERS_TO_PIXELS(otherBody->body->GetPosition().y) >
-					METERS_TO_PIXELS(pBody1->body->GetPosition().y)) {
+					METERS_TO_PIXELS(pBody->body->GetPosition().y)) {
 					App->scene->getBotFlag = false;
 				}
 				break;
@@ -242,19 +230,21 @@ public:
 	}
 
 	bool CleanUp() {
-		delete pBody1;
-		pBody1 = nullptr;
+		delete pBody;
+		pBody = nullptr;
 
 		return true;
 	}
 
 private:
 
-	SensorSide side;
-
-	PhysBody* pBody1 = nullptr;
-
-	int blingSfx;
 	int switchLayer = -1;
+
+	PhysBody* pBody = nullptr;
+
+	// SFX
+	int blingSfx;
+
+	SensorSide side;
 
 };

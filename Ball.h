@@ -121,50 +121,39 @@ public:
 			switch (bodyB->prop->type) {
 			case PropType::BUMPERTOP:
 				score = BUMPER_SCORE;
-				LOG("Ball collided BUMPERTOP");
 				break;
 			case PropType::BUMPERRIGHT:
 				score = BUMPER_SCORE;
-				LOG("Ball collided BUMPERIGHT");
 				break;
 			case PropType::BUMPERLEFT:
 				score = BUMPER_SCORE;	
-				LOG("Ball collided BUMPERLEFT");
 				break;
 			case PropType::MINUN_BUTTON:
 				score = MINUN_SCORE;
-				LOG("Ball collided MINUN_BUTTON");
 				break;
 			case PropType::PLUSLE_BUTTON:
 				score = PLUSLE_SCORE;
-				LOG("Ball collided PLUSLE_BUTTON");
 				break;
 			case PropType::ZIGZAGOON_BUTTON:
 				score = ZIGZAGOON_SCORE;
-				LOG("Ball collided ZIGZAGOON_BUTTON");
 				break;
 			case PropType::SEEDOT_BUTTON:
 				score = SEEDOT_SCORE;
 				score *= App->scene->seedotMultiplier;
-				LOG("Ball collided SEEDOT_BUTTON");
 				break;
 			case PropType::PELIPPER_BUTTON:
 				score = PELIPPER_SCORE;
 				score *= App->scene->pelipperMultiplier;
-				LOG("Ball collided PELIPPER_BUTTON");
 				break;
 			case PropType::TROUGH:
 				score = 0;
 				lose = true;
-				LOG("Ball collided TROUGH");
 				break;
 			case PropType::SLINGSHOT_LEFT:
 				score = SLINGSHOT_SCORE;
-				LOG("Ball collided SLINGSHOT_LEFT");
 				break;
 			case PropType::SLINGSHOT_RIGHT:
 				score = SLINGSHOT_SCORE;
-				LOG("Ball collided SLINGSHOT_RIGHT");
 				break;
 			case PropType::SENSOR_UP_LEFT:
 				score = UP_SCORE;
@@ -191,13 +180,11 @@ public:
 				score = WAILMER_SCORE;
 				App->scene->wailmerTrigger = true;
 				wailmerSpit = true;
-				LOG("Ball collided WAILMER");
 				break;
 			case PropType::PIKACHU:
 				score = PIKACHU_SCORE;
 				break;
 			default:
-				LOG("Ball collided ???");
 				score = 0;
 				break;
 			}
@@ -209,7 +196,6 @@ public:
 		if (otherBody->prop != NULL) {
 			switch (otherBody->prop->type) {
 			case PropType::SENSOR_SPRING_IN:
-				LOG("Ball END collided SPRING");
 				release = true;
 				break;
 			}
@@ -237,12 +223,12 @@ public:
 	}
 
 public:
+
 	PhysBody* pBody;
 
 private:
 
 	int radius;
-
 	int switchLayer = -1;
 
 	// SFX
@@ -254,6 +240,11 @@ private:
 
 	// Spawn position
 	iPoint spawn, afterRelease;
+
+	// Ball flags
 	bool lose, release, wailmerSpit;
+
+	// Ball texture
 	SDL_Texture* ballTexture;
+
 };

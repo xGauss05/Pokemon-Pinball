@@ -18,7 +18,6 @@ public:
 
 	// Called every frame
 	update_status Update();
-
 	update_status PostUpdate();
 
 	void BlitPropsByLayer(int layer);

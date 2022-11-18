@@ -90,15 +90,19 @@ public:
 	
 	bool CleanUp() {
 		delete pBody;
-
 		return true;
 	}
 
 private:
+	
+	PhysBody* pBody;
+
 	int x;
 	int y;
+
+	// SFX
 	int buttonSfx;
 
 	ButtonType btnType;
-	PhysBody* pBody;
+
 };
