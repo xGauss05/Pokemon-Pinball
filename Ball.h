@@ -200,6 +200,9 @@ public:
 				wailmerSpit = true;
 				LOG("Ball collided WAILMER");
 				break;
+			case PropType::PIKACHU:
+				score = PIKACHU_SCORE;
+				break;
 			default:
 				LOG("Ball collided ???");
 				score = 0;

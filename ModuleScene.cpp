@@ -247,14 +247,6 @@ void ModuleScene::initTextures()
 	plusleJump.speed = 0.2f;
 	plusleJump.loop = true;
 
-	pikachuTexture = App->textures->Load("pinball/Textures/pikachu_sprite.png");
-	for (int i = 0; i < 2; i++) {
-		pikachuIdle.PushBack({ i * 38, 0,38,91 });
-	}
-	pikachuIdle.speed = 0.05f;
-	pikachuIdle.loop = true;
-	pikachuAnim = &pikachuIdle;
-
 	font = App->fonts->Load("pinball/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,&!- ", 1);
 }
 
@@ -667,7 +659,6 @@ void ModuleScene::drawAnimations() {
 	zigzagoonAnim->Update();
 	plusleAnim->Update();
 	minunAnim->Update();
-	pikachuAnim->Update();
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
 	screenAnim->Update();
@@ -713,17 +704,7 @@ void ModuleScene::drawAnimations() {
 	else {
 		if (zigzagoonAnim != &zigzagoonIdle) zigzagoonAnim = &zigzagoonIdle;
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) pikachuTrigger = false;
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) pikachuTrigger = true;
-
-	if (pikachuTrigger) {
-		App->renderer->Blit(pikachuTexture, 191, 318, &(pikachuAnim->GetCurrentFrame()));
-	}
-	else {
-		App->renderer->Blit(pikachuTexture, 14, 318, &(pikachuAnim->GetCurrentFrame()));
-	}
+	
 
 	App->renderer->Blit(seedotTexture, 13, 295, &(basketAnim->GetCurrentFrame()));
 	App->renderer->Blit(pelipperTexture, 150, 120, &(pelipperAnim->GetCurrentFrame()));
@@ -795,7 +776,7 @@ void ModuleScene::ResetTable() {
 	redArrow1.isActive = redArrow2.isActive = redArrow3.isActive = false;
 	dotsLight1.isActive = dotsLight2.isActive = dotsLight3.isActive = false;
 	upLeftFlag = upMidFlag = upRightFlag = false;
-	plusleTrigger = minunTrigger = pelipperTrigger = zigzagoonTrigger = pikachuTrigger = false;
+	plusleTrigger = minunTrigger = pelipperTrigger = pikachuTrigger = zigzagoonTrigger = false;
 	pelipperMultiplier = ballMultiplier = 1;
 	seedotMultiplier = 1.0f;
 }
@@ -898,6 +879,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
 	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
 	App->pManager->CreateProp(PropType::WAILMER);
+	App->pManager->CreateProp(PropType::PIKACHU);
 
 	return ret;
 }
@@ -1056,7 +1038,6 @@ bool ModuleScene::CleanUp() {
 	App->textures->Unload(minunTexture);
 	App->textures->Unload(plusleTexture);
 	App->textures->Unload(lightningTexture);
-	App->textures->Unload(pikachuTexture);
 
 	screenAnim = nullptr;
 	wailmerAnim = nullptr;

@@ -9,6 +9,7 @@
 #include "Sensor.h"
 #include "Slingshot.h"
 #include "Wailmer.h"
+#include "Pikachu.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePhysics.h"
@@ -159,6 +160,9 @@ Prop* PropsManager::CreateProp(PropType type)
 		break;
 	case PropType::WAILMER:
 		prop = (Prop*)new Wailmer(type);
+		break;
+	case PropType::PIKACHU:
+		prop = (Prop*)new Pikachu(type);
 		break;
 	case PropType::UNKNOWN:
 		break;

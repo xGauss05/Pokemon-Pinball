@@ -181,11 +181,6 @@ public:
 	Animation* lightPlusleAnim = nullptr;
 	Animation* lightMinunAnim = nullptr;
 
-	// Animations (Pikachu)
-	SDL_Texture* pikachuTexture;
-	Animation pikachuIdle;
-	Animation* pikachuAnim = nullptr;
-
 	// Score variables
 	unsigned int currentScore = 0;
 	unsigned int previousScore = 0;
