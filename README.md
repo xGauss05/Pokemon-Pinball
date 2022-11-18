@@ -28,24 +28,24 @@ A tribute to Pokémon Pinball Ruby & Sapphire using SDL and Box2D.
 ## Debug keys
 When the Debug Menu (F1) is Open.
 
-- 1: Time Options
-HOME: Increases target FPS by 10.
-END: Decreases target FPS by 10.
-BACKSPACE: Goes back.
+1. Time Options
+    - HOME: Increases target FPS by 10.
+    - END: Decreases target FPS by 10.
+    - BACKSPACE: Goes back.
 
-- 2: Gravity Options
-HOME: Increases gravity by 1.
-END: Decreases gravity by 1.
-BACKSPACE: Goes back.
+2. Gravity Options
+    - HOME: Increases gravity by 1.
+    - END: Decreases gravity by 1.
+    - BACKSPACE: Goes back.
 
-- 3: Sprites Options
-HOME: Increases ballMultiplier by 1 (changes ball texture).
-END: Increases ballMultiplier by 1 (changes ball texture).
-BACKSPACE: Goes back.
+3. Sprites Options
+    - HOME: Increases ballMultiplier by 1 (changes ball texture).
+    - END: Increases ballMultiplier by 1 (changes ball texture).
+    - BACKSPACE: Goes back.
 
-- 4: Show Colliders (shows the table and ball colliders)
-LMB: While pointing to the ball, drag and move it.
-BACKSPACE: Goes back.
+4. Show Colliders (shows the table and ball colliders)
+    - LMB: While pointing to the ball, drag and move it.
+    - BACKSPACE: Goes back.
 
 ## Developers
 
