@@ -39,7 +39,7 @@ public:
 
 		data->center = b2Vec2(0.0f, 0.0f);
 		data->mass = 0.1f;
-		data->I = 0.01f;
+		data->I = 0.001f;
 		pBody->body->SetMassData(data);
 		pBody->body->SetBullet(true);
 

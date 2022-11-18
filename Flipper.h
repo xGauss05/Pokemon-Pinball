@@ -44,6 +44,16 @@ public:
 		pBody = App->physics->CreateRectangle(x, y, 30, 8);
 		pin = App->physics->CreateRectangle(xPin, yPin, 2, 2);
 		pBody->prop = this;
+
+		pBody->body->ResetMassData();
+
+		b2MassData* data = new b2MassData;
+
+		data->center = b2Vec2(0.0f, 0.0f);
+		data->mass = 10.0f;
+		data->I = 1.0f;
+		pBody->body->SetMassData(data);
+
 		pBody->body->SetType(b2BodyType::b2_dynamicBody);
 		pin->body->SetType(b2BodyType::b2_staticBody);
 
@@ -53,13 +63,13 @@ public:
 		{
 		case LEFT:
 			joint->SetLimits(-21 * DEGTORAD, 30 * DEGTORAD);
-			joint->SetMotorSpeed(-20);
-			joint->SetMaxMotorTorque(20);
+			joint->SetMotorSpeed(-500);
+			joint->SetMaxMotorTorque(500);
 			break;
 		case RIGHT:
 			joint->SetLimits(-30 * DEGTORAD, 21 * DEGTORAD);
-			joint->SetMotorSpeed(20);
-			joint->SetMaxMotorTorque(20);
+			joint->SetMotorSpeed(500);
+			joint->SetMaxMotorTorque(500);
 			break;
 		default:
 			break;

@@ -36,7 +36,7 @@ public:
 			break;
 		}
 		radius = 5;
-		force = 10;
+		force = 50;
 
 		pBody = App->physics->CreateCircle(x, y, radius);
 		pBody->body->SetType(b2BodyType::b2_staticBody);
