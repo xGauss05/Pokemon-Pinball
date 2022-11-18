@@ -2,6 +2,7 @@
 #define __MODULE_DEBUG_H__
 
 #include "Module.h"
+#include "Ball.h"
 #include <chrono>
 using namespace std::chrono;
 
@@ -11,8 +12,9 @@ enum class Screen
 	TIME,
 	GRAVITY,
 	SPRITES,
+	COEFFICIENTS,
 	COLLIDERS,
-	VARIABLES,
+	C_BALLRESTITUTION,
 	NONE
 };
 
@@ -42,6 +44,8 @@ public:
 	microseconds elapsedFrame;
 	int targetFPS = 60;
 	double FPS;
+	
+	Ball* ball;
 
 private:
 
@@ -52,9 +56,11 @@ private:
 
 	bool time = false;
 	bool gravity = false;
-	bool colliders = false;
 	bool sprites = false;
-	bool variables = false;
+	bool coefficients = false;
+	bool colliders = false;
+
+	bool c_ballRestitution = false;
 };
 
 #endif // __MODULE_DEBUG_H__

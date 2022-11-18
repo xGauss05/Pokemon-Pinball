@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
+#include "ModuleDebug.h"
 #include "PropsManager.h"
 
 #include <string>
@@ -869,7 +870,7 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::BUMPERTOP);
 	App->pManager->CreateProp(PropType::BUMPERRIGHT);
 	App->pManager->CreateProp(PropType::BUMPERLEFT);
-	App->pManager->CreateProp(PropType::BALL);
+	App->debug->ball = (Ball*)App->pManager->CreateProp(PropType::BALL);
 	App->pManager->CreateProp(PropType::SPRING);
 	App->pManager->CreateProp(PropType::MINUN_BUTTON);
 	App->pManager->CreateProp(PropType::PLUSLE_BUTTON);

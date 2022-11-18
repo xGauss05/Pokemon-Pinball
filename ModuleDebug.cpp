@@ -31,6 +31,8 @@ update_status ModuleDebug::Update() {
 
 	if (debug) {
 
+#pragma region Menu navigation
+
 		if (currentScreen == Screen::HOME)
 		{
 			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -43,10 +45,10 @@ update_status ModuleDebug::Update() {
 				sprites = true;
 
 			if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-				colliders = true;
+				coefficients = true;
 
-			if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-				variables = true;
+			if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+				colliders = true;
 		}
 
 		if (time == true)
@@ -78,7 +80,7 @@ update_status ModuleDebug::Update() {
 			currentScreen = Screen::SPRITES;
 
 			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && App->scene->ballMultiplier < 4)
-			App->scene->ballMultiplier++;
+				App->scene->ballMultiplier++;
 
 			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && App->scene->ballMultiplier > 1)
 				App->scene->ballMultiplier--;
@@ -87,16 +89,30 @@ update_status ModuleDebug::Update() {
 		{
 			currentScreen = Screen::COLLIDERS;
 		}
-		if (variables == true)
+		if (coefficients == true)
 		{
-			currentScreen = Screen::VARIABLES;
+			currentScreen = Screen::COEFFICIENTS;
+			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			{c_ballRestitution = true; currentScreen = Screen::COEFFICIENTS; coefficients = false; }
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 		{
-			currentScreen = Screen::HOME;
-			variables = false; time = false; gravity = false; sprites = false; colliders = false;
+			if (currentScreen == Screen::C_BALLRESTITUTION)
+			{
+				currentScreen = Screen::COEFFICIENTS;
+				c_ballRestitution = false;
+				coefficients = true;
+			}
+			else
+			{
+				currentScreen = Screen::HOME;
+				coefficients = false; time = false; gravity = false; sprites = false; colliders = false;
+			}
 		}
+
+#pragma endregion
+
 
 		if (App->physics->mouse_body != nullptr && App->physics->mouse_joint != nullptr)
 		{
@@ -264,12 +280,13 @@ void ModuleDebug::DebugDraw() {
 	}
 
 	SDL_Rect bg;
-	if (time)			{ bg = { 2,38,251,92 }; }
-	else if (gravity)	{ bg = { 2,38,251,82 }; }
-	else if (sprites)	{ bg = { 2,38,251,62 }; }
-	else if (colliders)	{ bg = { 2,38,251,22 }; }
-	else if (variables) { bg = { 2,38,251,52 }; }
-	else				{ bg = { 2,38,252,72 }; }
+	if (time)					{ bg = { 2,38,251,92 }; }
+	else if (gravity)			{ bg = { 2,38,251,82 }; }
+	else if (sprites)			{ bg = { 2,38,251,62 }; }
+	else if (coefficients)		{ bg = { 2,38,251,52 }; }
+	else if (colliders)			{ bg = { 2,38,251,22 }; }
+	else if (c_ballRestitution)	{ bg = { 2,38,251,500 }; }
+	else						{ bg = { 2,38,252,72 }; }
 	App->renderer->DrawQuad(bg, 0, 0, 0, 125, true);
 
 	switch (currentScreen)
@@ -280,8 +297,8 @@ void ModuleDebug::DebugDraw() {
 		App->fonts->BlitText(5, 60, 0, "1. TIME OPTIONS");
 		App->fonts->BlitText(5, 70, 0, "2. GRAVITY OPTIONS");
 		App->fonts->BlitText(5, 80, 0, "3. SPRITES OPTIONS");
-		App->fonts->BlitText(5, 90, 0, "4. SHOW COLLIDERS");
-		App->fonts->BlitText(5, 100, 0, "V. SHOW VARIABLES");
+		App->fonts->BlitText(5, 90, 0, "4. COEFFICIENT OPTIONS");
+		App->fonts->BlitText(5, 100, 0, "5. SHOW COLLIDERS");
 		break;
 		
 	case Screen::TIME:
@@ -322,16 +339,23 @@ void ModuleDebug::DebugDraw() {
 		App->fonts->BlitText(5, 90, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
-	case Screen::COLLIDERS:
-		App->fonts->BlitText(5, 40, 0, "CLICK ON THE BALL TO DRAG IT");
-		App->fonts->BlitText(5, 50, 0, "PRESS BACKSPACE TO GO BACK");
+	case Screen::COEFFICIENTS:
+		App->fonts->BlitText(5, 40, 0, "COEFFICIENT OPTIONS");
+		App->fonts->BlitText(5, 60, 0, "PRESS 1 FOR BALL REST");
+
+		App->fonts->BlitText(5, 80, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
-	case Screen::VARIABLES:
-		App->fonts->BlitText(5, 40, 0, "VARIABLES");
+	case Screen::C_BALLRESTITUTION:
+		App->fonts->BlitText(5, 40, 0, "BALL RESTITUTION");
 		App->fonts->BlitText(5, 60, 0, "VARIABLES GO HERE");
 
 		App->fonts->BlitText(5, 80, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+
+	case Screen::COLLIDERS:
+		App->fonts->BlitText(5, 40, 0, "CLICK ON THE BALL TO DRAG IT");
+		App->fonts->BlitText(5, 50, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
 	case Screen::NONE:
