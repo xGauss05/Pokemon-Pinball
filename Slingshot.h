@@ -34,7 +34,7 @@ public:
 			pBody->body->SetTransform({ pBody->body->GetPosition() }, 0.6);
 			break;
 		}
-		force = 0.7;
+		force = 1.0f;
 
 		pBody->body->SetType(b2BodyType::b2_staticBody);
 		pBody2->body->SetType(b2BodyType::b2_staticBody);
@@ -74,11 +74,11 @@ public:
 				{
 				case SlingPlace::SLEFT:
 					//bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
-					bodyB->body->ApplyLinearImpulse({ (float32)(force * 0.866), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
+					bodyB->body->ApplyLinearImpulse({ (float32)(force * 0.866), (float32)(-force * 0.8) }, bodyB->body->GetPosition(), true);
 					break;
 				case SlingPlace::SRIGHT:
 					//bodyB->body->SetLinearVelocity(b2Vec2{ 0,0 });
-					bodyB->body->ApplyLinearImpulse({ (float32)(force * (-0.866)), (float32)(-force * 0.64) }, bodyB->body->GetPosition(), true);
+					bodyB->body->ApplyLinearImpulse({ (float32)(force * (-0.866)), (float32)(-force * 0.8) }, bodyB->body->GetPosition(), true);
 					break;
 				}
 			}
