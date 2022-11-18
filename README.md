@@ -1,9 +1,8 @@
 # Pokémon Pinball (Sapphire table)
 
-- [Repository LINK](https://github.com/xGauss05/Physics-Pinball)
+- [Repository LINK](https://github.com/xGauss05/Pokemon-Pinball)
 
 ## Disclaimer
-
 We do NOT own any of the information or images of this Game. Pokémon Pinball (Sapphire table) and all of the content used for the Game is the property of Nintendo. 
 Every piece of content is used and can be used by anyone for non-commercial projects. Created for educational purposes.
 
@@ -18,10 +17,10 @@ A tribute to Pokémon Pinball Ruby & Sapphire using SDL and Box2D.
 - The top red dots upgrade the ball so you can have a better score multiplier!
 - A maximum of 3 lives. You can not obtain more than 3.
 - Shows the Current Score, they Previous Score and the High Score. (Only in one session)
-- - If you touch Pikachu's flag, he might save the ball...
+- If you touch Pikachu's flag, he might save the ball...
 - Debug mode by pressing F1.
 
-## Controls
+## Gameplay controls
 - DOWN: Compresses the Spoink (Spring)
 - LEFT: Moves the left flipper.
 - RIGHT: Moves the right flipper.
@@ -29,6 +28,7 @@ A tribute to Pokémon Pinball Ruby & Sapphire using SDL and Box2D.
 
 ## Debug keys
 When the Debug Menu (F1) is Open. Press BACKSPACE anytime to return to the previous menu.
+Press 0 in order to teleport the ball on the mouse position.
 
 1. Time Options
     - W: Increases target FPS by 10.
