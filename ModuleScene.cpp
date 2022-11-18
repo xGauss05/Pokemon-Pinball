@@ -63,6 +63,10 @@ void ModuleScene::initTextures()
 	livesLight2 = { 114, 338, { 232, 32, 12, 12 }, true };
 	livesLight3 = { 130, 338, { 232, 32, 12, 12 }, true };
 
+	counterNo1 = { 143, 196, { 161, 81, 5, 7 }, false };
+	counterNo2 = { 142, 196, { 169, 81, 5, 7 }, false };
+	counterNo3 = { 142, 196, { 177, 81, 5, 7 }, false };
+
 	groundAssets.add(&greenArrow1);
 	groundAssets.add(&greenArrow2);
 	groundAssets.add(&greenArrow3);
@@ -82,6 +86,9 @@ void ModuleScene::initTextures()
 	groundAssets.add(&holeLight2);
 	groundAssets.add(&holeLight3);
 	groundAssets.add(&holeLight4);
+	groundAssets.add(&counterNo1);
+	groundAssets.add(&counterNo2);
+	groundAssets.add(&counterNo3);
 
 	pButton.PushBack({ 200,48,8,10 });
 	pButton.PushBack({ 216,48,8,10 });
@@ -650,12 +657,6 @@ void ModuleScene::drawScore() {
 	num_char = temp.c_str();
 	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 19, font, "PREV");
 	App->fonts->BlitText(App->renderer->camera.x + 5, App->renderer->camera.y + 26, font, num_char);
-
-	// Pelipper score multiplier
-	temp = std::to_string(pelipperMultiplier);
-	num_char = temp.c_str();
-	App->fonts->BlitText(142, 195, font, num_char);
-
 }
 
 void ModuleScene::drawAnimations() {
@@ -952,6 +953,27 @@ update_status ModuleScene::Update()
 			}
 		}
 		hasGivenLife = true;
+	}
+
+	if (pelipperMultiplier == 1) {
+		counterNo1.isActive = true;
+	}
+	else {
+		counterNo1.isActive = false;
+	}
+
+	if (pelipperMultiplier == 2) {
+		counterNo2.isActive = true;
+	}
+	else {
+		counterNo2.isActive = false;
+	}
+
+	if (pelipperMultiplier == 3) {
+		counterNo3.isActive = true;
+	}
+	else {
+		counterNo3.isActive = false;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {

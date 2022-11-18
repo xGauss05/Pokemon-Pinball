@@ -80,6 +80,11 @@ public:
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
 
+	// Pelipper button counter.
+	GroundAsset counterNo1;
+	GroundAsset counterNo2;
+	GroundAsset counterNo3;
+
 	p2List<GroundAsset*> groundAssets;
 
 	// map collisions
