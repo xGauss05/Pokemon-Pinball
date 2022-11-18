@@ -92,6 +92,7 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="Pikachu.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="PropsManager.h" />
     <ClInclude Include="Sensor.h" />
