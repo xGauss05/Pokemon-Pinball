@@ -80,6 +80,11 @@ public:
 	GroundAsset livesLight2;
 	GroundAsset livesLight3;
 
+	// Pelipper button counter.
+	GroundAsset counterNo1;
+	GroundAsset counterNo2;
+	GroundAsset counterNo3;
+
 	p2List<GroundAsset*> groundAssets;
 
 	// map collisions
@@ -175,11 +180,6 @@ public:
 	Animation lightningMinun;
 	Animation* lightPlusleAnim = nullptr;
 	Animation* lightMinunAnim = nullptr;
-
-	// Animations (Pikachu)
-	SDL_Texture* pikachuTexture;
-	Animation pikachuIdle;
-	Animation* pikachuAnim = nullptr;
 
 	// Score variables
 	unsigned int currentScore = 0;

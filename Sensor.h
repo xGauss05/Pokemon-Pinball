@@ -124,6 +124,7 @@ public:
 				if (App->scene->getBotFlag) {
 					App->scene->getTopFlag = true;
 				}
+				App->scene->pikachuTrigger = true;
 				break;
 			case GET_BOT:
 				App->scene->getBotFlag = true;

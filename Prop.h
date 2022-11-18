@@ -38,6 +38,7 @@ enum class PropType
 	SLINGSHOT_RIGHT,
 	SLINGSHOT_LEFT,
 	WAILMER,
+	PIKACHU,
 	UNKNOWN
 };
 
