@@ -25,6 +25,7 @@ public:
 		pBody->prop = this;
 		pBody->listener = (Module*)App->pManager;
 		initAnim();
+		sign = { 570, 0, 18, 18 };
 		pikachuHitSfx = App->audio->LoadFx("pinball/Sounds/pikachu_hit.wav");
 		pikachuThunderSfx = App->audio->LoadFx("pinball/Sounds/pikachu_thunder.wav");
 	}
@@ -63,6 +64,8 @@ public:
 	}
 
 	void Blit() {
+
+		App->renderer->Blit(pikachuTexture, 196, 126, &sign);
 
 		if (currentAnim == &idleAnim)
 			idleAnim.Update();
@@ -170,6 +173,7 @@ private:
 	bool charged = false;
 
 	SDL_Texture* pikachuTexture;
+	SDL_Rect sign;
 
 	Animation* currentAnim;
 	Animation idleAnim;
