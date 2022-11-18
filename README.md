@@ -53,3 +53,16 @@ When the Debug Menu (F1) is Open. Press BACKSPACE anytime to return to the previ
 - Ethan Martín - [Ethanm-0371](https://github.com/Ethanm-0371)
 - Víctor Martín - [VicMarBall](https://github.com/VicMarBall)
 - Ariadna Sevcik - [AriSevcik](https://github.com/AriSevcik)
+
+## Development
+- We had problems on the ball not rotating correctly. We tried to change the friction between the scenario and the ball in order to make it spin, but that was not
+the problem. The funny thing is that by calling the body and reset their mass data, it also removes the Inertia. So... we added a value to the Inertia and it
+rotates how it should.
+- With the spring, we had problems on making the ball not bounce every time it touches the spring without charging it. The reason why was this happening it was
+because it always had the maximum motor force, so in order to fix it we have put a bigger mass than the ball.
+- We had problems with the TeleportTo() function. Everytime we called it, it would trigger an Assertion error. We asked the teacher why was that happening, and he
+told us not to do any transformations to the body in the OnCollision() function and to it in the Update() or PreUpdate(). The reason was because by teleporting
+to another spot, the body matrices would get the previous state from the TeleportTo() function and the values of the new spot, and that would end up having
+NULLS, INF, and things that a computer can not compute.
+- Sensors were kind of a headache; Sometimes the ball would pass through one and it would not trigger. Luckily, there was a class lesson that taught us how to
+prevent this kind of "missing" collisions. We basically added the property "bullet" set to true for the ball to prevent mising collisions.
