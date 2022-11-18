@@ -32,7 +32,7 @@ public:
 
 		joint->EnableMotor(true);
 		joint->SetMotorSpeed(-releaseSpeed);
-		joint->SetMaxMotorForce(700);
+		joint->SetMaxMotorForce(force);
 
 		initAnim();
 		releaseSFX = App->audio->LoadFx("pinball/Sounds/spoink_release.wav");
@@ -119,6 +119,10 @@ public:
 		return true;
 	}
 
+public:
+	int force = 700;
+	b2PrismaticJoint* joint;
+
 private:
 	int x = 243;
 	int y = 395;
@@ -128,8 +132,6 @@ private:
 	int pathLength = 7;
 	float contractionSpeed = 0.3f;
 	float releaseSpeed = 200.0f;
-
-	b2PrismaticJoint* joint;
 
 	SDL_Texture* spoinkTexture;
 	

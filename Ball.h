@@ -93,13 +93,6 @@ public:
 			break;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) {
-			iPoint position;
-			position.x = App->input->GetMouseX();
-			position.y = App->input->GetMouseY();
-			TeleportTo(position);
-		}
-
 		if (lose) {
 			lose = false;
 			TeleportTo(spawn);
@@ -240,6 +233,9 @@ public:
 		return true;
 	}
 
+public:
+	PhysBody* pBody;
+
 private:
 
 	int radius;
@@ -256,6 +252,5 @@ private:
 	// Spawn position
 	iPoint spawn, afterRelease;
 	bool lose, release, wailmerSpit;
-	PhysBody* pBody;
 	SDL_Texture* ballTexture;
 };

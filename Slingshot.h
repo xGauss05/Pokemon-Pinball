@@ -107,6 +107,9 @@ public:
 		return true;
 	}
 
+public:
+	float32 force;
+
 private:
 
 	int pLeft[6] = {
@@ -118,8 +121,6 @@ private:
 		152, 370,
 		172, 345,
 		172, 360 };
-
-	float32 force;
 
 	PhysBody* pBody;
 	PhysBody* pBody2;

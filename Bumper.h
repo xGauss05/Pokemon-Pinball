@@ -119,11 +119,13 @@ public:
 		return true;
 	}
 
+public:
+	int force;
+
 private:
 	int x;
 	int y;
 	int radius;
-	int force;
 
 	PhysBody* pBody;
 

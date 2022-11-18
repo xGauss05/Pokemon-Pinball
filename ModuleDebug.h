@@ -3,6 +3,10 @@
 
 #include "Module.h"
 #include "Ball.h"
+#include "Bumper.h"
+#include "Slingshot.h"
+#include "Spring.h"
+#include "Flipper.h"
 #include <chrono>
 using namespace std::chrono;
 
@@ -15,6 +19,10 @@ enum class Screen
 	COEFFICIENTS,
 	COLLIDERS,
 	C_BALLRESTITUTION,
+	C_BUMPERFORCE,
+	C_SLINGSHOTFORCE,
+	C_SPRINGFORCE,
+	C_FLIPPERFORCE,
 	NONE
 };
 
@@ -46,13 +54,21 @@ public:
 	double FPS;
 	
 	Ball* ball;
+	Bumper* bumperU;
+	Bumper* bumperL;
+	Bumper* bumperR;
+	Slingshot* slingshotL;
+	Slingshot* slingshotR;
+	Spring* spring;
+	Flipper* flipperL;
+	Flipper* flipperR;
+
+	// Simple debugging flag
+	bool debug;
 
 private:
 
 	Screen currentScreen = Screen::HOME;
-
-	// Simple debugging flag
-	bool debug;
 
 	bool time = false;
 	bool gravity = false;
@@ -61,6 +77,10 @@ private:
 	bool colliders = false;
 
 	bool c_ballRestitution = false;
+	bool c_bumperforce = false;
+	bool c_slingshotforce = false;
+	bool c_springforce = false;
+	bool c_flipperforce = false;
 };
 
 #endif // __MODULE_DEBUG_H__

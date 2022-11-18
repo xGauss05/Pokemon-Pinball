@@ -63,13 +63,13 @@ public:
 		{
 		case LEFT:
 			joint->SetLimits(-21 * DEGTORAD, 30 * DEGTORAD);
-			joint->SetMotorSpeed(-500);
-			joint->SetMaxMotorTorque(500);
+			joint->SetMotorSpeed(-force);
+			joint->SetMaxMotorTorque(force);
 			break;
 		case RIGHT:
 			joint->SetLimits(-30 * DEGTORAD, 21 * DEGTORAD);
-			joint->SetMotorSpeed(500);
-			joint->SetMaxMotorTorque(500);
+			joint->SetMotorSpeed(force);
+			joint->SetMaxMotorTorque(force);
 			break;
 		default:
 			break;
@@ -164,6 +164,10 @@ public:
 		return true;
 	}
 
+public:
+	int force = 1000;
+	b2RevoluteJoint* joint;
+
 private:
 
 	int x;
@@ -177,7 +181,6 @@ private:
 
 	PhysBody* pBody;
 	PhysBody* pin;
-	b2RevoluteJoint* joint;
 
 	SDL_Texture* flipperTexture;
 };

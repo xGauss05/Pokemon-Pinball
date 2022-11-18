@@ -55,21 +55,21 @@ update_status ModuleDebug::Update() {
 		{
 			currentScreen = Screen::TIME;
 
-			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && targetFPS < 120)
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && targetFPS < 120)
 				targetFPS += 10;
-			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && targetFPS > 10)
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && targetFPS > 10)
 				targetFPS -= 10;
 		}
 		if (gravity == true)
 		{
 			currentScreen = Screen::GRAVITY;
 
-			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && App->physics->GRAVITY_Y < 20.0f)
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && App->physics->GRAVITY_Y < 20.0f)
 			{
 				App->physics->GRAVITY_Y += 1.0f;
 				App->physics->world->SetGravity(b2Vec2(GRAVITY_X, App->physics->GRAVITY_Y));
 			}
-			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && App->physics->GRAVITY_Y > -20.0f)
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && App->physics->GRAVITY_Y > -20.0f)
 			{
 				App->physics->GRAVITY_Y -= 1.0f;
 				App->physics->world->SetGravity(b2Vec2(GRAVITY_X, App->physics->GRAVITY_Y));
@@ -79,10 +79,10 @@ update_status ModuleDebug::Update() {
 		{
 			currentScreen = Screen::SPRITES;
 
-			if (App->input->GetKey(SDL_SCANCODE_HOME) == KEY_DOWN && App->scene->ballMultiplier < 4)
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && App->scene->ballMultiplier < 4)
 				App->scene->ballMultiplier++;
 
-			if (App->input->GetKey(SDL_SCANCODE_END) == KEY_DOWN && App->scene->ballMultiplier > 1)
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && App->scene->ballMultiplier > 1)
 				App->scene->ballMultiplier--;
 		}
 		if (colliders == true)
@@ -91,28 +91,173 @@ update_status ModuleDebug::Update() {
 		}
 		if (coefficients == true)
 		{
-			currentScreen = Screen::COEFFICIENTS;
+			//This one has the screen activation at the end due to input difficulties
+
 			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			{c_ballRestitution = true; currentScreen = Screen::COEFFICIENTS; coefficients = false; }
+			{
+				c_ballRestitution = true;  
+				coefficients = false; 
+			}
+			if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			{
+				c_bumperforce = true;
+				coefficients = false;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			{
+				c_slingshotforce = true;
+				coefficients = false;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN && currentScreen == Screen::COEFFICIENTS)
+			{
+				c_springforce = true;
+				coefficients = false;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+			{
+				c_flipperforce = true;
+				coefficients = false;
+			}
+
+			currentScreen = Screen::COEFFICIENTS;
+		}
+		if (c_ballRestitution == true)
+		{
+			currentScreen = Screen::C_BALLRESTITUTION;
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && ball->pBody->body->GetFixtureList()->GetRestitution() < 1.0f)
+				ball->pBody->body->GetFixtureList()->SetRestitution(ball->pBody->body->GetFixtureList()->GetRestitution() + 0.10f);
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && ball->pBody->body->GetFixtureList()->GetRestitution() > 0.0f)
+				ball->pBody->body->GetFixtureList()->SetRestitution(ball->pBody->body->GetFixtureList()->GetRestitution() - 0.10f);
+		}
+		if (c_bumperforce == true)
+		{
+			currentScreen = Screen::C_BUMPERFORCE;
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && bumperU->force < 200)
+			{
+				bumperU->force += 10;
+				bumperL->force += 10;
+				bumperR->force += 10;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && bumperU->force > 0)
+			{
+				bumperU->force -= 10;
+				bumperL->force -= 10;
+				bumperR->force -= 10;
+			}
+		}
+		if (c_slingshotforce == true)
+		{
+			currentScreen = Screen::C_SLINGSHOTFORCE;
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && slingshotL->force < 2.0f)
+			{
+				slingshotL->force += 0.1f;
+				slingshotR->force += 0.1f;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && slingshotL->force > 0.0f)
+			{
+				slingshotL->force -= 0.1f;
+				slingshotR->force -= 0.1f;
+			}
+		}
+		if (c_springforce == true)
+		{
+			currentScreen = Screen::C_SPRINGFORCE;
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && spring->force < 2000)
+			{
+				if (spring->force < 100)
+					spring->force += 10;
+				else
+					spring->force += 100;
+
+				spring->joint->SetMaxMotorForce(spring->force);
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && spring->force > 0)
+			{
+				if (spring->force <= 100)
+					spring->force -= 10;
+				else
+					spring->force -= 100;
+
+				spring->joint->SetMaxMotorForce(spring->force);
+			}
+		}
+		if (c_flipperforce == true)
+		{
+			currentScreen = Screen::C_FLIPPERFORCE;
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && flipperL->force < 3000)
+			{
+				if (flipperL->force < 100)
+				{
+					flipperL->force += 10;
+					flipperR->force += 10;
+				}
+				else
+				{
+					flipperL->force += 100;
+					flipperR->force += 100;
+				}
+				flipperR->joint->SetMotorSpeed(flipperL->force);
+				flipperR->joint->SetMaxMotorTorque(flipperL->force);
+				flipperL->joint->SetMotorSpeed(-flipperL->force);
+				flipperL->joint->SetMaxMotorTorque(flipperL->force);
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && flipperL->force > 0)
+			{
+				if (flipperL->force <= 100)
+				{
+					flipperL->force -= 10;
+					flipperR->force -= 10;
+				}
+				else
+				{
+					flipperL->force -= 100;
+					flipperR->force -= 100;
+				}
+				flipperR->joint->SetMotorSpeed(flipperL->force);
+				flipperR->joint->SetMaxMotorTorque(flipperL->force);
+				flipperL->joint->SetMotorSpeed(-flipperL->force);
+				flipperL->joint->SetMaxMotorTorque(flipperL->force);
+			}
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 		{
-			if (currentScreen == Screen::C_BALLRESTITUTION)
+			if (currentScreen == Screen::C_BALLRESTITUTION || currentScreen == Screen::C_BUMPERFORCE || currentScreen == Screen::C_SLINGSHOTFORCE || 
+				currentScreen == Screen::C_SPRINGFORCE	   || currentScreen == Screen::C_FLIPPERFORCE)
 			{
 				currentScreen = Screen::COEFFICIENTS;
-				c_ballRestitution = false;
+				c_ballRestitution = false; c_bumperforce = false; c_slingshotforce = false; c_springforce = false; c_flipperforce = false;
 				coefficients = true;
+			}
+			else if (currentScreen == Screen::HOME)
+			{
+				debug = false;
 			}
 			else
 			{
 				currentScreen = Screen::HOME;
-				coefficients = false; time = false; gravity = false; sprites = false; colliders = false;
+				time = false; gravity = false; sprites = false; coefficients = false; colliders = false;
 			}
 		}
 
 #pragma endregion
 
+		if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN) {
+			iPoint position;
+			position.x = App->input->GetMouseX();
+			position.y = App->input->GetMouseY();
+			ball->TeleportTo(position);
+		}
 
 		if (App->physics->mouse_body != nullptr && App->physics->mouse_joint != nullptr)
 		{
@@ -283,9 +428,13 @@ void ModuleDebug::DebugDraw() {
 	if (time)					{ bg = { 2,38,251,92 }; }
 	else if (gravity)			{ bg = { 2,38,251,82 }; }
 	else if (sprites)			{ bg = { 2,38,251,62 }; }
-	else if (coefficients)		{ bg = { 2,38,251,52 }; }
+	else if (coefficients)		{ bg = { 2,38,251,112 }; }
 	else if (colliders)			{ bg = { 2,38,251,22 }; }
-	else if (c_ballRestitution)	{ bg = { 2,38,251,500 }; }
+	else if (c_ballRestitution)	{ bg = { 2,38,251,82 }; }
+	else if (c_bumperforce)		{ bg = { 2,38,251,82 }; }
+	else if (c_slingshotforce)	{ bg = { 2,38,251,82 }; }
+	else if (c_springforce)		{ bg = { 2,38,251,82 }; }
+	else if (c_flipperforce)	{ bg = { 2,38,251,82 }; }
 	else						{ bg = { 2,38,252,72 }; }
 	App->renderer->DrawQuad(bg, 0, 0, 0, 125, true);
 
@@ -303,8 +452,8 @@ void ModuleDebug::DebugDraw() {
 		
 	case Screen::TIME:
 		App->fonts->BlitText(5, 40, 0, "TIME OPTIONS");
-		App->fonts->BlitText(5, 60, 0, "PRESS HOME TO INCREASE AND");
-		App->fonts->BlitText(5, 70, 0, "END TO DECREASE THE VALUE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND");
+		App->fonts->BlitText(5, 70, 0, "S TO DECREASE THE VALUE");
 
 		LOG("Elapsed Cycle:");
 		LOG(std::to_string(elapsedCycle.count()).c_str());
@@ -323,8 +472,8 @@ void ModuleDebug::DebugDraw() {
 
 	case Screen::GRAVITY:
 		App->fonts->BlitText(5, 40, 0, "GRAVITY OPTIONS");
-		App->fonts->BlitText(5, 60, 0, "PRESS HOME TO INCREASE AND");
-		App->fonts->BlitText(5, 70, 0, "END TO DECREASE THE VALUE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND");
+		App->fonts->BlitText(5, 70, 0, "S TO DECREASE THE VALUE");
 
 		App->fonts->BlitText(5, 90, 0, "GRAVITY ");
 		App->fonts->BlitText(120, 90, 0, std::to_string(App->physics->GRAVITY_Y).c_str());
@@ -334,23 +483,73 @@ void ModuleDebug::DebugDraw() {
 
 	case Screen::SPRITES:
 		App->fonts->BlitText(5, 40, 0, "SPRITE OPTIONS");
-		App->fonts->BlitText(5, 60, 0, "PRESS HOME TO INCREASE AND");
-		App->fonts->BlitText(5, 70, 0, "END TO DECREASE THE BALL LEVEL");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE BALL LEVEL");
 		App->fonts->BlitText(5, 90, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
 	case Screen::COEFFICIENTS:
 		App->fonts->BlitText(5, 40, 0, "COEFFICIENT OPTIONS");
-		App->fonts->BlitText(5, 60, 0, "PRESS 1 FOR BALL REST");
+		App->fonts->BlitText(5, 60, 0, "PRESS A NUMBER TO SELECT AN");
+		App->fonts->BlitText(5, 70, 0, "OPTION");
+		App->fonts->BlitText(5, 80, 0, "1. BALL RESTITUTION");
+		App->fonts->BlitText(5, 90, 0, "2. BUMPERS FORCE");
+		App->fonts->BlitText(5, 100, 0, "3. SLINGSHOTS FORCE");
+		App->fonts->BlitText(5, 110, 0, "4. SPRING FORCE");
+		App->fonts->BlitText(5, 120, 0, "5. FLIPPERS FORCE");
 
-		App->fonts->BlitText(5, 80, 0, "PRESS BACKSPACE TO GO BACK");
+		App->fonts->BlitText(5, 140, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
 	case Screen::C_BALLRESTITUTION:
 		App->fonts->BlitText(5, 40, 0, "BALL RESTITUTION");
-		App->fonts->BlitText(5, 60, 0, "VARIABLES GO HERE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE BALL RESTITUTION");
 
-		App->fonts->BlitText(5, 80, 0, "PRESS BACKSPACE TO GO BACK");
+		App->fonts->BlitText(5, 90, 0, "CURRENT RESTITUTION");
+		App->fonts->BlitText(170, 90, 0, std::to_string(ball->pBody->body->GetFixtureList()->GetRestitution()).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+	case Screen::C_BUMPERFORCE:
+		App->fonts->BlitText(5, 40, 0, "BUMPERS FORCE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE BUMPERS FORCE");
+
+		App->fonts->BlitText(5, 90, 0, "CURRENT FORCE");
+		App->fonts->BlitText(170, 90, 0, std::to_string(bumperU->force).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+	case Screen::C_SLINGSHOTFORCE:
+		App->fonts->BlitText(5, 40, 0, "SLINGSHOTS FORCE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE SLINGSHOTS FORCE");
+
+		App->fonts->BlitText(5, 90, 0, "CURRENT FORCE");
+		App->fonts->BlitText(170, 90, 0, std::to_string(slingshotL->force).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+	case Screen::C_SPRINGFORCE:
+		App->fonts->BlitText(5, 40, 0, "SPRING FORCE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE SPRING FORCE");
+
+		App->fonts->BlitText(5, 90, 0, "CURRENT FORCE");
+		App->fonts->BlitText(170, 90, 0, std::to_string(spring->force).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
+		break;
+	case Screen::C_FLIPPERFORCE:
+		App->fonts->BlitText(5, 40, 0, "FLIPPERS FORCE");
+		App->fonts->BlitText(5, 60, 0, "PRESS W TO INCREASE AND S TO");
+		App->fonts->BlitText(5, 70, 0, "DECREASE THE FLIPPERS FORCE");
+
+		App->fonts->BlitText(5, 90, 0, "CURRENT FORCE");
+		App->fonts->BlitText(170, 90, 0, std::to_string(flipperL->force).c_str());
+
+		App->fonts->BlitText(5, 110, 0, "PRESS BACKSPACE TO GO BACK");
 		break;
 
 	case Screen::COLLIDERS:

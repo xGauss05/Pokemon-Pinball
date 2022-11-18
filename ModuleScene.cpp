@@ -865,13 +865,13 @@ bool ModuleScene::Start()
 	switchLayer(1);
 	switchLayer(2);
 
-	App->pManager->CreateProp(PropType::FLIPPER_LEFT);
-	App->pManager->CreateProp(PropType::FLIPPER_RIGHT);
-	App->pManager->CreateProp(PropType::BUMPERTOP);
-	App->pManager->CreateProp(PropType::BUMPERRIGHT);
-	App->pManager->CreateProp(PropType::BUMPERLEFT);
+	App->debug->flipperL = (Flipper*)App->pManager->CreateProp(PropType::FLIPPER_LEFT);
+	App->debug->flipperR = (Flipper*)App->pManager->CreateProp(PropType::FLIPPER_RIGHT);
+	App->debug->bumperU = (Bumper*)App->pManager->CreateProp(PropType::BUMPERTOP);
+	App->debug->bumperR = (Bumper*)App->pManager->CreateProp(PropType::BUMPERRIGHT);
+	App->debug->bumperL = (Bumper*)App->pManager->CreateProp(PropType::BUMPERLEFT);
 	App->debug->ball = (Ball*)App->pManager->CreateProp(PropType::BALL);
-	App->pManager->CreateProp(PropType::SPRING);
+	App->debug->spring = (Spring*)App->pManager->CreateProp(PropType::SPRING);
 	App->pManager->CreateProp(PropType::MINUN_BUTTON);
 	App->pManager->CreateProp(PropType::PLUSLE_BUTTON);
 	App->pManager->CreateProp(PropType::SEEDOT_BUTTON);
@@ -894,8 +894,8 @@ bool ModuleScene::Start()
 	App->pManager->CreateProp(PropType::SENSOR_TOP_RAIL);
 	App->pManager->CreateProp(PropType::SENSOR_MOUNTAIN);
 	App->pManager->CreateProp(PropType::SENSOR_LAKE_RAIL);
-	App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
-	App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
+	App->debug->slingshotL = (Slingshot*)App->pManager->CreateProp(PropType::SLINGSHOT_LEFT);
+	App->debug->slingshotR = (Slingshot*)App->pManager->CreateProp(PropType::SLINGSHOT_RIGHT);
 	App->pManager->CreateProp(PropType::WAILMER);
 
 	return ret;
