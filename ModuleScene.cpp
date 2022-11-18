@@ -46,15 +46,6 @@ void ModuleScene::initTextures()
 	redArrow2 = { 183, 273, {112, 0, 16, 24}, false };
 	redArrow3 = { 173, 289, {128, 0, 16, 24}, false };
 
-	/*
-	// TODO Water Animation
-
-	// TODO P Animation
-
-	// Saver
-	saverLatios;
-	*/
-
 	// H-O-L-E Letters
 	holeLight1 = { 28, 343, { 152, 32, 10, 10 }, false };
 	holeLight2 = { 52, 343, { 168, 32, 10, 10 }, false };
@@ -90,6 +81,15 @@ void ModuleScene::initTextures()
 	groundAssets.add(&holeLight2);
 	groundAssets.add(&holeLight3);
 	groundAssets.add(&holeLight4);
+
+	pButton.PushBack({ 200,48,8,10 });
+	pButton.PushBack({ 216,48,8,10 });
+	pButton.PushBack({ 232,48,8,10 });
+	pButton.PushBack({ 200,64,8,10 });
+	pButton.PushBack({ 216,64,8,10 });
+	pButton.speed = 0.2f;
+	pButton.loop = true;
+	pButtonAnim = &pButton;
 
 	martArrow.PushBack({ 0,24,26,31 });
 	martArrow.PushBack({ 0,0,0,0 });
@@ -149,6 +149,14 @@ void ModuleScene::initTextures()
 	wailmerSpit.PushBack({ 160,0,40,29 });
 	wailmerSpit.loop = false;
 	wailmerSpit.speed = 0.2f;
+
+	wailmerPit.PushBack({ 152,0,31,31 });
+	wailmerPit.PushBack({ 184,0,31,31 });
+	wailmerPit.PushBack({ 216,0,31,31 });
+	wailmerPit.PushBack({ 184,0,31,31 });
+	wailmerPit.loop = true;
+	wailmerPit.speed = 0.1f;
+	wailmerPitAnim = &wailmerPit;
 
 	seedotTexture = App->textures->Load("pinball/Textures/seedot_sprite.png");
 	seedotIdle.PushBack({ 18,31,17,22 });
@@ -593,7 +601,11 @@ void ModuleScene::drawScene()
 	bumperArrowAnim->Update();
 	catchArrowAnim->Update();
 	hatchArrowAnim->Update();
+	pButtonAnim->Update();
+	wailmerPitAnim->Update();
 
+	App->renderer->Blit(assetsTexture, 169, 180, &(wailmerPitAnim->GetCurrentFrame()));
+	App->renderer->Blit(assetsTexture, 149, 170, &(pButtonAnim->GetCurrentFrame()));
 	App->renderer->Blit(assetsTexture, 73, 214, &(martArrowAnim->GetCurrentFrame()));
 	App->renderer->Blit(assetsTexture, 104, 186, &(bumperArrowAnim->GetCurrentFrame()));
 	App->renderer->Blit(assetsTexture, 144, 222, &(catchArrowAnim->GetCurrentFrame()));
@@ -657,7 +669,6 @@ void ModuleScene::drawAnimations() {
 	lightMinunAnim->Update();
 	lightPlusleAnim->Update();
 	screenAnim->Update();
-
 
 	App->renderer->Blit(assetsTexture, 22, 115, &(screenAnim->GetCurrentFrame()));
 
@@ -1005,7 +1016,6 @@ update_status ModuleScene::Update()
 
 update_status ModuleScene::PostUpdate()
 {
-
 	return UPDATE_CONTINUE;
 }
 
@@ -1038,6 +1048,8 @@ bool ModuleScene::CleanUp() {
 	bumperArrowAnim = nullptr;
 	catchArrowAnim = nullptr;
 	hatchArrowAnim = nullptr;
+	pButtonAnim = nullptr;
+	wailmerPitAnim = nullptr;
 
 	mapCollisionsLayer0.clear();
 	mapCollisionsLayer1.clear();

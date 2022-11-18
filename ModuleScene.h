@@ -63,14 +63,6 @@ public:
 	GroundAsset redArrow1;
 	GroundAsset redArrow2;
 	GroundAsset redArrow3;
-	/*
-	// TODO Water Animation
-
-	// TODO P Animation
-
-	// Saver
-	GroundAsset saverLatios;
-	*/
 
 	// H-O-L-E Letters
 	GroundAsset holeLight1;
@@ -118,6 +110,10 @@ public:
 
 	p2List<PhysBody*> mapCollisionsLayer2;
 
+	// Animation (Pelipper button)
+	Animation pButton;
+	Animation* pButtonAnim = nullptr;
+
 	// Animations (Yellow arrows)
 	Animation martArrow;
 	Animation* martArrowAnim = nullptr;
@@ -137,6 +133,10 @@ public:
 	Animation wailmerIdle;
 	Animation wailmerSpit;
 	Animation* wailmerAnim = nullptr;
+
+	// Animations (Wailmer pit)
+	Animation wailmerPit;
+	Animation* wailmerPitAnim = nullptr;
 
 	// Animations (Seedot)
 	SDL_Texture* seedotTexture;
